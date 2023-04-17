@@ -5,6 +5,8 @@ import { Recipes } from "./components/Recipes"
 import { MealPlan } from "./components/MealPlan"
 import { Inventory } from "./components/Inventory"
 import { GroceryList } from "./components/GroceryList"
+import { Login } from "./components/Login"
+import { Register } from "./components/Register"
 
 const AppRoutes = [
   {
@@ -34,6 +36,14 @@ const AppRoutes = [
   {
     path: '/grocery-list',
     element: <GroceryList />
+  },
+  {
+    path: '/login',
+    element: <Login />
+  },
+  {
+    path: '/register',
+    element: <Register />
   }
 ];
 
