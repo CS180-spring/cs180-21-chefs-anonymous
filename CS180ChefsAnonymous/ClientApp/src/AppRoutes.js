@@ -1,7 +1,7 @@
 import { Counter } from "./components/Counter";
 import { FetchData } from "./components/FetchData";
 import { Home } from "./components/Home";
-import { Recipe } from "./components/Recipe"
+import { Recipes } from "./components/Recipes"
 import { MealPlan } from "./components/MealPlan"
 import { Inventory } from "./components/Inventory"
 import { GroceryList } from "./components/GroceryList"
@@ -20,8 +20,8 @@ const AppRoutes = [
     element: <FetchData />
   },
   {
-    path: '/recipe',
-    element: <Recipe />
+    path: '/recipes',
+    element: <Recipes />
   },
   {
     path: '/meal-plan',
