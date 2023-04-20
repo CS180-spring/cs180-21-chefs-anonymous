@@ -17,12 +17,14 @@ namespace CS180ChefsAnonymous.Controllers
 
 		}
 		[HttpGet]
-		[Route("GetEmployees")]
+		[Route("GetUsers")]
 		public IActionResult GetUsers()
 		{
-			List<User> list = _dbContext.Users.ToList();
-			return StatusCode(StatusCodes.Status200OK);
-		}
+            List<User> list = _dbContext.Users.ToList();
+            return Ok(list);
+            //List<User> list = _dbContext.Users.ToList();
+            //return StatusCode(StatusCodes.Status200OK);
+        }
 	}
 }
 

@@ -2,12 +2,23 @@
 
 export function Users() {
     const [users, setUsers] = useState([]);
-
     useEffect(() => {
         fetch("api/user/GetUsers")
             .then((response) => response.json())
-            .then((responseJson) => setUsers(responseJson));
+            .then((responseJson) => {
+                console.log(responseJson);
+                setUsers(responseJson);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
     }, []);
+
+    //useEffect(() => {
+    //    fetch("api/user/GetUsers")
+    //        .then((response) => {console.log(response.json()) })
+    //        .then((responseJson) => { console.log(responseJson);console.log("bubbles"); console.log(responseJson); });//setUsers(responseJson)
+    //}, []);
 
     const refresh = () => {
         fetch("api/user/GetUsers")
@@ -31,13 +42,14 @@ export function Users() {
                             </tr>
                         </thead>
                         <tbody>
-                            {users.map((item) => (
-                                <tr key={item.id}>
-                                    <td>{item.id}</td>
+                            {   
+                                users.map((item) => (
+                                <tr key={item.name}>
+                                    <td>item.email</td>
                                     <td>{item.name}</td>
-                                    <td>{item.email}</td>
-                                    <td>{item.address}</td>
-                                    <td>{item.phone}</td>
+                                    <td>{item.password}</td>
+                                    <td>{item.userid}</td>
+                                    <td>{item.username}</td>
                                 </tr>
                             ))}
                         </tbody>
@@ -50,3 +62,19 @@ export function Users() {
         </div>
     );
 }
+
+//email
+//:
+//"john.smith@example.com"
+//name
+//:
+//"John Smith"
+//password
+//:
+//"pass"
+//userid
+//:
+//1
+//username
+//:
+//"john"
