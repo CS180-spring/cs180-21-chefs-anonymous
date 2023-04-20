@@ -14,11 +14,6 @@ export function Users() {
             });
     }, []);
 
-    //useEffect(() => {
-    //    fetch("api/user/GetUsers")
-    //        .then((response) => {console.log(response.json()) })
-    //        .then((responseJson) => { console.log(responseJson);console.log("bubbles"); console.log(responseJson); });//setUsers(responseJson)
-    //}, []);
 
     const refresh = () => {
         fetch("api/user/GetUsers")
@@ -44,12 +39,14 @@ export function Users() {
                         <tbody>
                             {   
                                 users.map((item) => (
-                                <tr key={item.name}>
-                                    <td>item.email</td>
-                                    <td>{item.name}</td>
-                                    <td>{item.password}</td>
-                                    <td>{item.userid}</td>
-                                    <td>{item.username}</td>
+                                    <tr key={item.name}>
+                                        <td>{item.userid}</td>
+                                    
+                                        <td>{item.name}</td>
+                                        <td>{item.email}</td>
+                                        <td>{item.password}</td>
+                                    
+                                        <td>{item.username}</td>
                                 </tr>
                             ))}
                         </tbody>
