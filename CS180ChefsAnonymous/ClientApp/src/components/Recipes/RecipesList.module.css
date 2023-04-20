@@ -1,0 +1,9 @@
+.recipes_list {
+  list-style: none;
+  padding: 0;
+}
+
+.recipes_list__fallback {
+  color: white;
+  text-align: center;
+}
