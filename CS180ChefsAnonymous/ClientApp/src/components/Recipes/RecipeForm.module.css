@@ -1,0 +1,31 @@
+.new_recipe__controls {
+  padding: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.new_recipe__control label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.new_recipe__control input {
+  font: inherit;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 20rem;
+  max-width: 100%;
+}
+
+
+.new_recipe__actions {
+
+  padding: 0.5rem;
+  margin-left: 0.5rem;
+  text-align: right;
+}
