@@ -12,35 +12,35 @@ import { Users } from "./components/Users"
 const AppRoutes = [
   {
     index: true,
-    element: <Home />
+    element: <Home />,
   },
   {
-    path: '/counter',
-    element: <Counter />
+    path: "/counter",
+    element: <Counter />,
   },
   {
-    path: '/fetch-data',
-    element: <FetchData />
+    path: "/fetch-data",
+    element: <FetchData />,
   },
   {
-    path: '/recipes',
-    element: <Recipes />
+    path: "/recipes",
+    element: <Recipes />,
   },
   {
-    path: '/meal-plan',
-    element: <MealPlan />
+    path: "/meal-plan",
+    element: <MealPlan />,
   },
   {
-    path: '/inventory',
-    element: <Inventory />
+    path: "/inventory",
+    element: <Inventory />,
   },
   {
-    path: '/grocery-list',
-    element: <GroceryList />
+    path: "/grocery-list",
+    element: <GroceryList />,
   },
   {
-    path: '/login',
-    element: <Login />
+    path: "/login",
+    element: <Login />,
   },
   {
     path: '/register',
@@ -50,6 +50,7 @@ const AppRoutes = [
     path: '/users',
     element: <Users />
   }
+
 ];
 
 export default AppRoutes;
