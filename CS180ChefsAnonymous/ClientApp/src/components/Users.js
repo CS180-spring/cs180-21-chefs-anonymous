@@ -32,8 +32,8 @@ export function Users() {
                                 <th>UserID</th>
                                 <th>Name</th>
                                 <th>Email</th>
-                                <th>Address</th>
-                                <th>Phone</th>
+                                <th>Password</th>
+                                <th>Username</th>
                             </tr>
                         </thead>
                         <tbody>
