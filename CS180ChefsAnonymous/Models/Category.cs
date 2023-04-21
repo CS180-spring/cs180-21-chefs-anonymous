@@ -1,13 +1,19 @@
 ﻿using System;
-namespace CS180ChefsAnonymous.Models
-{
-	public class Category
-	{
-		public int categoryID{ get; set; }
-        public string? cuisine { get; set; }
-        public DateTime mealtime { get; set; }
-        public int difficulty { get; set; }
-        public decimal amnt_of_servings { get; set; }
-    }
-}
+using System.Collections.Generic;
 
+namespace CS180ChefsAnonymous.Models;
+
+public partial class Category
+{
+    public int CategoryId { get; set; }
+
+    public string? Cuisine { get; set; }
+
+    public DateTime Mealtime { get; set; }
+
+    public int Difficulty { get; set; }
+
+    public decimal AmntOfServings { get; set; }
+
+    public virtual ICollection<Recipe> Recipes { get; set; } = new List<Recipe>();
+}
