@@ -1,5 +1,6 @@
 import React, { Component, useState } from "react";
-//import Card from "../UI/Card";
+import RecipesContext from "./RecipesContext";
+import ExpandedRecipe from "./ExpandedRecipe";
 import RecipesList from "./RecipesList";
 import RecipeForm from "./RecipeForm";
 import Button from "../UI/Button";
@@ -42,7 +43,9 @@ const DUMMY_RECIPES = [
 
 const Recipes = (props) => {
   const [displayForm, setDisplayForm] = useState(false);
+  const [displayExpandedRecipe, setDisplayExpandedrecipe] = useState(false);
   const [dummyRecipes, setDummyRecipes] = useState(DUMMY_RECIPES);
+  const [recipeItemData, setRecipeItemData] = useState(null);
 
   const displayRecipeFormHandler = () => {
     setDisplayForm(true);
@@ -54,28 +57,40 @@ const Recipes = (props) => {
     const recipeData = { ...enteredRecipeData, id: Math.random().toString() };
     const newList = [...dummyRecipes, recipeData];
     setDummyRecipes(newList);
-
-    console.log(dummyRecipes);
     setDisplayForm(false);
+  };
+  const expandRecipeItemDataHandler = (recipeItem) => {
+    setRecipeItemData(recipeItem);
+    setDisplayExpandedrecipe(true);
   };
 
   return (
     <div>
-      <h1>Recipes</h1>
-      {displayForm === false && (
-        <div>
-          <RecipesList recipes={dummyRecipes} />
-          <Button type="submit" onClick={displayRecipeFormHandler}>
-            Add Recipe
-          </Button>
-        </div>
-      )}
-      {displayForm === true && (
-        <RecipeForm
-          onCancel={cancelFormHandler}
-          onGetRecipeData={getRecipeDataHandler}
-        />
-      )}
+      <RecipesContext.Provider
+        value={{ recipeItemToExpand: expandRecipeItemDataHandler }}
+      >
+        {displayExpandedRecipe === true && (
+          <ExpandedRecipe recipe={recipeItemData} />
+        )}
+        {displayExpandedRecipe === false && displayForm === false && (
+          <div>
+            <h1>Recipes</h1>
+            <RecipesList recipes={dummyRecipes} />
+            <Button type="submit" onClick={displayRecipeFormHandler}>
+              Add Recipe
+            </Button>
+          </div>
+        )}
+        {displayExpandedRecipe === false && displayForm === true && (
+          <div>
+            <h1>Add Recipe</h1>
+            <RecipeForm
+              onCancel={cancelFormHandler}
+              onGetRecipeData={getRecipeDataHandler}
+            />
+          </div>
+        )}
+      </RecipesContext.Provider>
     </div>
   );
 };

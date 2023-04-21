@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
+import RecipesContext from "./RecipesContext";
 import Card from "../UI/Card";
 import styles from "./RecipeItem.module.css";
 
 const RecipeItem = (props) => {
+  const context = useContext(RecipesContext);
+
   const mouseOverHandler = (event) => {
     event.target.style.background = "#dfe6e3";
   };
@@ -11,7 +14,7 @@ const RecipeItem = (props) => {
   };
 
   const expandFullRecipeHandler = () => {
-    props.onExpandFullRecipe(props);
+    context.recipeItemToExpand(props);
   };
 
   return (
