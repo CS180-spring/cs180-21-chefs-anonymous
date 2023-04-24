@@ -1,12 +1,14 @@
 import { Counter } from "./components/Counter";
 import { FetchData } from "./components/FetchData";
 import { Home } from "./components/Home";
+
 import Recipes from "./components/Recipes/Recipes";
 import { MealPlan } from "./components/MealPlan";
 import { Inventory } from "./components/Inventory";
 import { GroceryList } from "./components/GroceryList";
 import { Login } from "./components/Login";
 import { Register } from "./components/Register";
+import { Users } from "./components/Users"
 
 const AppRoutes = [
   {
@@ -42,9 +44,14 @@ const AppRoutes = [
     element: <Login />,
   },
   {
-    path: "/register",
-    element: <Register />,
+    path: '/register',
+    element: <Register />
   },
+  {
+    path: '/users',
+    element: <Users />
+  }
+
 ];
 
 export default AppRoutes;
