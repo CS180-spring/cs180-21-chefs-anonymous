@@ -1,15 +1,5 @@
 ﻿import React, { useState, useEffect } from "react";
-// import {User} from index.js
 
-//public int Userid { get; set; }
-
-//    public string ? Name { get; set; }
-
-//    public string ? Username { get; set; }
-
-//    public string ? Password { get; set; }
-
-//    public string ? Email { get; set; }
 export function Users() {
     const [users, setUsers] = useState([]);
     useEffect(() => {
@@ -137,22 +127,3 @@ export function Users() {
     );
 }
 
-//<div>
-//    <h1>{user.username}</h1>
-//    <p>{user.email}</p>
-//</div>
-//email
-//:
-//"john.smith@example.com"
-//name
-//:
-//"John Smith"
-//password
-//:
-//"pass"
-//userid
-//:
-//1
-//username
-//:
-//"john"
