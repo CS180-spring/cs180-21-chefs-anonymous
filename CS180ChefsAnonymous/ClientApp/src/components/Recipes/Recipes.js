@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import RecipesContext from "./RecipesContext";
 import ExpandedRecipe from "./ExpandedRecipe";
 import RecipesList from "./RecipesList";
@@ -72,8 +72,18 @@ const Recipes = (props) => {
         {displayExpandedRecipe === true && (
           <ExpandedRecipe recipe={recipeItemData} />
         )}
-        {displayExpandedRecipe === false && displayForm === false && (
+        {displayExpandedRecipe === false && (
+          // {displayExpandedRecipe === false && displayForm === false && (
+
           <div>
+            {displayForm === true && (
+              <div>
+                <RecipeForm
+                  onCancel={cancelFormHandler}
+                  onGetRecipeData={getRecipeDataHandler}
+                />
+              </div>
+            )}
             <h1>Recipes</h1>
             <RecipesList recipes={dummyRecipes} />
             <Button type="submit" onClick={displayRecipeFormHandler}>
@@ -81,7 +91,7 @@ const Recipes = (props) => {
             </Button>
           </div>
         )}
-        {displayExpandedRecipe === false && displayForm === true && (
+        {/* {displayExpandedRecipe === false && displayForm === true && (
           <div>
             <h1>Add Recipe</h1>
             <RecipeForm
@@ -89,7 +99,7 @@ const Recipes = (props) => {
               onGetRecipeData={getRecipeDataHandler}
             />
           </div>
-        )}
+        )} */}
       </RecipesContext.Provider>
     </div>
   );

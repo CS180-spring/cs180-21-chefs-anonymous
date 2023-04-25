@@ -1,8 +1,9 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import data from "../dummy-meal-plan.json";
 
 const MealPlan = (props) => {
-  const [plans, setPlans] = useState(data);
+  const [plans] = useState(data);
+  // const [plans, setPlans] = useState(data);
   return (
     <div>
       <table>
@@ -19,7 +20,7 @@ const MealPlan = (props) => {
           </tr>
         </thead>
         <tbody>
-          {plans.map( (plan) => (
+          {plans.map((plan) => (
             <tr>
               <td>{plan.mealTime}</td>
               <td>{plan.Sun}</td>

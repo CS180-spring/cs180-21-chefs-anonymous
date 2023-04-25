@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import Card from "../UI/Card";
 import Button from "../UI/Button";
 import styles from "./RecipeForm.module.css";
@@ -62,82 +62,85 @@ const RecipeForm = (props) => {
   };
 
   return (
-    <Card>
-      <form onSubmit={formSubmitHandler}>
-        <div className={styles.new_recipe__controls}>
-          <div className={styles.new_recipe__control}>
-            <label>Title</label>
-            <input
-              type="text"
-              value={enteredTitle}
-              onChange={titleChangeHandler}
-            />
+    <div className={styles.backdrop}>
+      <Card className={styles.modal}>
+        <h2 className={styles.new_recipe__controls}>Add Recipe</h2>
+        <form onSubmit={formSubmitHandler}>
+          <div className={styles.new_recipe__controls}>
+            <div className={styles.new_recipe__control}>
+              <label>Title</label>
+              <input
+                type="text"
+                value={enteredTitle}
+                onChange={titleChangeHandler}
+              />
+            </div>
+            <div className={styles.new_recipe__control}>
+              <label>Cuisine</label>
+              <input
+                type="text"
+                value={enteredCuisine}
+                onChange={cuisineChangeHandler}
+              />
+            </div>
+            <div className={styles.new_recipe__control}>
+              <label>Description</label>
+              <input
+                type="text"
+                value={enteredDescription}
+                onChange={descriptionChangeHandler}
+              />
+            </div>
+            <div className={styles.new_recipe__control}>
+              <label>Prep Time</label>
+              <input
+                type="number"
+                value={enteredHoursPreptime}
+                min="0"
+                max="24"
+                onChange={hoursPreptimeChangeHandler}
+                style={{ width: "35%" }}
+              />
+              :
+              <input
+                type="number"
+                value={enteredMinutesPreptime}
+                min="0"
+                max="59"
+                onChange={minutesPreptimeChangeHandler}
+                style={{ width: "35%" }}
+              />
+            </div>
+            <div className={styles.new_recipe__control}>
+              <label>Cook Time</label>
+              <input
+                type="number"
+                value={enteredHoursCooktime}
+                min="0"
+                max="24"
+                onChange={hoursCooktimeChangeHandler}
+                style={{ width: "35%" }}
+              />
+              :
+              <input
+                type="number"
+                value={enteredMinutesCooktime}
+                min="0"
+                max="59"
+                onChange={minutesCooktimeChangeHandler}
+                style={{ width: "35%" }}
+              />
+            </div>
           </div>
-          <div className={styles.new_recipe__control}>
-            <label>Cuisine</label>
-            <input
-              type="text"
-              value={enteredCuisine}
-              onChange={cuisineChangeHandler}
-            />
-          </div>
-          <div className={styles.new_recipe__control}>
-            <label>Description</label>
-            <input
-              type="text"
-              value={enteredDescription}
-              onChange={descriptionChangeHandler}
-            />
-          </div>
-          <div className={styles.new_recipe__control}>
-            <label>Prep Time</label>
-            <input
-              type="number"
-              value={enteredHoursPreptime}
-              min="0"
-              max="24"
-              onChange={hoursPreptimeChangeHandler}
-              style={{ width: "35%" }}
-            />
-            :
-            <input
-              type="number"
-              value={enteredMinutesPreptime}
-              min="0"
-              max="59"
-              onChange={minutesPreptimeChangeHandler}
-              style={{ width: "35%" }}
-            />
-          </div>
-          <div className={styles.new_recipe__control}>
-            <label>Cook Time</label>
-            <input
-              type="number"
-              value={enteredHoursCooktime}
-              min="0"
-              max="24"
-              onChange={hoursCooktimeChangeHandler}
-              style={{ width: "35%" }}
-            />
-            :
-            <input
-              type="number"
-              value={enteredMinutesCooktime}
-              min="0"
-              max="59"
-              onChange={minutesCooktimeChangeHandler}
-              style={{ width: "35%" }}
-            />
-          </div>
-        </div>
 
-        {/*Submit button */}
-        <div className={styles.new_recipe__actions}>
-          <Button onClick={cancelHandler}>Cancel</Button>
-          <Button type="submit">Submit</Button>
-        </div>
-      </form>
-    </Card>
+          {/*Submit button */}
+          <div className={styles.new_recipe__actions}>
+            <Button onClick={cancelHandler}>Cancel</Button>
+            <Button type="submit">Submit</Button>
+          </div>
+        </form>
+      </Card>
+    </div>
   );
 };
 
