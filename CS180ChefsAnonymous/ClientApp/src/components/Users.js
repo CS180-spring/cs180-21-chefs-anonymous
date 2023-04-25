@@ -1,5 +1,15 @@
 ﻿import React, { useState, useEffect } from "react";
+// import {User} from index.js
 
+//public int Userid { get; set; }
+
+//    public string ? Name { get; set; }
+
+//    public string ? Username { get; set; }
+
+//    public string ? Password { get; set; }
+
+//    public string ? Email { get; set; }
 export function Users() {
     const [users, setUsers] = useState([]);
     useEffect(() => {
@@ -14,12 +24,68 @@ export function Users() {
             });
     }, []);
 
-
-    const refresh = () => {
+    function refresh() {
         fetch("api/user/GetUsers")
             .then((response) => response.json())
-            .then((responseJson) => setUsers(responseJson));
-    };
+            .then((responseJson) => {
+                console.log(responseJson);
+                setUsers(responseJson);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+
+    function add() {
+        fetch("api/user/AddUser", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                // pass the new user object as the request body
+                userid: 6,
+                name: 'David Doe',
+                username: 'david',
+                password: 'david',
+                email: 'daviddoe@example.com'
+            })
+        })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
+    }
+
+    function update() {
+        fetch("api/user/UpdateUser/6", {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                // pass the new user object as the request body
+                userid: 6,
+                name: 'Megan',
+                username: 'megan',
+                password: 'megan',
+                email: 'megan@example.com'
+            })
+        })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
+    }
+    function remove () {
+        fetch("api/user/DeleteUser/6", {
+            method: 'DELETE',
+
+        })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
+    }
+
+    //};
 
     return (
         <div className="container">
@@ -37,29 +103,44 @@ export function Users() {
                             </tr>
                         </thead>
                         <tbody>
-                            {   
+                            {
                                 users.map((item) => (
                                     <tr key={item.name}>
                                         <td>{item.userid}</td>
-                                    
+
                                         <td>{item.name}</td>
                                         <td>{item.email}</td>
                                         <td>{item.password}</td>
-                                    
+
                                         <td>{item.username}</td>
-                                </tr>
-                            ))}
+                                    </tr>
+                                ))}
                         </tbody>
                     </table>
                 </div>
             </div>
             <button className="btn btn-primary" onClick={refresh}>
                 Refresh
-      </button>
+            </button >
+            <button className="btn btn-primary" onClick={add}>
+                Add
+            </button >
+            <button className="btn btn-primary" onClick={update}>
+                Update
+            </button >
+            <button className="btn btn-primary" onClick={remove}>
+                Delete
+            </button >
+
+
         </div>
     );
 }
 
+//<div>
+//    <h1>{user.username}</h1>
+//    <p>{user.email}</p>
+//</div>
 //email
 //:
 //"john.smith@example.com"
