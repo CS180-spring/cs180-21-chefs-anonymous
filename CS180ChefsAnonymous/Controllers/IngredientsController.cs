@@ -18,14 +18,14 @@ namespace CS180ChefsAnonymous.Controllers
 
         }
         [HttpGet]
-        [Route("Getingredients")]
+        [Route("GetIngredients")]
         public async Task<IEnumerable<Ingredient>> Getingredients()
         {
             return await _dbContext.Ingredients.ToListAsync();
         }
 
         [HttpPost]
-        [Route("Addingredient")]
+        [Route("AddIngredient")]
         public async Task<Ingredient> Addingredient(Ingredient objingredient)
         {
             _dbContext.Ingredients.Add(objingredient);
@@ -34,7 +34,7 @@ namespace CS180ChefsAnonymous.Controllers
         }
 
         [HttpPatch]
-        [Route("Updateingredient/{id}")]
+        [Route("UpdateIngredient/{id}")]
         public async Task<Ingredient> Updateingredient(Ingredient objingredient)
         {
             _dbContext.Entry(objingredient).State = EntityState.Modified;
@@ -43,7 +43,7 @@ namespace CS180ChefsAnonymous.Controllers
         }
 
         [HttpDelete]
-        [Route("Deleteingredient/{id}")]
+        [Route("DeleteIngredient/{id}")]
         public bool Deleteingredient(int id)
         {
             bool a = false;
