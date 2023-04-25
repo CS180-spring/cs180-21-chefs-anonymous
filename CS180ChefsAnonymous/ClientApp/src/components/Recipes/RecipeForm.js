@@ -4,13 +4,23 @@ import Button from "../UI/Button";
 import styles from "./RecipeForm.module.css";
 
 const RecipeForm = (props) => {
-  const [enteredTitle, setEnteredTitle] = useState("");
-  const [enteredCuisine, setEnteredCuisine] = useState("");
-  const [enteredDescription, setEnteredDescription] = useState("");
-  const [enteredHoursPreptime, setEnteredHoursPreptime] = useState(0);
-  const [enteredMinutesPreptime, setEnteredMinutesPreptime] = useState(0);
-  const [enteredHoursCooktime, setEnteredHoursCooktime] = useState(0);
-  const [enteredMinutesCooktime, setEnteredMinutesCooktime] = useState(0);
+  const [enteredTitle, setEnteredTitle] = useState(props.title);
+  const [enteredCuisine, setEnteredCuisine] = useState(props.cuisine);
+  const [enteredDescription, setEnteredDescription] = useState(
+    props.description
+  );
+  const [enteredHoursPreptime, setEnteredHoursPreptime] = useState(
+    props.prepHr
+  );
+  const [enteredMinutesPreptime, setEnteredMinutesPreptime] = useState(
+    props.prepMin
+  );
+  const [enteredHoursCooktime, setEnteredHoursCooktime] = useState(
+    props.cookHr
+  );
+  const [enteredMinutesCooktime, setEnteredMinutesCooktime] = useState(
+    props.cookMin
+  );
 
   const titleChangeHandler = (event) => {
     setEnteredTitle(event.target.value);
