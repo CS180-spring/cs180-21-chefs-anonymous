@@ -5,9 +5,10 @@ namespace CS180ChefsAnonymous.Models
 {
 	public partial class Item
 	{
-		public string? ItemName { get; set; } = "";
+		[Key]
+		public string? ItemName { get; set; } 
 		public int CalPerKg { get; set; }
-		public string? OtherInfo { get; set; } = "";
+		public string? OtherInfo { get; set; } 
 
 		public Item()
 		{

@@ -15,5 +15,5 @@ public partial class Ingredient
 
     public int? Unit { get; set; }
 
-    public virtual Recipe Recipe { get; set; } = null!;
+    public virtual Recipe Recipe { get; set; }
 }
