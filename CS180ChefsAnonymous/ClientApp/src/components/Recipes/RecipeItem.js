@@ -3,13 +3,13 @@ import RecipesContext from "./RecipesContext";
 import Card from "../UI/Card";
 import styles from "./RecipeItem.module.css";
 import RecipeForm from "./RecipeForm";
-import DUMMY_RECIPES from "./dummy-recipe-data.json";
 
 const RecipeItem = (props) => {
   const context = useContext(RecipesContext);
   const [displayForm, setDisplayForm] = useState(false);
 
-  const displayRecipeFormHandler = () => {
+  const displayRecipeFormHandler = (e) => {
+    e.stopPropagation();
     setDisplayForm(true);
   };
   const cancelFormHandler = () => {
@@ -74,6 +74,10 @@ const RecipeItem = (props) => {
             onClick={displayRecipeFormHandler}
             onMouseOver={mouseOverHandler}
             onMouseLeave={mouseLeaveHandler}
+            // onMouseDown={(e) => {
+            //   e.stopPropagation();
+            //   console.log("what?");
+            // }}
           >
             Edit
           </p>
