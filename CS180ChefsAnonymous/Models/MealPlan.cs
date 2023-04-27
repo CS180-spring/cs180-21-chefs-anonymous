@@ -1,7 +1,7 @@
 ﻿using System;
 namespace CS180ChefsAnonymous.Models
 {
-	public class MealPlan
+	public partial class MealPlan
 	{
 		public int MealPlanId { get; set; }
 		public DateTime MealTime { get; set; }
