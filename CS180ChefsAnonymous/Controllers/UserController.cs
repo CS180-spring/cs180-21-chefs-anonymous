@@ -22,6 +22,7 @@ namespace CS180ChefsAnonymous.Controllers
         public async Task<IEnumerable<User>> GetUsers()
         {
             return await _dbContext.Users.ToListAsync();
+    
         }
 
         [HttpPost]
