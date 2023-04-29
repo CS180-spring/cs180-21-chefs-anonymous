@@ -84,6 +84,7 @@ export function Users() {
             //    response.json()
             //})
             .then((responseJson) => {
+                console.log("Set recipes");
                 console.log(responseJson);
                 setRecipes(responseJson);
             })
@@ -98,6 +99,7 @@ export function Users() {
             .then((responseJson) => {
                 console.log(responseJson);
                 setRecipes(responseJson);
+                console.log(recipes)
             })
             .catch((error) => {
                 console.error(error);
@@ -110,18 +112,17 @@ export function Users() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-                // pass the new user object as the request body
-                recipe_id: 6,
-                reciple_title: 'Cookie',
-                recipe_desc: 'Cookie Description',
-                instructions: 'Do stuff',
-                prep_time: 5,
-                cooking_time: 5,
-                user_id: 6,
-                category_id: 1
-
-            })
+            body: JSON.stringify(
+                {
+                    "recipeId": 1,
+                    "recipeTitle": "Spaghetti Carbonara",
+                    "recipeDesc": "Classic Italian pasta dish with creamy sauce",
+                    "instructions": "Cook pasta according to package directions. Meanwhile, in a large skillet, cook bacon over medium heat until crisp. Remove with a slotted spoon; drain on paper towels. Discard drippings. In the same skillet, heat butter over medium heat. Add garlic; cook 1 minute. Whisk together eggs, cream, cheese and pepper; remove skillet from heat. Drain pasta; add to skillet. Pour egg mixture over pasta; toss to coat. Add bacon; toss to combine. Serve immediately.",
+                    "prepTime": 15,
+                    "cookingTime": 15,
+                    "userId": 1,
+                    "categoryId": 2
+                })
         })
             .then(response => response.json())
             .then(data => console.log(data))
@@ -129,21 +130,22 @@ export function Users() {
     }
 
     function updateRecipe() {
-        fetch("api/recipe/UpdateRecipe/1", {
+        fetch("api/recipe/UpdateRecipe/6", {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 // pass the new user object as the request body
-                recipe_id: 6,
-                reciple_title: 'Cookie2',
-                recipe_desc: 'Cookie2 Description',
+
+                recipeId: 6,
+                recipeTitle: 'Cookie2',
+                recipeDesc: 'Cookie Description2',
                 instructions: 'Do stuff2',
-                prep_time: 5,
-                cooking_time: 5,
-                user_id: 6,
-                category_id: 1
+                prepTime: 5,
+                cookingTime: 5,
+                userId: 6,
+                categoryId: 1
 
             })
         })
@@ -221,23 +223,23 @@ export function Users() {
                                 <th>Instructions</th>
                                 <th>Preptime</th>
                                 <th>CookingTime</th>
-                                <th>RecipeDescription</th>
                                 <th>UserID</th>
                                 <th>CategoryID</th>
                             </tr>
                         </thead>
                         <tbody>
                             {
-                                users.map((recipe) => (
-                                    <tr key={recipe.recipe_title}>
-                                        <td>{recipe.recipe_id}</td>
-                                        <td>{recipe.recipe_title}</td>
-                                        <td>{recipe.recipe_desc}</td>
+                                
+                                recipes.map((recipe) => (
+                                    <tr key={recipe.recipeTitle}>
+                                        <td>{recipe.recipeId}</td>
+                                        <td>{recipe.recipeTitle}</td>
+                                        <td>{recipe.recipeDesc}</td>
                                         <td>{recipe.instructions}</td>
-                                        <td>{recipe.prep_time}</td>
-                                        <td>{recipe.cooking_time}</td>
-                                        <td>{recipe.user_id}</td>
-                                        <td>{recipe.category_id}</td>
+                                        <td>{recipe.prepTime}</td>
+                                        <td>{recipe.cookingTime}</td>
+                                        <td>{recipe.userId}</td>
+                                        <td>{recipe.categoryId}</td>
                                     </tr>
                                 ))}
                         </tbody>
