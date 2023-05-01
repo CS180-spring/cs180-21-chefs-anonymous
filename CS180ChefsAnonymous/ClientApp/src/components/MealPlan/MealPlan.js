@@ -1,8 +1,21 @@
 import React, { Component, useState, useMemo, useEffect } from "react";
-import data from "../dummy-meal-plan.json";
+import styles from "./MealPlan.css";
+import data from "../../dummy-meal-plan.json";
 
 const MealPlan = (props) => {
-  const rows = 5;
+  const [modal, setModal] = useState(false);
+  const toggleModal = () => {
+    setModal(!modal);
+  }
+
+  if (modal) {
+    document.body.classList.add('active-modal');
+    // document.getElementById("modal").style.display = "block";
+  } else {
+    document.body.classList.remove('active-modal');
+  }
+
+  const rows = 6;
   const cols = 8;
 
   function getDay(j){
@@ -34,9 +47,9 @@ const MealPlan = (props) => {
     for (let j = 0; j < cols; j++) {
       if (i===0){
         tableCells.push(
-          <td id={i+'-'+j} key={i+'-'+j}>
+          <th id={i+'-'+j} key={i+'-'+j}>
             {getDay(j)}
-          </td>
+          </th>
         );
       }
       else {
@@ -49,7 +62,7 @@ const MealPlan = (props) => {
         }
         else {
           tableCells.push(
-            <td id={i+'-'+j} key={i+'-'+j}>
+            <td id={i+'-'+j} key={i+'-'+j} onClick={toggleModal}>
               ({i},{j})
             </td>
           );
@@ -64,11 +77,21 @@ const MealPlan = (props) => {
   }
 
   return (
-    <table>
-      <tbody>
-        {tableRows}
-      </tbody>
-    </table>
+    <div>
+      <table>
+        <tbody>
+          {tableRows}
+        </tbody>
+      </table>
+      {modal && (
+        <div className="modal1">
+          <div onClick={toggleModal} className="overlay1"></div>
+          <div class="modal-content1">
+            <h3>hello</h3>
+          </div>
+        </div>
+      )}
+    </div>
   );
 };
 
