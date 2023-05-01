@@ -1,52 +1,52 @@
 [
- {
-   "mealTime": "breakfast",
-   "Sun": "pizza",
-   "Mon": "rice",
-   "Tue": "flower",
-   "Wed": "soop",
-   "Thu": "smooth",
-   "Fri": "criminal",
-   "Sat": "trouble"
- },
- {
-   "mealTime": "lunch",
-   "Sun": "udon",
-   "Mon": "soba",
-   "Tue": "grass",
-   "Wed": "calpico",
-   "Thu": "like",
-   "Fri": "undercover",
-   "Sat": "breaking"
- },
- {
-   "mealTime": "snack",
-   "Sun": "ramen",
-   "Mon": "ramen",
-   "Tue": "bread",
-   "Wed": "water",
-   "Thu": "butter",
-   "Fri": "Gon",
-   "Sat": "into"
- },
- {
-   "mealTime": "dinner",
-   "Sun": "curry",
-   "Mon": "chips",
-   "Tue": "cheese",
-   "Wed": "milk",
-   "Thu": "like",
-   "Fri": "pop",
-   "Sat": "your"
- },
- {
-   "mealTime": "dessert",
-   "Sun": "ice cream",
-   "Mon": "tomato",
-   "Tue": "onion",
-   "Wed": "orange",
-   "Thu": "a",
-   "Fri": "like",
-   "Sat": "heart"
- }
+  {
+    "mealTime": "breakfast",
+    "Sun": "pizza",
+    "Mon": "rice",
+    "Tue": "flower",
+    "Wed": "soop",
+    "Thu": "smooth",
+    "Fri": "criminal",
+    "Sat": "trouble"
+  },
+  {
+    "mealTime": "lunch",
+    "Sun": "udon",
+    "Mon": "soba",
+    "Tue": "grass",
+    "Wed": "calpico",
+    "Thu": "like",
+    "Fri": "undercover",
+    "Sat": "breaking"
+  },
+  {
+    "mealTime": "snack",
+    "Sun": "ramen",
+    "Mon": "ramen",
+    "Tue": "bread",
+    "Wed": "water",
+    "Thu": "butter",
+    "Fri": "Gon",
+    "Sat": "into"
+  },
+  {
+    "mealTime": "dinner",
+    "Sun": "curry",
+    "Mon": "chips",
+    "Tue": "cheese",
+    "Wed": "milk",
+    "Thu": "like",
+    "Fri": "pop",
+    "Sat": "your"
+  },
+  {
+    "mealTime": "dessert",
+    "Sun": "ice cream",
+    "Mon": "tomato",
+    "Tue": "onion",
+    "Wed": "orange",
+    "Thu": "a",
+    "Fri": "like",
+    "Sat": "heart"
+  }
 ]
