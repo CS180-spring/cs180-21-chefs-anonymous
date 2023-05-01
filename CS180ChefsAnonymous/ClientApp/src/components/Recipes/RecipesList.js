@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./RecipesList.module.css";
 import RecipeItem from "./RecipeItem";
-import ExpandedRecipe from "./ExpandedRecipe";
+// import ExpandedRecipe from "./ExpandedRecipe";
 
 const RecipesList = (props) => {
   if (props.recipes.length === 0) {
