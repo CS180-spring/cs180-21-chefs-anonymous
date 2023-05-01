@@ -3,7 +3,7 @@ import { FetchData } from "./components/FetchData";
 import { Home } from "./components/Home";
 import Recipes from "./components/Recipes/Recipes";
 import { MealPlan } from "./components/MealPlan";
-import { Inventory } from "./components/Inventory";
+import  Inventory  from "./components/Inventory/Inventory";
 import { GroceryList } from "./components/GroceryList";
 import { Login } from "./components/Login";
 import { Register } from "./components/Register";
