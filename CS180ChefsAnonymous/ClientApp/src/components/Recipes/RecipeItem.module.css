@@ -40,6 +40,13 @@
     background-color: #dfe6e3;
 }
 
+.delete_modal__buttons {
+
+  padding: 0.5rem;
+  margin-left: 0.5rem;
+  text-align: right;
+}
+
 
 @media (min-width: 580px) {
   .recipe_item__description {

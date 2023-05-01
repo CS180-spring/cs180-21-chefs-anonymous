@@ -1,13 +1,17 @@
 import React, { useContext, useState } from "react";
 import RecipesContext from "./RecipesContext";
 import Card from "../UI/Card";
+import Button from "../UI/Button";
+import Modal from "../UI/Modal";
 import styles from "./RecipeItem.module.css";
 import RecipeForm from "./RecipeForm";
 
 const RecipeItem = (props) => {
   const context = useContext(RecipesContext);
   const [displayForm, setDisplayForm] = useState(false);
+  const [displayDeleteModal, setDisplayDeleteModal] = useState(false);
 
+  // Form display
   const displayRecipeFormHandler = (e) => {
     e.stopPropagation();
     setDisplayForm(true);
@@ -24,6 +28,8 @@ const RecipeItem = (props) => {
   // const mouseLeaveDisplayDeleteHandler = () => {
   //   setDisplay(false);
   // };
+
+  // Styling Edit and Delete Buttons on mouse events
   const mouseOverHandler = (event) => {
     event.target.style.fontWeight = "bold";
   };
@@ -31,12 +37,19 @@ const RecipeItem = (props) => {
     event.target.style.fontWeight = "normal";
   };
 
+  // Expand full recipe
   const expandFullRecipeHandler = () => {
     context.recipeItemToExpand(props);
   };
-  const deleteRecipeHandler = () => {
-    // Need API
+  // Delete recipe
+  const deleteRecipeHandler = (e) => {
+    e.stopPropagation();
+    setDisplayDeleteModal(true);
   };
+  const cancelDeleteModalHandler = () => {
+    setDisplayDeleteModal(false);
+  };
+  // Edit recipe
   const getRecipeDataHandler = (enteredRecipeData) => {
     console.log("got form data!");
     setDisplayForm(false);
@@ -61,6 +74,15 @@ const RecipeItem = (props) => {
           />
         </div>
       )}
+      {displayDeleteModal === true && (
+        <Modal>
+          <h2>Delete Recipe?</h2>
+          <div className={styles.delete_modal__buttons}>
+            <Button onClick={cancelDeleteModalHandler}>Cancel</Button>{" "}
+            <Button type="submit">Delete</Button>
+          </div>
+        </Modal>
+      )}
       <li>
         <Card
           className={styles.recipe_item}
@@ -74,10 +96,6 @@ const RecipeItem = (props) => {
             onClick={displayRecipeFormHandler}
             onMouseOver={mouseOverHandler}
             onMouseLeave={mouseLeaveHandler}
-            // onMouseDown={(e) => {
-            //   e.stopPropagation();
-            //   console.log("what?");
-            // }}
           >
             Edit
           </p>
