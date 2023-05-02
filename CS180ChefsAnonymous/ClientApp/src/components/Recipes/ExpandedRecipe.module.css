@@ -8,3 +8,33 @@
 }
 
 
+.delete_modal__buttons {
+  text-align: right;
+}
+
+.delete_button {
+  background: #f25c54;
+  border-color: #f25c54;
+}
+
+.delete_button:hover,
+.delete_button:active {
+  background: #c1413a;
+  border-color: #c1413a;
+  color: white;
+}
+.cancel_button {
+  border: 1px solid #afafaf;
+  background: transparent;
+  color: #afafaf;
+}
+
+.cancel_button:hover,
+.cancel_button:active {
+  background: #afafaf;
+  border-color: #afafaf;
+  color: white;
+}
+
+
+

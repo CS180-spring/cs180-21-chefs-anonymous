@@ -145,7 +145,9 @@ const RecipeForm = (props) => {
 
           {/*Submit button */}
           <div className={styles.new_recipe__actions}>
-            <Button onClick={cancelHandler}>Cancel</Button>{" "}
+            <Button onClick={cancelHandler} className={styles.cancel_button}>
+              Cancel
+            </Button>{" "}
             <Button type="submit">Submit</Button>
           </div>
         </form>
