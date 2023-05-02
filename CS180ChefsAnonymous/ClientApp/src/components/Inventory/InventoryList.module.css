@@ -1,9 +1,9 @@
 .inventory_list {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .inventory_list__fallback {
-    color: white;
-    text-align: center;
-  }
+  list-style: none;
+  padding: 0;
+}
+
+.inventory_list__fallback {
+  color: white;
+  text-align: center;
+}

@@ -22,7 +22,7 @@ const InventoryItem = (props) => {
         onMouseOver={mouseOverHandler}
         onMouseLeave={mouseLeaveHandler}
       >
-        <strong>{props.title} </strong>
+        <strong>{props.ingredient} </strong>
       </Card>
     </li>
   );

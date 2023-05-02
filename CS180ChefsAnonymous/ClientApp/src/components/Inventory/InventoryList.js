@@ -7,7 +7,7 @@ const InventoryList = (props) => {
   const [displayFullInventory, setDisplayFullInventory] = useState(false);
 
   if (props.inventory.length === 0) {
-    return <h2 className={styles.inventory_list__fallback}>Found no inventory.</h2>;
+    return <h2 className={styles.recieps_list__fallback}>Found no inventory.</h2>;
   }
 
   let selectedInventory;
@@ -23,12 +23,10 @@ const InventoryList = (props) => {
           {props.inventory.map((inventory) => (
             <InventoryItem
               key={inventory.id}
-              title={inventory.title}
-              cuisine={inventory.cuisine}
-              description={inventory.description}
-              preptime={inventory.preptime}
-              cooktime={inventory.cooktime}
-              ingredients={inventory.ingredients}
+              ingredient={inventory.ingredient}
+              quantity = {inventory.quantity}
+              expiryDate = {inventory.expiryDate}
+              currentDate = {inventory.currentDate}
               onExpandFullInventory={expandFullInventoryHandler}
             />
           ))}
