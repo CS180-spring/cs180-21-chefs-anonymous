@@ -24,8 +24,7 @@
 
 
 .new_recipe__actions {
-
-  padding: 0.5rem;
+  padding: 1rem;
   margin-left: 0.5rem;
   text-align: right;
 }
@@ -47,4 +46,17 @@
   width: 80%;
   z-index: 100;
   overflow: hidden;
+}
+
+.cancel_button {
+  border: 1px solid #afafaf;
+  background: transparent;
+  color: #afafaf;
+}
+
+.cancel_button:hover,
+.cancel_button:active {
+  background: #afafaf;
+  border-color: #afafaf;
+  color: white;
 }

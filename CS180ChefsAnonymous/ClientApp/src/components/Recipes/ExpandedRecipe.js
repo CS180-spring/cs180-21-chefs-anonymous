@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import styles from "./ExpandedRecipe.module.css";
 import Button from "../UI/Button";
+import Modal from "../UI/Modal";
 import RecipeForm from "./RecipeForm";
 
 const ExpandedRecipe = (props) => {
   const [displayForm, setDisplayForm] = useState(false);
+  const [displayDeleteModal, setDisplayDeleteModal] = useState(false);
 
   const displayRecipeFormHandler = () => {
     setDisplayForm(true);
@@ -30,10 +32,18 @@ const ExpandedRecipe = (props) => {
 
     // Need API
   };
-  const deleteRecipeHandler = () => {
-    console.log("deleting recipe now!");
-    // Go back to main recipe page
+  // Delete recipe
+  const deleteRecipeHandler = (e) => {
+    e.stopPropagation();
+    setDisplayDeleteModal(true);
+  };
+  const cancelDeleteModalHandler = () => {
+    setDisplayDeleteModal(false);
+  };
+  const deleteDeleteModalHandler = () => {
     // Need API
+    // need to go back to main recipe page
+    setDisplayDeleteModal(false);
   };
 
   return (
@@ -52,6 +62,26 @@ const ExpandedRecipe = (props) => {
             onGetRecipeData={getRecipeDataHandler}
           />
         </div>
+      )}
+      {displayDeleteModal === true && (
+        <Modal>
+          <h2>Delete {props.recipe.title}?</h2>
+          <div className={styles.delete_modal__buttons}>
+            <Button
+              onClick={cancelDeleteModalHandler}
+              className={styles.cancel_button_expanded_recipe}
+            >
+              Cancel
+            </Button>{" "}
+            <Button
+              onClick={deleteDeleteModalHandler}
+              type="submit"
+              className={styles.delete_button_expanded_recipe}
+            >
+              Delete
+            </Button>
+          </div>
+        </Modal>
       )}
       <h1>{props.recipe.title}</h1>
       <h2>{props.recipe.cuisine}</h2>
@@ -76,12 +106,14 @@ const ExpandedRecipe = (props) => {
           </span>
         </div>
       </div>
-      <Button type="button" onClick={displayRecipeFormHandler}>
-        Edit
-      </Button>{" "}
-      <Button type="button" onClick={deleteRecipeHandler}>
-        Delete
-      </Button>
+      <div className={styles.expanded_recipe__actions}>
+        <Button type="button" onClick={displayRecipeFormHandler}>
+          Edit
+        </Button>{" "}
+        <Button type="button" onClick={deleteRecipeHandler}>
+          Delete
+        </Button>
+      </div>
     </div>
   );
 };

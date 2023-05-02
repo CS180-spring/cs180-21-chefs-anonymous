@@ -8,3 +8,38 @@
 }
 
 
+.delete_modal__buttons {
+  text-align: right;
+}
+
+.delete_button_expanded_recipe {
+  background: #f25c54 !important;
+  border-color: #f25c54 !important;
+}
+
+.delete_button_expanded_recipe:hover,
+.delete_button_expanded_recipe:active {
+  background: #c1413a !important;
+  border-color: #c1413a !important;
+  color: white;
+}
+.cancel_button_expanded_recipe {
+  border: 1px solid #afafaf !important;
+  background: transparent !important;
+  color: #afafaf !important;
+}
+
+.cancel_button_expanded_recipe:hover,
+.cancel_button_expanded_recipe:active {
+  background: #afafaf !important;
+  border-color: #afafaf !important;
+  color: white;
+}
+
+.expanded_recipe__actions {
+  padding: 1rem;
+  margin-left: 0.5rem;
+  text-align: right;
+}
+
+
