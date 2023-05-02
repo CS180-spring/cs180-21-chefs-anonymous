@@ -12,29 +12,34 @@
   text-align: right;
 }
 
-.delete_button {
+.delete_button_expanded_recipe {
   background: #f25c54;
   border-color: #f25c54;
 }
 
-.delete_button:hover,
-.delete_button:active {
+.delete_button_expanded_recipe:hover,
+.delete_button_expanded_recipe:active {
   background: #c1413a;
   border-color: #c1413a;
   color: white;
 }
-.cancel_button {
+.cancel_button_expanded_recipe {
   border: 1px solid #afafaf;
   background: transparent;
   color: #afafaf;
 }
 
-.cancel_button:hover,
-.cancel_button:active {
+.cancel_button_expanded_recipe:hover,
+.cancel_button_expanded_recipe:active {
   background: #afafaf;
   border-color: #afafaf;
   color: white;
 }
 
+.expanded_recipe__actions {
+  padding: 1rem;
+  margin-left: 0.5rem;
+  text-align: right;
+}
 
 

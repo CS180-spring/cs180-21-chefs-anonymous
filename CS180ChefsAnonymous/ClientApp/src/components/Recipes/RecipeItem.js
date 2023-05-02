@@ -106,7 +106,7 @@ const RecipeItem = (props) => {
           onMouseLeave={mouseLeaveDisplayDeleteHandler}
         >
           <h2>{props.title}</h2>
-          {displayEditDelete == true && (
+          {displayEditDelete === true && (
             <p
               className={styles.delete_recipe_item}
               onClick={displayRecipeFormHandler}
@@ -116,7 +116,7 @@ const RecipeItem = (props) => {
               Edit
             </p>
           )}
-          {displayEditDelete == true && (
+          {displayEditDelete === true && (
             <p
               className={styles.delete_recipe_item}
               onClick={deleteRecipeHandler}

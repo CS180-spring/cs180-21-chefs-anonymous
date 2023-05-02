@@ -69,14 +69,14 @@ const ExpandedRecipe = (props) => {
           <div className={styles.delete_modal__buttons}>
             <Button
               onClick={cancelDeleteModalHandler}
-              className={styles.cancel_button}
+              className={styles.cancel_button_expanded_recipe}
             >
               Cancel
             </Button>{" "}
             <Button
               onClick={deleteDeleteModalHandler}
               type="submit"
-              className={styles.delete_button}
+              className={styles.delete_button_expanded_recipe}
             >
               Delete
             </Button>
@@ -106,12 +106,14 @@ const ExpandedRecipe = (props) => {
           </span>
         </div>
       </div>
-      <Button type="button" onClick={displayRecipeFormHandler}>
-        Edit
-      </Button>{" "}
-      <Button type="button" onClick={deleteRecipeHandler}>
-        Delete
-      </Button>
+      <div className={styles.expanded_recipe__actions}>
+        <Button type="button" onClick={displayRecipeFormHandler}>
+          Edit
+        </Button>{" "}
+        <Button type="button" onClick={deleteRecipeHandler}>
+          Delete
+        </Button>
+      </div>
     </div>
   );
 };
