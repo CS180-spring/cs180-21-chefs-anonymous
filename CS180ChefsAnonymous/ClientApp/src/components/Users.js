@@ -114,14 +114,29 @@ export function Users() {
             },
             body: JSON.stringify(
                 {
-                    "recipeId": 1,
-                    "recipeTitle": "Spaghetti Carbonara",
-                    "recipeDesc": "Classic Italian pasta dish with creamy sauce",
-                    "instructions": "Cook pasta according to package directions. Meanwhile, in a large skillet, cook bacon over medium heat until crisp. Remove with a slotted spoon; drain on paper towels. Discard drippings. In the same skillet, heat butter over medium heat. Add garlic; cook 1 minute. Whisk together eggs, cream, cheese and pepper; remove skillet from heat. Drain pasta; add to skillet. Pour egg mixture over pasta; toss to coat. Add bacon; toss to combine. Serve immediately.",
-                    "prepTime": 15,
-                    "cookingTime": 15,
-                    "userId": 1,
-                    "categoryId": 2
+                    recipeId: 1,
+                    recipeTitle: "Spaghetti Carbonara",
+                    recipeDesc: "Classic Italian pasta dish with creamy sauce",
+                    instructions: "Cook pasta according to package directions. Meanwhile, in a large skillet, cook bacon over medium heat until crisp. Remove with a slotted spoon; drain on paper towels. Discard drippings. In the same skillet, heat butter over medium heat. Add garlic; cook 1 minute. Whisk together eggs, cream, cheese and pepper; remove skillet from heat. Drain pasta; add to skillet. Pour egg mixture over pasta; toss to coat. Add bacon; toss to combine. Serve immediately.",
+                    prepTime: 15,
+                    cookingTime: 15,
+                    userId: 6,
+                    categoryId: 2,
+                    User: {
+                        userid: 6,
+                        name: 'David Doe',
+                        username: 'david',
+                        password: 'david',
+                        email: 'daviddoe@example.com'
+                    },
+                    Category: {
+                        recipe_id:1,
+                         category_id: 1,
+                        CategoryName: "Main Dishes",
+                        cookingTime: 1,
+                         prepTime:1,
+                        
+                    }
                 })
         })
             .then(response => response.json())
