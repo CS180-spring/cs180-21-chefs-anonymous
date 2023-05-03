@@ -1,5 +1,6 @@
 ﻿import React, { useState, useEffect } from "react";
 
+
 export function Users() {
     const [users, setUsers] = useState([]);
     useEffect(() => {
@@ -35,7 +36,7 @@ export function Users() {
             body: JSON.stringify({
                 // pass the new user object as the request body
                 userid: 6,
-                name: 'David Doe',
+                name: 'David Boe',
                 username: 'david',
                 password: 'david',
                 email: 'daviddoe@example.com'
@@ -114,14 +115,14 @@ export function Users() {
             },
             body: JSON.stringify(
                 {
-                    recipeId: 1,
-                    recipeTitle: "Spaghetti Carbonara",
-                    recipeDesc: "Classic Italian pasta dish with creamy sauce",
-                    instructions: "Cook pasta according to package directions. Meanwhile, in a large skillet, cook bacon over medium heat until crisp. Remove with a slotted spoon; drain on paper towels. Discard drippings. In the same skillet, heat butter over medium heat. Add garlic; cook 1 minute. Whisk together eggs, cream, cheese and pepper; remove skillet from heat. Drain pasta; add to skillet. Pour egg mixture over pasta; toss to coat. Add bacon; toss to combine. Serve immediately.",
-                    prepTime: 15,
-                    cookingTime: 15,
-                    userId: 6,
-                    categoryId: 2,
+                    "recipeId": 2,
+                    "recipeTitle": "Spaghetti Carbonara",
+                    "recipeDesc": "Classic Italian pasta dish with creamy sauce",
+                    "instructions": "Cook pasta according to package directions...",
+                    "prepTime": 15,
+                    "cookingTime": 15,
+                    "userId": 6,
+                    "categoryId": 1,
                     User: {
                         userid: 6,
                         name: 'David Doe',
@@ -130,14 +131,16 @@ export function Users() {
                         email: 'daviddoe@example.com'
                     },
                     Category: {
-                        recipe_id:1,
-                         category_id: 1,
-                        CategoryName: "Main Dishes",
-                        cookingTime: 1,
-                         prepTime:1,
-                        
+                        category_id: 2,
+                        amnt_of_servings: 2.5,
+                        cuisine: "Italian",
+                        difficulty: 3,
+                        mealtime: new Date('2023-04-21T12:30:00.000'),
+
                     }
-                })
+                }
+
+            )
         })
             .then(response => response.json())
             .then(data => console.log(data))
@@ -160,7 +163,9 @@ export function Users() {
                 prepTime: 5,
                 cookingTime: 5,
                 userId: 6,
-                categoryId: 1
+                categoryId: 1,
+
+                //"Category": null, "ingredients": [], "User": null
 
             })
         })
@@ -278,3 +283,24 @@ export function Users() {
     );
 }
 
+
+/*
+User: {
+                        userid: 6,
+                        name: 'David Doe',
+                        username: 'david',
+                        password: 'david',
+                        email: 'daviddoe@example.com'
+                    },
+                    Category: {
+                        recipe_id: 1,
+                        category_id: 1,
+                        amnt_of_servings: 1,
+                        cuisine: "Food",
+                        difficulty: 1,
+                        datetime: new Date(),
+                        mealtime: new Date(),
+                        "category": null, "ingredients": [], "user": null
+
+                    }
+                    */
