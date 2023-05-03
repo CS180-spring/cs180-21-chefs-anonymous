@@ -13,7 +13,7 @@ const MealPlan = (props) => {
 
   const toggleModal = (i,j) => {
     setModal(!isModal);
-    setRecipe(filteredData.filter((jsonData) => jsonData.mealTime === i && jsonData.day_of_week === j)[0]?.recipe_id)
+    setRecipe(filteredData.filter((jsonData) => jsonData.meal_time === i && jsonData.day_of_week === j)[0]?.recipe_id)
   }
 
   if (isModal) {
@@ -53,7 +53,7 @@ const MealPlan = (props) => {
   let copy = [...meal_matrix];
   for (let i = 1; i < rows; i++) {
     for (let j = 1; j < cols; j++) {
-      copy[i-1][j-1] = filteredData.filter((jsonData) => jsonData.mealTime === i && jsonData.day_of_week === j)[0]?.recipe_id;
+      copy[i-1][j-1] = filteredData.filter((jsonData) => jsonData.meal_time === i && jsonData.day_of_week === j)[0]?.recipe_id;
     }
   }
 
