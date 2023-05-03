@@ -36,7 +36,7 @@ export function Users() {
             body: JSON.stringify({
                 // pass the new user object as the request body
                 userid: 6,
-                name: 'David Boe',
+                name: 'David Doe',
                 username: 'david',
                 password: 'david',
                 email: 'daviddoe@example.com'
@@ -115,29 +115,15 @@ export function Users() {
             },
             body: JSON.stringify(
                 {
-                    "recipeId": 2,
+                    "recipeId": 3,
                     "recipeTitle": "Spaghetti Carbonara",
                     "recipeDesc": "Classic Italian pasta dish with creamy sauce",
                     "instructions": "Cook pasta according to package directions...",
                     "prepTime": 15,
                     "cookingTime": 15,
-                    "userId": 6,
+                    "userId": 1,
                     "categoryId": 1,
-                    User: {
-                        userid: 6,
-                        name: 'David Doe',
-                        username: 'david',
-                        password: 'david',
-                        email: 'daviddoe@example.com'
-                    },
-                    Category: {
-                        category_id: 2,
-                        amnt_of_servings: 2.5,
-                        cuisine: "Italian",
-                        difficulty: 3,
-                        mealtime: new Date('2023-04-21T12:30:00.000'),
-
-                    }
+                    
                 }
 
             )
@@ -174,7 +160,7 @@ export function Users() {
             .catch(error => console.error(error));
     }
     function removeRecipe() {
-        fetch("api/recipe/DeleteRecipe/6", {
+        fetch("api/recipe/DeleteRecipe/3", {
             method: 'DELETE',
 
         })

@@ -21,9 +21,9 @@ public partial class Recipe
 
     public int CategoryId { get; set; }
 
-    public virtual Category Category { get; set; } = null!;
+    public virtual Category? Category { get; set; }
 
     public virtual ICollection<Ingredient> Ingredients { get; set; } = new List<Ingredient>();
 
-    public virtual User User { get; set; } = null!;
+    public virtual User? User { get; set; }
 }
