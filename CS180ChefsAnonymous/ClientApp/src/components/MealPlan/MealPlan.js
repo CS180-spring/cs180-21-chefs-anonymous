@@ -4,6 +4,10 @@ import data from "../../dummy-meal-plan.json";
 
 const MealPlan = (props) => {
   const [modal, setModal] = useState(false);
+  const [meals, setMeals] = useState([])
+  const [meal_matrix, setMealMatrix] = useState(Array.from({length: 5},()=> Array.from({length: 7}, () => null)));
+  console.log(meal_matrix)
+
   const toggleModal = () => {
     setModal(!modal);
   }
@@ -41,6 +45,17 @@ const MealPlan = (props) => {
   //   // Runs after EVERY rendering
   // });
 
+  const filteredData = data.filter( (jsonData) => jsonData.user_id === 1);
+  console.log(filteredData);
+
+  const handleChange = (row, column, event) => {
+    let copy = [...meal_matrix];
+    copy[row][column] = event.target.value;
+    setMealMatrix(copy);
+
+    console.log(meal_matrix);
+  };
+
   const tableRows = [];
   for (let i = 0; i < rows; i++) {
     const tableCells = [];
@@ -64,6 +79,10 @@ const MealPlan = (props) => {
           tableCells.push(
             <td id={i+'-'+j} key={i+'-'+j} onClick={toggleModal}>
               ({i},{j})
+              <input
+                type="text"
+                onChange={e => handleChange(i-1, j-1, e)}
+              />
             </td>
           );
         }
@@ -86,7 +105,7 @@ const MealPlan = (props) => {
       {modal && (
         <div className="modal1">
           <div onClick={toggleModal} className="overlay1"></div>
-          <div class="modal-content1">
+          <div className="modal-content1">
             <h3>hello</h3>
           </div>
         </div>
