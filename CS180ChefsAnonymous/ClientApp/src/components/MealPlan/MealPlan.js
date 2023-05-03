@@ -4,12 +4,18 @@ import data from "../../dummy-meal-plan.json";
 
 const MealPlan = (props) => {
   const [modal, setModal] = useState(false);
+  const [recipe, setRecipe] = useState("");
   const [meals, setMeals] = useState([])
   const [meal_matrix, setMealMatrix] = useState(Array.from({length: 5},()=> Array.from({length: 7}, () => null)));
   console.log(meal_matrix)
 
-  const toggleModal = () => {
+  // const toggleModal = () => {
+  //   setModal(!modal);
+  // }
+
+  const toggleModal = (i,j) => {
     setModal(!modal);
+    setRecipe(filteredData.filter((jsonData) => jsonData.mealTime === i && jsonData.day_of_week === j)[0]?.recipe_id)
   }
 
   if (modal) {
@@ -46,14 +52,14 @@ const MealPlan = (props) => {
   // });
 
   const filteredData = data.filter( (jsonData) => jsonData.user_id === 1);
-  console.log(filteredData);
+  // console.log("filtered data:",filteredData);
 
-  const handleChange = (row, column, event) => {
+  const handleChange = (row, col, event) => {
     let copy = [...meal_matrix];
-    copy[row][column] = event.target.value;
+    copy[row][col] = filteredData.filter((jsonData) => jsonData.mealTime === row + 1 && jsonData.day_of_week === col + 1)[0]?.recipe_id;
     setMealMatrix(copy);
 
-    console.log(meal_matrix);
+    console.log("meal matrix:",meal_matrix);
   };
 
   const tableRows = [];
@@ -77,8 +83,9 @@ const MealPlan = (props) => {
         }
         else {
           tableCells.push(
-            <td id={i+'-'+j} key={i+'-'+j} onClick={toggleModal}>
+            <td id={i+'-'+j} key={i+'-'+j} onClick={ () => toggleModal(i,j)}>
               ({i},{j})
+              {meal_matrix[i-1][j-1]}
               <input
                 type="text"
                 onChange={e => handleChange(i-1, j-1, e)}
@@ -106,7 +113,7 @@ const MealPlan = (props) => {
         <div className="modal1">
           <div onClick={toggleModal} className="overlay1"></div>
           <div className="modal-content1">
-            <h3>hello</h3>
+            <h3>{recipe}</h3>
           </div>
         </div>
       )}

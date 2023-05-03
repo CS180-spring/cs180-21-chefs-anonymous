@@ -1,492 +1,485 @@
 [
   {
-    "meal_plan_id": 1,
-    "user_id": 1,
-    "mealTime": "breakfast",
-    "day-of-week": "Sun",
-    "recipe_id": 1
-  },
-  {
     "meal_plan_id": 2,
     "user_id": 1,
-    "mealTime": "breakfast",
-    "day-of-week": "Mon",
+    "mealTime": 1,
+    "day_of_week": 2,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 3,
     "user_id": 1,
-    "mealTime": "breakfast",
-    "day-of-week": "Tue",
+    "mealTime": 1,
+    "day_of_week": 3,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 4,
     "user_id": 1,
-    "mealTime": "breakfast",
-    "day-of-week": "Wed",
+    "mealTime": 1,
+    "day_of_week": 4,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 5,
     "user_id": 1,
-    "mealTime": "breakfast",
-    "day-of-week": "Thu",
+    "mealTime": 1,
+    "day_of_week": 5,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 6,
     "user_id": 1,
-    "mealTime": "breakfast",
-    "day-of-week": "Fri",
+    "mealTime": 1,
+    "day_of_week": 6,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 7,
     "user_id": 1,
-    "mealTime": "breakfast",
-    "day-of-week": "Sat",
+    "mealTime": 1,
+    "day_of_week": 7,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 8,
     "user_id": 1,
-    "mealTime": "lunch",
-    "day-of-week": "Mon",
+    "mealTime": 2,
+    "day_of_week": 1,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 9,
     "user_id": 1,
-    "mealTime": "lunch",
-    "day-of-week": "Mon",
+    "mealTime": 2,
+    "day_of_week": 2,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 10,
     "user_id": 1,
-    "mealTime": "lunch",
-    "day-of-week": "Tue",
+    "mealTime": 2,
+    "day_of_week": 3,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 11,
     "user_id": 1,
-    "mealTime": "lunch",
-    "day-of-week": "Wed",
+    "mealTime": 2,
+    "day_of_week": 4,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 12,
     "user_id": 1,
-    "mealTime": "lunch",
-    "day-of-week": "Thu",
+    "mealTime": 2,
+    "day_of_week": 5,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 13,
     "user_id": 1,
-    "mealTime": "lunch",
-    "day-of-week": "Fri",
+    "mealTime": 2,
+    "day_of_week": 6,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 14,
     "user_id": 1,
-    "mealTime": "lunch",
-    "day-of-week": "Sat",
+    "mealTime": 2,
+    "day_of_week": 7,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 15,
     "user_id": 1,
-    "mealTime": "snacks",
-    "day-of-week": "Sun",
+    "mealTime": 3,
+    "day_of_week": 1,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 16,
     "user_id": 1,
-    "mealTime": "snacks",
-    "day-of-week": "Mon",
+    "mealTime": 3,
+    "day_of_week": 2,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 17,
     "user_id": 1,
-    "mealTime": "snacks",
-    "day-of-week": "Tue",
+    "mealTime": 3,
+    "day_of_week": 3,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 18,
     "user_id": 1,
-    "mealTime": "snacks",
-    "day-of-week": "Wed",
+    "mealTime": 3,
+    "day_of_week": 4,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 19,
     "user_id": 1,
-    "mealTime": "snacks",
-    "day-of-week": "Thu",
+    "mealTime": 3,
+    "day_of_week": 5,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 20,
     "user_id": 1,
-    "mealTime": "snacks",
-    "day-of-week": "Fri",
+    "mealTime": 3,
+    "day_of_week": 6,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 21,
     "user_id": 1,
-    "mealTime": "snacks",
-    "day-of-week": "Sat",
+    "mealTime": 3,
+    "day_of_week": 7,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 22,
     "user_id": 1,
-    "mealTime": "dinner",
-    "day-of-week": "Mon",
+    "mealTime": 4,
+    "day_of_week": 1,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 23,
     "user_id": 1,
-    "mealTime": "dinner",
-    "day-of-week": "Mon",
+    "mealTime": 4,
+    "day_of_week": 2,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 24,
     "user_id": 1,
-    "mealTime": "dinner",
-    "day-of-week": "Tue",
+    "mealTime": 4,
+    "day_of_week": 3,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 25,
     "user_id": 1,
-    "mealTime": "dinner",
-    "day-of-week": "Wed",
+    "mealTime": 4,
+    "day_of_week": 4,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 26,
     "user_id": 1,
-    "mealTime": "dinner",
-    "day-of-week": "Thu",
+    "mealTime": 4,
+    "day_of_week": 5,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 27,
     "user_id": 1,
-    "mealTime": "dinner",
-    "day-of-week": "Fri",
+    "mealTime": 4,
+    "day_of_week": 6,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 28,
     "user_id": 1,
-    "mealTime": "dinner",
-    "day-of-week": "Sat",
+    "mealTime": 4,
+    "day_of_week": 7,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 29,
     "user_id": 1,
-    "mealTime": "dessert",
-    "day-of-week": "Mon",
+    "mealTime": 5,
+    "day_of_week": 1,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 30,
     "user_id": 1,
-    "mealTime": "dessert",
-    "day-of-week": "Mon",
+    "mealTime": 5,
+    "day_of_week": 2,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 31,
     "user_id": 1,
-    "mealTime": "dessert",
-    "day-of-week": "Tue",
+    "mealTime": 5,
+    "day_of_week": 3,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 32,
     "user_id": 1,
-    "mealTime": "dessert",
-    "day-of-week": "Wed",
+    "mealTime": 5,
+    "day_of_week": 4,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 33,
     "user_id": 1,
-    "mealTime": "dessert",
-    "day-of-week": "Thu",
+    "mealTime": 5,
+    "day_of_week": 5,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 34,
     "user_id": 1,
-    "mealTime": "dessert",
-    "day-of-week": "Fri",
+    "mealTime": 5,
+    "day_of_week": 6,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 35,
     "user_id": 1,
-    "mealTime": "dessert",
-    "day-of-week": "Sat",
+    "mealTime": 5,
+    "day_of_week": 7,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 1,
     "user_id": 2,
-    "mealTime": "breakfast",
-    "day-of-week": "Sun",
+    "mealTime": 1,
+    "day_of_week": 1,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 2,
     "user_id": 2,
-    "mealTime": "breakfast",
-    "day-of-week": "Mon",
+    "mealTime": 1,
+    "day_of_week": 2,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 3,
     "user_id": 2,
-    "mealTime": "breakfast",
-    "day-of-week": "Tue",
+    "mealTime": 1,
+    "day_of_week": 3,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 4,
     "user_id": 2,
-    "mealTime": "breakfast",
-    "day-of-week": "Wed",
+    "mealTime": 1,
+    "day_of_week": 4,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 5,
     "user_id": 2,
-    "mealTime": "breakfast",
-    "day-of-week": "Thu",
+    "mealTime": 1,
+    "day_of_week": 5,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 6,
     "user_id": 2,
-    "mealTime": "breakfast",
-    "day-of-week": "Fri",
+    "mealTime": 1,
+    "day_of_week": 6,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 7,
     "user_id": 2,
-    "mealTime": "breakfast",
-    "day-of-week": "Sat",
+    "mealTime": 1,
+    "day_of_week": 7,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 8,
     "user_id": 2,
-    "mealTime": "lunch",
-    "day-of-week": "Mon",
+    "mealTime": 2,
+    "day_of_week": 1,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 9,
     "user_id": 2,
-    "mealTime": "lunch",
-    "day-of-week": "Mon",
+    "mealTime": 2,
+    "day_of_week": 2,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 10,
     "user_id": 2,
-    "mealTime": "lunch",
-    "day-of-week": "Tue",
+    "mealTime": 2,
+    "day_of_week": 3,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 11,
     "user_id": 2,
-    "mealTime": "lunch",
-    "day-of-week": "Wed",
+    "mealTime": 2,
+    "day_of_week": 4,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 12,
     "user_id": 2,
-    "mealTime": "lunch",
-    "day-of-week": "Thu",
+    "mealTime": 2,
+    "day_of_week": 5,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 13,
     "user_id": 2,
-    "mealTime": "lunch",
-    "day-of-week": "Fri",
+    "mealTime": 2,
+    "day_of_week": 6,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 14,
     "user_id": 2,
-    "mealTime": "lunch",
-    "day-of-week": "Sat",
+    "mealTime": 2,
+    "day_of_week": 7,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 15,
     "user_id": 2,
-    "mealTime": "snacks",
-    "day-of-week": "Sun",
+    "mealTime": 3,
+    "day_of_week": 1,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 16,
     "user_id": 2,
-    "mealTime": "snacks",
-    "day-of-week": "Mon",
+    "mealTime": 3,
+    "day_of_week": 2,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 17,
     "user_id": 2,
-    "mealTime": "snacks",
-    "day-of-week": "Tue",
+    "mealTime": 3,
+    "day_of_week": 3,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 18,
     "user_id": 2,
-    "mealTime": "snacks",
-    "day-of-week": "Wed",
+    "mealTime": 3,
+    "day_of_week": 4,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 19,
     "user_id": 2,
-    "mealTime": "snacks",
-    "day-of-week": "Thu",
+    "mealTime": 3,
+    "day_of_week": 5,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 20,
     "user_id": 2,
-    "mealTime": "snacks",
-    "day-of-week": "Fri",
+    "mealTime": 3,
+    "day_of_week": 6,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 21,
     "user_id": 2,
-    "mealTime": "snacks",
-    "day-of-week": "Sat",
+    "mealTime": 3,
+    "day_of_week": 7,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 22,
     "user_id": 2,
-    "mealTime": "dinner",
-    "day-of-week": "Mon",
+    "mealTime": 4,
+    "day_of_week": 1,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 23,
     "user_id": 2,
-    "mealTime": "dinner",
-    "day-of-week": "Mon",
+    "mealTime": 4,
+    "day_of_week": 2,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 24,
     "user_id": 2,
-    "mealTime": "dinner",
-    "day-of-week": "Tue",
+    "mealTime": 4,
+    "day_of_week": 3,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 25,
     "user_id": 2,
-    "mealTime": "dinner",
-    "day-of-week": "Wed",
+    "mealTime": 4,
+    "day_of_week": 4,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 26,
     "user_id": 2,
-    "mealTime": "dinner",
-    "day-of-week": "Thu",
+    "mealTime": 4,
+    "day_of_week": 5,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 27,
     "user_id": 2,
-    "mealTime": "dinner",
-    "day-of-week": "Fri",
+    "mealTime": 4,
+    "day_of_week": 6,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 28,
     "user_id": 2,
-    "mealTime": "dinner",
-    "day-of-week": "Sat",
+    "mealTime": 4,
+    "day_of_week": 7,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 29,
     "user_id": 2,
-    "mealTime": "dessert",
-    "day-of-week": "Mon",
+    "mealTime": 5,
+    "day_of_week": 1,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 30,
     "user_id": 2,
-    "mealTime": "dessert",
-    "day-of-week": "Mon",
+    "mealTime": 5,
+    "day_of_week": 2,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 31,
     "user_id": 2,
-    "mealTime": "dessert",
-    "day-of-week": "Tue",
+    "mealTime": 5,
+    "day_of_week": 3,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 32,
     "user_id": 2,
-    "mealTime": "dessert",
-    "day-of-week": "Wed",
+    "mealTime": 5,
+    "day_of_week": 4,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 33,
     "user_id": 2,
-    "mealTime": "dessert",
-    "day-of-week": "Thu",
+    "mealTime": 5,
+    "day_of_week": 5,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 34,
     "user_id": 2,
-    "mealTime": "dessert",
-    "day-of-week": "Fri",
+    "mealTime": 5,
+    "day_of_week": 6,
     "recipe_id": 1
   },
   {
     "meal_plan_id": 35,
     "user_id": 2,
-    "mealTime": "dessert",
-    "day-of-week": "Sat",
+    "mealTime": 5,
+    "day_of_week": 7,
     "recipe_id": 1
   }
 ]
