@@ -1,16 +1,21 @@
 ﻿using System;
-namespace CS180ChefsAnonymous.Models
+using System.Collections.Generic;
+
+namespace CS180ChefsAnonymous.Models;
+
+public partial class MealPlan
 {
-	public partial class MealPlan
-	{
-		public int MealPlanId { get; set; }
-		public DateTime MealTime { get; set; }
-		public DayOfWeek DayOfTheWeek { get; set; }
-		public int Recipe_id { get; set; }
+    public int MealPlanId { get; set; }
 
-		public MealPlan()
-		{
-		}
-	}
+    public int? UserId { get; set; }
+
+    public int? MealTime { get; set; }
+
+    public int? DayOfWeek { get; set; }
+
+    public int? RecipeId { get; set; }
+
+    public virtual Recipe? Recipe { get; set; }
+
+    public virtual User? User { get; set; }
 }
-

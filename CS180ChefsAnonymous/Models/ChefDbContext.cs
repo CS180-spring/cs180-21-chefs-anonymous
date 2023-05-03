@@ -19,15 +19,15 @@ public partial class ChefDbContext : DbContext
 
     public virtual DbSet<Ingredient> Ingredients { get; set; }
 
-    public virtual DbSet<Recipe> Recipes { get; set; }
-
-    public virtual DbSet<User> Users { get; set; }
+    public virtual DbSet<Inventory> Inventories { get; set; }
 
     public virtual DbSet<Item> Items { get; set; }
 
     public virtual DbSet<MealPlan> MealPlans { get; set; }
 
-    public virtual DbSet<Inventory> Inventories { get; set; }
+    public virtual DbSet<Recipe> Recipes { get; set; }
+
+    public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
@@ -59,21 +59,91 @@ public partial class ChefDbContext : DbContext
 
         modelBuilder.Entity<Ingredient>(entity =>
         {
+            entity.HasKey(e => e.IngredientId).HasName("PK__Ingredie__B0E453CF3D56EC39");
+
             entity.Property(e => e.IngredientId)
                 .ValueGeneratedNever()
                 .HasColumnName("ingredient_id");
-            entity.Property(e => e.Name)
+            entity.Property(e => e.ItemName)
                 .HasMaxLength(50)
                 .IsUnicode(false)
-                .HasColumnName("name");
+                .HasColumnName("item_name");
             entity.Property(e => e.Qty).HasColumnName("qty");
             entity.Property(e => e.RecipeId).HasColumnName("recipe_id");
             entity.Property(e => e.Unit).HasColumnName("unit");
 
+            entity.HasOne(d => d.ItemNameNavigation).WithMany(p => p.Ingredients)
+                .HasForeignKey(d => d.ItemName)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Ingredien__item___2180FB33");
+
             entity.HasOne(d => d.Recipe).WithMany(p => p.Ingredients)
                 .HasForeignKey(d => d.RecipeId)
+                .HasConstraintName("FK__Ingredien__recip__208CD6FA");
+        });
+
+        modelBuilder.Entity<Inventory>(entity =>
+        {
+            entity.ToTable("Inventory");
+
+            entity.Property(e => e.InventoryId)
+                .ValueGeneratedNever()
+                .HasColumnName("inventory_id");
+            entity.Property(e => e.ItemName)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("item_name");
+            entity.Property(e => e.Qty).HasColumnName("qty");
+            entity.Property(e => e.Unit).HasColumnName("unit");
+            entity.Property(e => e.UserId).HasColumnName("user_id");
+
+            entity.HasOne(d => d.ItemNameNavigation).WithMany(p => p.Inventories)
+                .HasForeignKey(d => d.ItemName)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("recipe_id");
+                .HasConstraintName("item_name");
+
+            entity.HasOne(d => d.User).WithMany(p => p.Inventories)
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("userid");
+        });
+
+        modelBuilder.Entity<Item>(entity =>
+        {
+            entity.HasKey(e => e.ItemName);
+
+            entity.Property(e => e.ItemName)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("item_name");
+            entity.Property(e => e.CalPerKg).HasColumnName("calPerKg");
+            entity.Property(e => e.OtherInfo)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .HasColumnName("other_info");
+        });
+
+        modelBuilder.Entity<MealPlan>(entity =>
+        {
+            entity.HasKey(e => e.MealPlanId).HasName("PK__MealPlan__05C576072E6428CD");
+
+            entity.ToTable("MealPlan");
+
+            entity.Property(e => e.MealPlanId)
+                .ValueGeneratedNever()
+                .HasColumnName("meal_plan_id");
+            entity.Property(e => e.DayOfWeek).HasColumnName("day_of_week");
+            entity.Property(e => e.MealTime).HasColumnName("meal_time");
+            entity.Property(e => e.RecipeId).HasColumnName("recipe_id");
+            entity.Property(e => e.UserId).HasColumnName("user_id");
+
+            entity.HasOne(d => d.Recipe).WithMany(p => p.MealPlans)
+                .HasForeignKey(d => d.RecipeId)
+                .HasConstraintName("FK__MealPlan__recipe__19DFD96B");
+
+            entity.HasOne(d => d.User).WithMany(p => p.MealPlans)
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("FK__MealPlan__user_i__18EBB532");
         });
 
         modelBuilder.Entity<Recipe>(entity =>
@@ -111,11 +181,11 @@ public partial class ChefDbContext : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.Userid).HasName("PK__Users__CBA1B257585BC2B5");
+            entity.HasKey(e => e.UserId).HasName("PK__Users__CBA1B257585BC2B5");
 
-            entity.Property(e => e.Userid)
+            entity.Property(e => e.UserId)
                 .ValueGeneratedNever()
-                .HasColumnName("userid");
+                .HasColumnName("user_id");
             entity.Property(e => e.Email)
                 .HasMaxLength(50)
                 .IsUnicode(false)
