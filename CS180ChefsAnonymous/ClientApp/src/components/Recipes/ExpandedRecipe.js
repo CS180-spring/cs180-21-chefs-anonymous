@@ -58,6 +58,7 @@ const ExpandedRecipe = (props) => {
             prepMin={props.recipe.preptime.minutes}
             cookHr={props.recipe.cooktime.hours}
             cookMin={props.recipe.cooktime.minutes}
+            ingredients={props.recipe.ingredients}
             onCancel={cancelFormHandler}
             onGetRecipeData={getRecipeDataHandler}
           />
@@ -105,6 +106,15 @@ const ExpandedRecipe = (props) => {
             {totalHr} hr {totalMin} min
           </span>
         </div>
+      </div>
+
+      <div>
+        <h4>Ingredients</h4>
+        {props.recipe.ingredients.map((ingredient) => (
+          <li key={ingredient.id}>
+            {ingredient.qty} {ingredient.name}
+          </li>
+        ))}
       </div>
       <div className={styles.expanded_recipe__actions}>
         <Button type="button" onClick={displayRecipeFormHandler}>

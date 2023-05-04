@@ -5,13 +5,15 @@ import styles from "./Modal.module.css";
 const Modal = (props) => {
   return (
     <div
-      className={`${styles.modal_formatting} ${styles.backdrop} `}
+      className={`${styles.modal_formatting} ${styles.backdrop}`}
       onClick={props.onClick}
       onMouseOver={props.onMouseOver}
       onMouseLeave={props.onMouseLeave}
       onBlur={props.onBlur}
     >
-      <Card className={styles.modal}>{props.children}</Card>
+      <div className={`${styles.outer}`}>
+        <div className={`${styles.modal} ${styles.card}`}>{props.children}</div>
+      </div>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Card from "../UI/Card";
+import Modal from "../UI/Modal";
 import Button from "../UI/Button";
 import styles from "./RecipeForm.module.css";
 
@@ -21,6 +21,8 @@ const RecipeForm = (props) => {
   const [enteredMinutesCooktime, setEnteredMinutesCooktime] = useState(
     props.cookMin
   );
+  const [enteredIngredient, setEnteredIngredient] = useState(props.ingredients);
+  const [newIngredient, setNewIngredient] = useState("");
 
   const titleChangeHandler = (event) => {
     setEnteredTitle(event.target.value);
@@ -43,13 +45,30 @@ const RecipeForm = (props) => {
   const minutesCooktimeChangeHandler = (event) => {
     setEnteredMinutesCooktime(event.target.value);
   };
+  const newIngredientHandler = (event) => {
+    setNewIngredient(event.target.value);
+  };
+  const addIngredientHandler = () => {
+    const newIngredientToAdd = {
+      id: Math.random().toString(),
+      name: newIngredient,
+    };
+
+    let newIngredientsList = [];
+    if (enteredIngredient === undefined) {
+      newIngredientsList = [newIngredientToAdd];
+    } else {
+      newIngredientsList = [...enteredIngredient, newIngredientToAdd];
+    }
+    setEnteredIngredient(newIngredientsList);
+    setNewIngredient("");
+  };
 
   const cancelHandler = () => {
     props.onCancel();
   };
   const formSubmitHandler = (event) => {
     event.preventDefault();
-
     const recipeData = {
       title: enteredTitle,
       cuisine: enteredCuisine,
@@ -73,7 +92,7 @@ const RecipeForm = (props) => {
 
   return (
     <div className={styles.backdrop}>
-      <Card className={styles.modal}>
+      <Modal>
         <h2 className={styles.new_recipe__controls}>Add Recipe</h2>
         <form onSubmit={formSubmitHandler}>
           <div className={styles.new_recipe__controls}>
@@ -142,6 +161,40 @@ const RecipeForm = (props) => {
               />
             </div>
           </div>
+          <div className={styles.new_recipe__controls}>
+            <div className={styles.new_recipe__control}>
+              <label>Add Ingredient</label>
+              <input
+                type="text"
+                value={newIngredient}
+                onChange={newIngredientHandler}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    if (newIngredient !== "") {
+                      addIngredientHandler();
+                    }
+                  }
+                }}
+              />{" "}
+              <Button
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (newIngredient !== "") {
+                    addIngredientHandler();
+                  }
+                }}
+              >
+                Add
+              </Button>
+              {enteredIngredient !== undefined &&
+                enteredIngredient.map((ingredient) => (
+                  <li key={ingredient.id} className={styles.ingredients_list}>
+                    {ingredient.qty} {ingredient.name}
+                  </li>
+                ))}
+            </div>
+          </div>
 
           {/*Submit button */}
           <div className={styles.new_recipe__actions}>
@@ -151,7 +204,7 @@ const RecipeForm = (props) => {
             <Button type="submit">Submit</Button>
           </div>
         </form>
-      </Card>
+      </Modal>
     </div>
   );
 };
