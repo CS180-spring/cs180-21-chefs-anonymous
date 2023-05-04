@@ -21,6 +21,8 @@ export function Users() {
             .then((responseJson) => {
                 console.log(responseJson);
                 setUsers(responseJson);
+                console.log(users)
+
             })
             .catch((error) => {
                 console.error(error);
@@ -106,6 +108,20 @@ export function Users() {
                 console.error(error);
             });
     }
+    function getSpecificRecipe() {
+        fetch("api/recipe/GetRecipe/3")
+            .then((response) => response.json())
+            .then((responseJson) => {
+                console.log(responseJson);
+                setRecipes([responseJson]);
+                console.log("SPECIFIC RECIPE");
+                console.log(recipes);
+
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
 
     function addRecipe() {
         fetch("api/recipe/AddRecipe", {
@@ -121,7 +137,7 @@ export function Users() {
                     "instructions": "Cook pasta according to package directions...",
                     "prepTime": 15,
                     "cookingTime": 15,
-                    "userId": 1,
+                    "userId": 6,
                     "categoryId": 1,
                     
                 }
@@ -191,7 +207,7 @@ export function Users() {
                             {
                                 users.map((item) => (
                                     <tr key={item.name}>
-                                        <td>{item.userid}</td>
+                                        <td>{item.userId}</td>
 
                                         <td>{item.name}</td>
                                         <td>{item.email}</td>
@@ -263,6 +279,9 @@ export function Users() {
             </button >
             <button className="btn btn-primary" onClick={removeRecipe}>
                 Delete
+            </button >
+            <button className="btn btn-primary" onClick={getSpecificRecipe}>
+                Get1
             </button >
         </div>
         
