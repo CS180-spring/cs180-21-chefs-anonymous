@@ -185,7 +185,99 @@ export function Users() {
             .catch(error => console.error(error));
     }
 
+    // Item Stuff
+    const [items, setItems] = useState([]);
+    useEffect(() => {
+        fetch("api/item/GetItems")
+            .then((response) => response.json())
+            //.then((response) => {
+            //    //console.log(response.json());
+            //    response.json()
+            //})
+            .then((responseJson) => {
+                console.log(responseJson);
+                setItems(responseJson);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }, []);
 
+    function refreshItems() {
+        fetch("api/item/GetItems")
+            .then((response) => response.json())
+            .then((responseJson) => {
+                console.log(responseJson);
+                setItems(responseJson);
+                console.log(items)
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+    function getSpecificItem() {
+        fetch("api/item/GetItem/Apple")
+            .then((response) => response.json())
+            .then((responseJson) => {
+                console.log(responseJson);
+                setItems([responseJson]);
+                console.log("SPECIFIC ITEM");
+                console.log(recipes);
+
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+
+    function addItem() {
+        fetch("api/item/AddItem", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(
+                {
+                    "itemName": "Banana",
+                    "calPerKg": 50,
+                    "otherInfo": "Organic2",
+                }
+
+            )
+        })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
+    }
+
+
+    function updateItem() {
+        fetch("api/item/UpdateItem/Banana", {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(
+                {
+                    "itemName": "Banana",
+                    "calPerKg": 300,
+                    "otherInfo": "Organic3",
+                }
+            )
+        })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
+    }
+    function removeItem() {
+        fetch("api/item/DeleteItem/Banana", {
+            method: 'DELETE',
+
+        })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
+    }
     //};
 
     return (
@@ -281,6 +373,49 @@ export function Users() {
                 Delete
             </button >
             <button className="btn btn-primary" onClick={getSpecificRecipe}>
+                Get1
+            </button >
+
+            <h1>Items</h1>
+            <div className="row">
+                <div className="col-sm-12">
+                    <table className="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ItemName</th>
+                                <th>calories</th>
+                                <th>info</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+
+                                items.map((items) => (
+                                    <tr key={items.itemName}>
+                                        <td>{items.itemName}</td>
+                                        <td>{items.calPerKg}</td>
+                                        <td>{items.otherInfo}</td>
+
+                                    </tr>
+                                ))}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <button className="btn btn-primary" onClick={refreshItems}>
+                Refresh
+            </button >
+            <button className="btn btn-primary" onClick={addItem}>
+                Add
+            </button >
+            <button className="btn btn-primary" onClick={updateItem}>
+                Update
+            </button >
+            <button className="btn btn-primary" onClick={removeItem}>
+                Delete
+            </button >
+            <button className="btn btn-primary" onClick={getSpecificItem}>
                 Get1
             </button >
         </div>
