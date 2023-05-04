@@ -3,14 +3,21 @@ import styles from "./MealPlan.css";
 import data from "../../dummy-meal-plan.json";
 
 const MealPlan = (props) => {
-  const [modal, setModal] = useState(false);
-  const toggleModal = () => {
-    setModal(!modal);
+  const [isModal, setModal] = useState(false);
+  // recipe is a recipe we can retrieve by clicking a cell
+  const [recipe, setRecipe] = useState("");
+  const [meals, setMeals] = useState([])
+  // meal_matrix is a table which contains recipe_id for displaying in a cell of table
+  const [meal_matrix, setMealMatrix] = useState(Array.from({length: 5},()=> Array.from({length: 7}, () => null)));
+
+
+  const toggleModal = (i,j) => {
+    setModal(!isModal);
+    setRecipe(filteredData.filter((jsonData) => jsonData.meal_time === i && jsonData.day_of_week === j)[0]?.recipe_id)
   }
 
-  if (modal) {
+  if (isModal) {
     document.body.classList.add('active-modal');
-    // document.getElementById("modal").style.display = "block";
   } else {
     document.body.classList.remove('active-modal');
   }
@@ -37,9 +44,18 @@ const MealPlan = (props) => {
     else if (i===5) return 'Dessert'
   }
 
-  // useEffect(() => {
-  //   // Runs after EVERY rendering
-  // });
+  useEffect(() => {
+    // Runs after EVERY rendering
+  });
+
+  const filteredData = data.filter( (jsonData) => jsonData.user_id === 1);
+
+  let copy = [...meal_matrix];
+  for (let i = 1; i < rows; i++) {
+    for (let j = 1; j < cols; j++) {
+      copy[i-1][j-1] = filteredData.filter((jsonData) => jsonData.meal_time === i && jsonData.day_of_week === j)[0]?.recipe_id;
+    }
+  }
 
   const tableRows = [];
   for (let i = 0; i < rows; i++) {
@@ -62,8 +78,8 @@ const MealPlan = (props) => {
         }
         else {
           tableCells.push(
-            <td id={i+'-'+j} key={i+'-'+j} onClick={toggleModal}>
-              ({i},{j})
+            <td id={i+'-'+j} key={i+'-'+j} onClick={ () => toggleModal(i,j)}>
+              {meal_matrix[i-1][j-1]}
             </td>
           );
         }
@@ -83,11 +99,11 @@ const MealPlan = (props) => {
           {tableRows}
         </tbody>
       </table>
-      {modal && (
+      {isModal && (
         <div className="modal1">
           <div onClick={toggleModal} className="overlay1"></div>
-          <div class="modal-content1">
-            <h3>hello</h3>
+          <div className="modal-content1">
+            <h3>{recipe}</h3>
           </div>
         </div>
       )}
