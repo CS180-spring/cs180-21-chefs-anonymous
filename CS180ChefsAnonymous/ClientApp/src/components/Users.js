@@ -238,9 +238,9 @@ export function Users() {
             },
             body: JSON.stringify(
                 {
-                    "itemName": "Banana",
-                    "calPerKg": 50,
-                    "otherInfo": "Organic2",
+                    "itemName": "Tomato Sauce",
+                    "calPerKg": 70,
+                    "otherInfo": "Organic4",
                 }
 
             )
@@ -279,10 +279,110 @@ export function Users() {
             .catch(error => console.error(error));
     }
     //};
+    // Ingredient Stuff
+    const [ingredients, setIngredients] = useState([]);
+    useEffect(() => {
+        fetch("api/ingredient/GetIngredients")
+            .then((response) => response.json())
+            //.then((response) => {
+            //    //console.log(response.json());
+            //    response.json()
+            //})
+            .then((responseJson) => {
+                console.log(responseJson);
+                setIngredients(responseJson);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }, []);
+
+    function refreshIngredients() {
+        fetch("api/ingredient/GetIngredients")
+            .then((response) => response.json())
+            .then((responseJson) => {
+                console.log(responseJson);
+                setIngredients(responseJson);
+                console.log(items)
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+    function getSpecificIngredient() {
+        fetch("api/ingredient/GetIngredient/3")
+            .then((response) => response.json())
+            .then((responseJson) => {
+                console.log(responseJson);
+                setIngredients([responseJson]);
+                console.log("SPECIFIC ITEM");
+                console.log(recipes);
+
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+
+    function addIngredient() {
+        fetch("api/ingredient/AddIngredient", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(
+                {
+                    "ingredientId": 3,
+                    "recipeId": 3,
+                    "itemName": "Cheese",
+                    "qty": 1,
+                    "unit": "tsp",
+
+                }
+
+            )
+        })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
+    }
+
+
+    function updateIngredient() {
+        fetch("api/ingredient/UpdateIngredient/Banana", {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(
+                {
+                    "ingredientId": 3,
+                    "recipeId": 3,
+                    "itemName": "Cheese",
+                    "qty": 2,
+                    "unit": "feet",
+
+                }
+            )
+        })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
+    }
+    function removeIngredient() {
+        fetch("api/ingredient/DeleteIngredient/3", {
+            method: 'DELETE',
+
+        })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
+    }
+    //};
 
     return (
         <div className="container">
-            <h1>Items</h1>
+            <h1>Users</h1>
             <div className="row">
                 <div className="col-sm-12">
                     <table className="table table-striped">
@@ -382,7 +482,7 @@ export function Users() {
                     <table className="table table-striped">
                         <thead>
                             <tr>
-                                <th>ItemName</th>
+                                <th>IngredientName</th>
                                 <th>calories</th>
                                 <th>info</th>
                                 
@@ -418,7 +518,56 @@ export function Users() {
             <button className="btn btn-primary" onClick={getSpecificItem}>
                 Get1
             </button >
+
+            
+            <h1>Ingredients</h1>
+            <div className="row">
+                <div className="col-sm-12">
+                    <table className="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>IngredientID</th>
+                                <th>RecipeID</th>
+                                <th>ItemName</th>
+                                <th>QTY</th>
+                                <th>Unit</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+
+                                ingredients.map((ingredients) => (
+                                    <tr key={ingredients.ingredientId}>
+                                        <td>{ingredients.ingredientId}</td>
+                                        <td>{ingredients.recipeId}</td>
+                                <td>{ingredients.itemName}</td>
+                                <td>{ingredients.qty}</td>
+                                <td>{ingredients.unit}</td>
+
+                                    </tr>
+                                ))}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <button className="btn btn-primary" onClick={refreshIngredients}>
+                Refresh
+            </button >
+            <button className="btn btn-primary" onClick={addIngredient}>
+                Add
+            </button >
+            <button className="btn btn-primary" onClick={updateIngredient}>
+                Update
+            </button >
+            <button className="btn btn-primary" onClick={removeIngredient}>
+                Delete
+            </button >
+            <button className="btn btn-primary" onClick={getSpecificIngredient}>
+                Get1
+            </button >
         </div>
+
         
     );
 }
