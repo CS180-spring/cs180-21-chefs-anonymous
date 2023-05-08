@@ -73,6 +73,7 @@ const RecipeItem = (props) => {
             prepMin={props.preptime.minutes}
             cookHr={props.cooktime.hours}
             cookMin={props.cooktime.minutes}
+            ingredients={props.ingredients}
             onCancel={cancelFormHandler}
             onGetRecipeData={getRecipeDataHandler}
           />
