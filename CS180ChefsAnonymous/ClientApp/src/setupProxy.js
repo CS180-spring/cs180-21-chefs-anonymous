@@ -12,6 +12,8 @@ const context =  [
     "/api/item",
     "/api/inventory",
     "/api/ingredient",
+    "/api/category",
+
 
 ];
 

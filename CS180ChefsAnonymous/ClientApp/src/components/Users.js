@@ -561,6 +561,86 @@ export function Users() {
             .catch(error => console.error(error));
     }
 
+
+    // Category Stuff
+    const [category, setCategory] = useState([]);
+
+    useEffect(() => {
+        fetch("api/category/GetCategory")
+            .then((response) => response.json())
+            .then((responseJson) => {
+                console.log(responseJson);
+                setCategory(responseJson);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }, []);
+
+    function refreshCategory() {
+        fetch("api/category/GetCategory")
+            .then((response) => response.json())
+            .then((responseJson) => {
+                console.log(responseJson);
+                setCategory(responseJson);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+
+
+    function addCategory() {
+        fetch("api/category/AddCategory", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(
+                {
+                    "categoryId": 10,
+                    "cuisine": "Indian",
+                    "mealtime": "2023-04-21T19:30:00",
+                    "difficulty": 3,
+                    "amntOfServings": 1.0,
+                }
+            )
+        })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
+    }
+
+    function updateCategory() {
+        fetch("api/category/UpdateCategory/10", {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(
+                {
+                    "categoryId": 10,
+                    "cuisine": "Not Indian",
+                    "mealtime": "2023-04-21T19:30:00",
+                    "difficulty": 3,
+                    "amntOfServings": 1.0,
+                }
+            )
+        })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
+    }
+
+    function removeCategory() {
+        fetch("api/category/DeleteCategory/10", {
+            method: 'DELETE'
+        })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
+    }
+
     return (
         <div className="container">
             <h1>Users</h1>
@@ -840,6 +920,51 @@ export function Users() {
             <button className="btn btn-primary" onClick={getSpecificMeal}>
                 Get1
             </button>
+
+            <h1>Category</h1>
+            <div className="row">
+                <div className="col-sm-12">
+                    <table className="table table-striped">
+                        
+                        <thead>
+                            <tr>
+                                <th>CategoryID</th>
+                                <th>Cuisine</th>
+                                <th>MealTime</th>
+                                <th>difficulty</th>
+                                <th>amntOfServings</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {
+                                category.map((item) => (
+                                    <tr key={item.categoryId}>
+                                        <td>{item.categoryId}</td>
+                                        <td>{item.cuisine}</td>
+                                        <td>{item.mealtime}</td>
+                                        <td>{item.difficulty}</td>
+                                        <td>{item.amntOfServings}</td>
+                                    </tr>
+                                ))
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <button className="btn btn-primary" onClick={refreshCategory}>
+                Refresh
+            </button>
+            <button className="btn btn-primary" onClick={addCategory}>
+                Add
+            </button>
+            <button className="btn btn-primary" onClick={updateCategory}>
+                Update
+            </button>
+            <button className="btn btn-primary" onClick={removeCategory}>
+                Delete
+            </button>
+           
 
 
         </div >
