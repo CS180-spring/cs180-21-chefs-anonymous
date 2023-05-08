@@ -77,6 +77,15 @@ export function Users() {
             .then(data => console.log(data))
             .catch(error => console.error(error));
     }
+
+    function getUserRecipes() {
+        fetch("api/user/GetUserRecipes/6", {
+            method: 'GET',
+        })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
+    }
 // Recipe stuff
     const [recipes, setRecipes] = useState([]);
     useEffect(() => {
@@ -131,12 +140,12 @@ export function Users() {
             },
             body: JSON.stringify(
                 {
-                    "recipeId": 3,
-                    "recipeTitle": "Spaghetti Carbonara",
-                    "recipeDesc": "Classic Italian pasta dish with creamy sauce",
-                    "instructions": "Cook pasta according to package directions...",
-                    "prepTime": 15,
-                    "cookingTime": 15,
+                    "recipeId": 1,
+                    "recipeTitle": "bubba gump",
+                    "recipeDesc": "gump bubble",
+                    "instructions": "googoogaga",
+                    "prepTime": 1,
+                    "cookingTime": 3,
                     "userId": 6,
                     "categoryId": 1,
                     
@@ -332,9 +341,9 @@ export function Users() {
             },
             body: JSON.stringify(
                 {
-                    "ingredientId": 12,
+                    "ingredientId": 13,
                     "recipeId": 3,
-                    "itemName": "Pear",
+                    "itemName": "cabbagePatchBear",
                     "qty": 1,
                     "unit": "tsp",
 
@@ -393,6 +402,7 @@ export function Users() {
                                 <th>Email</th>
                                 <th>Password</th>
                                 <th>Username</th>
+                                <th>Recipes</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -406,6 +416,7 @@ export function Users() {
                                         <td>{item.password}</td>
 
                                         <td>{item.username}</td>
+                                        <td>{item.recipes}</td>
                                     </tr>
                                 ))}
                         </tbody>
@@ -424,7 +435,9 @@ export function Users() {
             <button className="btn btn-primary" onClick={remove}>
                 Delete
             </button >
-
+            <button className="btn btn-primary" onClick={getUserRecipes}>
+                Recipes
+            </button>
             <h1>Recipes</h1>
             <div className="row">
                 <div className="col-sm-12">

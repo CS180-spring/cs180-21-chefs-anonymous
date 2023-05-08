@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace CS180ChefsAnonymous.Models;
 
@@ -27,5 +28,6 @@ public partial class Recipe
 
     public virtual ICollection<MealPlan> MealPlans { get; set; } = new List<MealPlan>();
 
+    [JsonIgnore]
     public virtual User? User { get; set; }
 }
