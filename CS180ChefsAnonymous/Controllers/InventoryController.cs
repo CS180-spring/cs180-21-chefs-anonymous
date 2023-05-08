@@ -30,6 +30,15 @@ namespace CS180ChefsAnonymous.Controllers
         [Route("AddInventory")]
         public async Task<Inventory> AddInventory(Inventory objInventory)
         {
+            string itemName = objInventory.ItemName;
+            if (!await _dbContext.Items.AnyAsync(i => i.ItemName == itemName))
+            {
+                var newItem = new Item
+                {
+                    ItemName = itemName
+                };
+                _dbContext.Items.Add(newItem);
+            }
             _dbContext.Inventories.Add(objInventory);
             await _dbContext.SaveChangesAsync();
             return objInventory;

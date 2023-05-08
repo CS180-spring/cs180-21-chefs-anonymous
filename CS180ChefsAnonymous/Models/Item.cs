@@ -14,7 +14,7 @@ public partial class Item
 
     [JsonIgnore]
     public virtual ICollection<Ingredient> Ingredients { get; set; } = new List<Ingredient>();
-
+    [JsonIgnore]
     public virtual ICollection<Inventory> Inventories { get; set; } = new List<Inventory>();
 
     

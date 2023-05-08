@@ -150,7 +150,7 @@ export function Users() {
     }
 
     function updateRecipe() {
-        fetch("api/recipe/UpdateRecipe/6", {
+        fetch("api/recipe/UpdateRecipe/3", {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
@@ -158,7 +158,7 @@ export function Users() {
             body: JSON.stringify({
                 // pass the new user object as the request body
 
-                recipeId: 6,
+                recipeId: 3,
                 recipeTitle: 'Cookie2',
                 recipeDesc: 'Cookie Description2',
                 instructions: 'Do stuff2',
@@ -332,9 +332,9 @@ export function Users() {
             },
             body: JSON.stringify(
                 {
-                    "ingredientId": 9,
+                    "ingredientId": 12,
                     "recipeId": 3,
-                    "itemName": "pies",
+                    "itemName": "Pear",
                     "qty": 1,
                     "unit": "tsp",
 
