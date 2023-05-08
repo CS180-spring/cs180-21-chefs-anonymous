@@ -379,6 +379,98 @@ export function Users() {
             .catch(error => console.error(error));
     }
     //};
+    // Inventory Stuff
+    const [inventory, setInventory] = useState([]);
+
+    useEffect(() => {
+        fetch("api/inventory/GetInventory")
+            .then((response) => response.json())
+            .then((responseJson) => {
+                console.log(responseJson);
+                setInventory(responseJson);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }, []);
+
+    function refreshInventory() {
+        fetch("api/inventory/GetInventory")
+            .then((response) => response.json())
+            .then((responseJson) => {
+                console.log(responseJson);
+                setInventory(responseJson);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+
+    function getSpecificInventoryItem() {
+        fetch("api/inventory/GetInventory/3")
+            .then((response) => response.json())
+            .then((responseJson) => {
+                console.log(responseJson);
+                setInventory([responseJson]);
+                console.log("SPECIFIC ITEM");
+                console.log(inventory);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+
+    function addInventoryItem() {
+        fetch("api/inventory/AddInventory", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(
+                {
+                    "inventoryId": 4,
+                    "userId": 6,
+                    "itemName": "Pepperoni",
+                    "qty": 5,
+                    "unit": 1,
+                }
+            )
+        })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
+    }
+
+    function updateInventoryItem() {
+        fetch("api/inventory/UpdateInventory/4", {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(
+                {
+                    "inventoryId": 4,
+                    "userId": 6,
+                    "itemName": "Pepperoni",
+                    "qty": 100,
+                    "unit": 3,
+                }
+            )
+        })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
+    }
+
+    function removeInventoryItem() {
+        fetch("api/inventory/DeleteInventory/4", {
+            method: 'DELETE'
+        })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
+    }
+
 
     return (
         <div className="container">
@@ -566,7 +658,102 @@ export function Users() {
             <button className="btn btn-primary" onClick={getSpecificIngredient}>
                 Get1
             </button >
-        </div>
+
+
+        <h1>Ingredients</h1>
+            <div className="row">
+                <div className="col-sm-12">
+                    <table className="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>IngredientID</th>
+                                <th>RecipeID</th>
+                                <th>ItemName</th>
+                                <th>QTY</th>
+                                <th>Unit</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+
+                                ingredients.map((ingredients) => (
+                                    <tr key={ingredients.ingredientId}>
+                                        <td>{ingredients.ingredientId}</td>
+                                        <td>{ingredients.recipeId}</td>
+                                <td>{ingredients.itemName}</td>
+                                <td>{ingredients.qty}</td>
+                                <td>{ingredients.unit}</td>
+
+                                    </tr>
+                                ))}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <button className="btn btn-primary" onClick={refreshIngredients}>
+            Refresh
+            </button >
+            <button className="btn btn-primary" onClick={addIngredient}>
+            Add
+            </button >
+            <button className="btn btn-primary" onClick={updateIngredient}>
+            Update
+            </button >
+            <button className="btn btn-primary" onClick={removeIngredient}>
+            Delete
+            </button >
+            <button className="btn btn-primary" onClick={getSpecificIngredient}>
+                Get1
+            </button >
+
+            <h1>Inventory</h1>
+            <div className="row">
+                <div className="col-sm-12">
+                    <table className="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>InventoryID</th>
+                                <th>UserID</th>
+                                <th>ItemName</th>
+                                <th>Qty</th>
+                                <th>Unit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                inventory.map((item) => (
+                                    <tr key={item.inventoryId}>
+                                        <td>{item.inventoryId}</td>
+                                        <td>{item.userId}</td>
+                                        <td>{item.itemName}</td>
+                                        <td>{item.qty}</td>
+                                        <td>{item.unit}</td>
+                                    </tr>
+                                ))
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <button className="btn btn-primary" onClick={refreshInventory}>
+                Refresh
+            </button>
+            <button className="btn btn-primary" onClick={addInventoryItem}>
+                Add
+            </button>
+            <button className="btn btn-primary" onClick={updateInventoryItem}>
+                Update
+            </button>
+            <button className="btn btn-primary" onClick={removeInventoryItem}>
+                Delete
+            </button>
+            <button className="btn btn-primary" onClick={getSpecificInventoryItem}>
+                Get1
+            </button>
+
+        </div >
+
 
         
     );
