@@ -25,6 +25,20 @@ namespace CS180ChefsAnonymous.Controllers
         {
             return await _dbContext.MealPlans.ToListAsync();
         }
+        [HttpGet]
+        [Route("GetMeal/{id}")]
+        public async Task<ActionResult<List<MealPlan>>> GetSpecificMeals(int id)
+        {
+            var meals = await _dbContext.MealPlans.Where(mp => mp.UserId == id).ToListAsync();
+
+            if (meals == null || meals.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return meals;
+        }
+
 
         [HttpPost]
         [Route("AddMealPlan")]

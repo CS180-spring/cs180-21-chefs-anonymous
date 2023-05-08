@@ -471,6 +471,95 @@ export function Users() {
             .catch(error => console.error(error));
     }
 
+    // MealPlan Stuff
+    const [mealplan, setMeal] = useState([]);
+
+    useEffect(() => {
+        fetch("api/mealplan/GetMealPlans")
+            .then((response) => response.json())
+            .then((responseJson) => {
+                console.log(responseJson);
+                setMeal(responseJson);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }, []);
+
+    function refreshMeal() {
+        fetch("api/mealplan/GetMealPlans")
+            .then((response) => response.json())
+            .then((responseJson) => {
+                console.log(responseJson);
+                setMeal(responseJson);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+
+    function getSpecificMeal() {
+        fetch("api/mealplan/GetMealPlan/3")
+            .then((response) => response.json())
+            .then((responseJson) => {
+                console.log(responseJson);
+                setMeal([responseJson]);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+
+    function addMeal() {
+        fetch("api/mealplan/AddMealPlan", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(
+                {
+                    "mealPlanId": 2,
+                    "userId": 6,
+                    "mealTime": 2,
+                    "dayOfWeek": 6,
+                    "recipeId": 3,
+                }
+            )
+        })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
+    }
+
+    function updateMeal() {
+        fetch("api/mealplan/UpdateMealPlan/2", {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(
+                {
+                    "mealPlanId": 2,
+                    "userId": 6,
+                    "mealTime": 2,
+                    "dayOfWeek": 1,
+                    "recipeId": 3,
+                }
+            )
+        })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
+    }
+
+    function removeMeal() {
+        fetch("api/mealplan/DeleteMealPlan/2", {
+            method: 'DELETE'
+        })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
+    }
 
     return (
         <div className="container">
@@ -660,52 +749,6 @@ export function Users() {
             </button >
 
 
-        <h1>Ingredients</h1>
-            <div className="row">
-                <div className="col-sm-12">
-                    <table className="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>IngredientID</th>
-                                <th>RecipeID</th>
-                                <th>ItemName</th>
-                                <th>QTY</th>
-                                <th>Unit</th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-
-                                ingredients.map((ingredients) => (
-                                    <tr key={ingredients.ingredientId}>
-                                        <td>{ingredients.ingredientId}</td>
-                                        <td>{ingredients.recipeId}</td>
-                                <td>{ingredients.itemName}</td>
-                                <td>{ingredients.qty}</td>
-                                <td>{ingredients.unit}</td>
-
-                                    </tr>
-                                ))}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <button className="btn btn-primary" onClick={refreshIngredients}>
-            Refresh
-            </button >
-            <button className="btn btn-primary" onClick={addIngredient}>
-            Add
-            </button >
-            <button className="btn btn-primary" onClick={updateIngredient}>
-            Update
-            </button >
-            <button className="btn btn-primary" onClick={removeIngredient}>
-            Delete
-            </button >
-            <button className="btn btn-primary" onClick={getSpecificIngredient}>
-                Get1
-            </button >
 
             <h1>Inventory</h1>
             <div className="row">
@@ -751,6 +794,53 @@ export function Users() {
             <button className="btn btn-primary" onClick={getSpecificInventoryItem}>
                 Get1
             </button>
+
+            <h1>Meal Plan</h1>
+            <div className="row">
+                <div className="col-sm-12">
+                    <table className="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>MealID</th>
+                                <th>UserID</th>
+                                <th>MealTime</th>
+                                <th>dayofweek</th>
+                                <th>recipeid</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+              
+                            {
+                                mealplan.map((item) => (
+                                    <tr key={item.mealPlanId}>
+                                        <td>{item.mealPlanId}</td>
+                                        <td>{item.userId}</td>
+                                        <td>{item.mealTime}</td>
+                                        <td>{item.dayOfWeek}</td>
+                                        <td>{item.recipeId}</td>
+                                    </tr>
+                                ))
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <button className="btn btn-primary" onClick={refreshMeal}>
+                Refresh
+            </button>
+            <button className="btn btn-primary" onClick={addMeal}>
+                Add
+            </button>
+            <button className="btn btn-primary" onClick={updateMeal}>
+                Update
+            </button>
+            <button className="btn btn-primary" onClick={removeMeal}>
+                Delete
+            </button>
+            <button className="btn btn-primary" onClick={getSpecificMeal}>
+                Get1
+            </button>
+
 
         </div >
 
