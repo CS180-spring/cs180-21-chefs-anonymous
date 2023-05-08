@@ -332,9 +332,9 @@ export function Users() {
             },
             body: JSON.stringify(
                 {
-                    "ingredientId": 3,
+                    "ingredientId": 9,
                     "recipeId": 3,
-                    "itemName": "Cheese",
+                    "itemName": "pies",
                     "qty": 1,
                     "unit": "tsp",
 
