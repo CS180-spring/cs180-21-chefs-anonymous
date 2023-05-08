@@ -5,6 +5,8 @@ import RecipesList from "./RecipesList";
 import RecipeForm from "./RecipeForm";
 import Button from "../UI/Button";
 import DUMMY_RECIPES from "./dummy-recipe-data.json";
+import Searchbar from "../UI/Searchbar";
+import DropdownMenu from "../UI/DropdownMenu";
 
 const Recipes = (props) => {
   const [displayForm, setDisplayForm] = useState(false);
@@ -49,6 +51,23 @@ const Recipes = (props) => {
               </div>
             )}
             <h1>Recipes</h1>
+            {/* <div>
+              <Searchbar recipes={dummyRecipes} />
+              <DropdownMenu placeHolder="Select..." />
+            </div> */}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "flex-end",
+              }}
+            >
+              <div style={{ marginRight: "10px" }}>
+                <Searchbar recipes={dummyRecipes} />
+              </div>
+              {/* <DropdownMenu placeHolder="Select..." options={} /> */}
+            </div>
+
             <RecipesList recipes={dummyRecipes} />
             <Button type="submit" onClick={displayRecipeFormHandler}>
               Add Recipe
