@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Modal from "../UI/Modal";
 import Button from "../UI/Button";
 import styles from "./RecipeForm.module.css";
+import UlStyles from "./RecipesList.module.css";
 
 const RecipeForm = (props) => {
   const [enteredTitle, setEnteredTitle] = useState(props.title);
@@ -187,12 +188,14 @@ const RecipeForm = (props) => {
               >
                 Add
               </Button>
-              {enteredIngredient !== undefined &&
-                enteredIngredient.map((ingredient) => (
+              {enteredIngredient !== undefined && 
+              <ul className={UlStyles.recipes_list}>
+                {enteredIngredient.map((ingredient) => (
                   <li key={ingredient.id} className={styles.ingredients_list}>
                     {ingredient.qty} {ingredient.name}
                   </li>
                 ))}
+              </ul>}
             </div>
           </div>
 

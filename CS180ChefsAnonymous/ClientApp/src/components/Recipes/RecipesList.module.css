@@ -1,6 +1,6 @@
 .recipes_list {
   list-style: none;
-  padding: 0;
+  padding-left: 1rem !important;
 }
 
 .recipes_list__fallback {
