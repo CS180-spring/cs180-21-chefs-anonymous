@@ -46,7 +46,7 @@ namespace CS180ChefsAnonymous.Controllers
 
         [HttpDelete]
         [Route("DeleteItem/{id}")]
-        public bool DeleteItem(int id)
+        public bool DeleteItem(string id)
         {
             bool a = false;
             var Item = _dbContext.Items.Find(id);

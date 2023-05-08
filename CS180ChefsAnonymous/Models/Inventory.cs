@@ -1,19 +1,21 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
-namespace CS180ChefsAnonymous.Models
+namespace CS180ChefsAnonymous.Models;
+
+public partial class Inventory
 {
-	public class Inventory
-	{
-		[Key]	
-		public int InventoryId { get; set; }
-		public int UserId { get; set; }
-		public string? ItemName { get; set; }
-		public int Qty { get; set; }
-		public int unit { get; set; }
-		public Inventory()
-		{
-		}
-	}
-}
+    public int InventoryId { get; set; }
 
+    public int UserId { get; set; }
+
+    public string ItemName { get; set; } = null!;
+
+    public int? Qty { get; set; }
+
+    public int? Unit { get; set; }
+
+    public virtual Item? ItemNameNavigation { get; set; } 
+
+    public virtual User? User { get; set; } 
+}

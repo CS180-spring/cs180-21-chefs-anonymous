@@ -18,6 +18,19 @@ namespace CS180ChefsAnonymous.Controllers
 
         }
         [HttpGet]
+        [Route("GetRecipe/{id}")]
+        public async Task<ActionResult<Recipe>> GetRecipe(int id)
+        {
+            var recipe = await _dbContext.Recipes.FindAsync(id);
+
+            if (recipe == null)
+            {
+                return NotFound();
+            }
+
+            return recipe;
+        }
+        [HttpGet]
         [Route("GetRecipes")]
         public async Task<IEnumerable<Recipe>> GetRecipes()
         {

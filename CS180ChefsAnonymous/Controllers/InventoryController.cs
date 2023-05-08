@@ -15,13 +15,13 @@ namespace CS180ChefsAnonymous.Controllers
         private readonly ChefDbContext _dbContext;
 
         public InventoryController(ChefDbContext dbContext)
-        {
+        { 
             _dbContext = dbContext;
 
         }
         [HttpGet]
-        [Route("GetInventorys")]
-        public async Task<IEnumerable<Inventory>> GetInventorys()
+        [Route("GetInventory")]
+        public async Task<IEnumerable<Inventory>> GetInventory()
         {
             return await _dbContext.Inventories.ToListAsync();
         }

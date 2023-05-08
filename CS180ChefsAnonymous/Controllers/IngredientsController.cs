@@ -8,11 +8,11 @@ namespace CS180ChefsAnonymous.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ingredientController : ControllerBase
+    public class IngredientController : ControllerBase
     {
         private readonly ChefDbContext _dbContext;
 
-        public ingredientController(ChefDbContext dbContext)
+        public IngredientController(ChefDbContext dbContext)
         {
             _dbContext = dbContext;
 
