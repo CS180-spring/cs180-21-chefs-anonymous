@@ -1,6 +1,7 @@
 import React, { Component, useState, useMemo, useEffect } from "react";
 import styles from "./MealPlan.css";
 import data from "../../dummy-meal-plan.json";
+import MealPlanModal from "./MealPlanModal";
 
 const MealPlan = (props) => {
   const [isModal, setModal] = useState(false);
@@ -53,7 +54,8 @@ const MealPlan = (props) => {
   let copy = [...meal_matrix];
   for (let i = 1; i < rows; i++) {
     for (let j = 1; j < cols; j++) {
-      copy[i-1][j-1] = filteredData.filter((jsonData) => jsonData.meal_time === i && jsonData.day_of_week === j)[0]?.recipe_id;
+      copy[i-1][j-1] = filteredData.filter((jsonData) => 
+      jsonData.meal_time === i && jsonData.day_of_week === j)[0]?.recipe_id;
     }
   }
 
@@ -100,12 +102,7 @@ const MealPlan = (props) => {
         </tbody>
       </table>
       {isModal && (
-        <div className="modal1">
-          <div onClick={toggleModal} className="overlay1"></div>
-          <div className="modal-content1">
-            <h3>{recipe}</h3>
-          </div>
-        </div>
+        <MealPlanModal toggleModal={toggleModal} recipe={recipe}/>
       )}
     </div>
   );
