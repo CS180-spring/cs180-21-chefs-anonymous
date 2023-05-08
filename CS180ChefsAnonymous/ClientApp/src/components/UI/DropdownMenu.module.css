@@ -1,0 +1,15 @@
+.dropdown_container {
+  text-align: right;
+  border: 1px solid #ccc;
+  position: relative;
+  border-radius: 6px;
+}
+
+.dropdown_input {
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font: inherit;
+  border-radius: 6px;
+}
