@@ -53,7 +53,8 @@ public partial class ChefDbContext : DbContext
                 .HasColumnName("cuisine");
             entity.Property(e => e.Difficulty).HasColumnName("difficulty");
             entity.Property(e => e.Mealtime)
-                .HasColumnType("datetime")
+                .HasMaxLength(50)
+                .IsUnicode(false)
                 .HasColumnName("mealtime");
         });
 
@@ -94,7 +95,10 @@ public partial class ChefDbContext : DbContext
                 .IsUnicode(false)
                 .HasColumnName("item_name");
             entity.Property(e => e.Qty).HasColumnName("qty");
-            entity.Property(e => e.Unit).HasColumnName("unit");
+            entity.Property(e => e.Unit)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("unit");
             entity.Property(e => e.UserId).HasColumnName("user_id");
 
             entity.HasOne(d => d.ItemNameNavigation).WithMany(p => p.Inventories)

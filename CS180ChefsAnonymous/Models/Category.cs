@@ -9,7 +9,7 @@ public partial class Category
 
     public string? Cuisine { get; set; }
 
-    public DateTime Mealtime { get; set; }
+    public string? Mealtime { get; set; }
 
     public int Difficulty { get; set; }
 
