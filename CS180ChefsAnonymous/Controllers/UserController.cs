@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using CS180ChefsAnonymous.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace CS180ChefsAnonymous.Controllers
 {
@@ -36,6 +38,28 @@ namespace CS180ChefsAnonymous.Controllers
             }
 
             return user;
+        }
+
+        [HttpGet]
+        [Route("GetUserRecipes/{userId}")]
+        public async Task<IActionResult> GetUserRecipes(int userId)
+        {
+            var user = await _dbContext.Users
+                .Include(u => u.Recipes)
+                .FirstOrDefaultAsync(u => u.UserId == userId); //= await _dbContext.Users.FirstOrDefaultAsync(u => u.UserId == userId);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var options = new JsonSerializerOptions
+            {
+                ReferenceHandler = ReferenceHandler.Preserve
+            };
+
+            var json = JsonSerializer.Serialize(user.Recipes, options);
+            return Ok(json);
         }
 
         [HttpPost]

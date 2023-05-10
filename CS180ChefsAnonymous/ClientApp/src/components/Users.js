@@ -37,11 +37,11 @@ export function Users() {
             },
             body: JSON.stringify({
                 // pass the new user object as the request body
-                userid: 6,
-                name: 'David Doe',
-                username: 'david',
-                password: 'david',
-                email: 'daviddoe@example.com'
+                userid: 3,
+                name: 'Sanji Vinsmoke',
+                username: 'SHChef',
+                password: 'BigBlue',
+                email: 'Chef3@gmail.com'
             })
         })
             .then(response => response.json())
@@ -72,6 +72,15 @@ export function Users() {
         fetch("api/user/DeleteUser/6", {
             method: 'DELETE',
 
+        })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
+    }
+
+    function getUserRecipes() {
+        fetch("api/user/GetUserRecipes/3", {
+            method: 'GET',
         })
             .then(response => response.json())
             .then(data => console.log(data))
@@ -131,13 +140,13 @@ export function Users() {
             },
             body: JSON.stringify(
                 {
-                    "recipeId": 3,
-                    "recipeTitle": "Spaghetti Carbonara",
-                    "recipeDesc": "Classic Italian pasta dish with creamy sauce",
-                    "instructions": "Cook pasta according to package directions...",
-                    "prepTime": 15,
-                    "cookingTime": 15,
-                    "userId": 6,
+                    "recipeId": 2,
+                    "recipeTitle": "Merman Kabob",
+                    "recipeDesc": "Not Jinbe",
+                    "instructions": "Catch and cook",
+                    "prepTime": 1,
+                    "cookingTime": 3,
+                    "userId": 3,
                     "categoryId": 1,
                     
                 }
@@ -150,7 +159,7 @@ export function Users() {
     }
 
     function updateRecipe() {
-        fetch("api/recipe/UpdateRecipe/6", {
+        fetch("api/recipe/UpdateRecipe/3", {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
@@ -158,7 +167,7 @@ export function Users() {
             body: JSON.stringify({
                 // pass the new user object as the request body
 
-                recipeId: 6,
+                recipeId: 3,
                 recipeTitle: 'Cookie2',
                 recipeDesc: 'Cookie Description2',
                 instructions: 'Do stuff2',
@@ -332,12 +341,11 @@ export function Users() {
             },
             body: JSON.stringify(
                 {
-                    "ingredientId": 3,
+                    "ingredientId": 14,
                     "recipeId": 3,
-                    "itemName": "Cheese",
+                    "itemName": "Pepperoni",
                     "qty": 1,
                     "unit": "tsp",
-
                 }
 
             )
@@ -654,6 +662,7 @@ export function Users() {
                                 <th>Email</th>
                                 <th>Password</th>
                                 <th>Username</th>
+                                <th>Recipes</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -667,6 +676,7 @@ export function Users() {
                                         <td>{item.password}</td>
 
                                         <td>{item.username}</td>
+                                        <td>{item.recipes}</td>
                                     </tr>
                                 ))}
                         </tbody>
@@ -685,7 +695,9 @@ export function Users() {
             <button className="btn btn-primary" onClick={remove}>
                 Delete
             </button >
-
+            <button className="btn btn-primary" onClick={getUserRecipes}>
+                Recipes
+            </button>
             <h1>Recipes</h1>
             <div className="row">
                 <div className="col-sm-12">

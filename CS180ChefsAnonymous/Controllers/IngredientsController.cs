@@ -28,6 +28,15 @@ namespace CS180ChefsAnonymous.Controllers
         [Route("AddIngredient")]
         public async Task<Ingredient> Addingredient(Ingredient objingredient)
         {
+            string itemName = objingredient.ItemName;
+            if ( !await _dbContext.Items.AnyAsync(i => i.ItemName == itemName))
+            {
+                var newItem = new Item
+                {
+                    ItemName = itemName
+                };
+                _dbContext.Items.Add(newItem);
+            }
             _dbContext.Ingredients.Add(objingredient);
             await _dbContext.SaveChangesAsync();
             return objingredient;
