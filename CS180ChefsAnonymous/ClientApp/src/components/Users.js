@@ -37,11 +37,11 @@ export function Users() {
             },
             body: JSON.stringify({
                 // pass the new user object as the request body
-                userid: 6,
-                name: 'David Doe',
-                username: 'david',
-                password: 'david',
-                email: 'daviddoe@example.com'
+                userid: 3,
+                name: 'Sanji Vinsmoke',
+                username: 'SHChef',
+                password: 'BigBlue',
+                email: 'Chef3@gmail.com'
             })
         })
             .then(response => response.json())
@@ -79,7 +79,7 @@ export function Users() {
     }
 
     function getUserRecipes() {
-        fetch("api/user/GetUserRecipes/6", {
+        fetch("api/user/GetUserRecipes/3", {
             method: 'GET',
         })
             .then(response => response.json())
@@ -140,13 +140,13 @@ export function Users() {
             },
             body: JSON.stringify(
                 {
-                    "recipeId": 1,
-                    "recipeTitle": "bubba gump",
-                    "recipeDesc": "gump bubble",
-                    "instructions": "googoogaga",
+                    "recipeId": 2,
+                    "recipeTitle": "Merman Kabob",
+                    "recipeDesc": "Not Jinbe",
+                    "instructions": "Catch and cook",
                     "prepTime": 1,
                     "cookingTime": 3,
-                    "userId": 6,
+                    "userId": 3,
                     "categoryId": 1,
                     
                 }
@@ -341,12 +341,11 @@ export function Users() {
             },
             body: JSON.stringify(
                 {
-                    "ingredientId": 13,
+                    "ingredientId": 14,
                     "recipeId": 3,
-                    "itemName": "cabbagePatchBear",
+                    "itemName": "Pepperoni",
                     "qty": 1,
                     "unit": "tsp",
-
                 }
 
             )
