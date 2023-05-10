@@ -24,6 +24,19 @@ namespace CS180ChefsAnonymous.Controllers
             return await _dbContext.Users.ToListAsync();
     
         }
+        [HttpGet]
+        [Route("GetUser/{id}")]
+        public async Task<ActionResult<User>> GetSpecificUser(int id)
+        {
+            var user = await _dbContext.Users.FindAsync(id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return user;
+        }
 
         [HttpPost]
         [Route("AddUser")]

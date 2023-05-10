@@ -13,7 +13,7 @@ public partial class Inventory
 
     public int? Qty { get; set; }
 
-    public int? Unit { get; set; }
+    public string? Unit { get; set; }
 
     public virtual Item? ItemNameNavigation { get; set; } 
 
