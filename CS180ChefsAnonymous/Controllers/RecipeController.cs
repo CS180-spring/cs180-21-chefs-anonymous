@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using CS180ChefsAnonymous.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace CS180ChefsAnonymous.Controllers
 {
@@ -40,10 +42,17 @@ namespace CS180ChefsAnonymous.Controllers
         }
 
         [HttpGet]
-        [Route("GetAlphaRecipes")]
-        public async Task<IEnumerable<Recipe>> GetRecipesAlpha()
+        [Route("GetRecipesAscending")]
+        public async Task<IEnumerable<Recipe>> GetRecipesAscending()
         {
             return await _dbContext.Recipes.OrderBy(r => r.RecipeTitle).ToListAsync();
+        }
+
+        [HttpGet]
+        [Route("GetRecipesDescending")]
+        public async Task<IEnumerable<Recipe>> GetRecipesDescending()
+        {
+            return await _dbContext.Recipes.OrderByDescending(r => r.RecipeTitle).ToListAsync();
         }
 
         [HttpPost]
@@ -82,6 +91,28 @@ namespace CS180ChefsAnonymous.Controllers
             }
             return a;
 
+        }
+
+        [HttpGet]
+        [Route("GetRecipeIngredients/{recipeId}")]
+        public async Task<IActionResult> GetRecipeIngredients(int recipeId)
+        {
+            var recipe = await _dbContext.Recipes
+                .Include(r => r.Ingredients)
+                .FirstOrDefaultAsync(r => r.RecipeId == recipeId);
+
+            if (recipe == null)
+            {
+                return NotFound();
+            }
+
+            var options = new JsonSerializerOptions
+            {
+                ReferenceHandler = ReferenceHandler.Preserve
+            };
+
+            var json = JsonSerializer.Serialize(recipe.Ingredients, options);
+            return Ok(json);
         }
     }
 }

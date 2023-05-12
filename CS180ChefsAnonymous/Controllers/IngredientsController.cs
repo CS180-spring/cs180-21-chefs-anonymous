@@ -19,16 +19,23 @@ namespace CS180ChefsAnonymous.Controllers
         }
         [HttpGet]
         [Route("GetIngredients")]
-        public async Task<IEnumerable<Ingredient>> Getingredients()
+        public async Task<IEnumerable<Ingredient>> GetIngredients()
         {
             return await _dbContext.Ingredients.ToListAsync();
         }
 
+        [HttpGet]
+        [Route("GetIngredientsByRecipe/{recipeId}")]
+        public async Task<IEnumerable<Ingredient>> GetIngredientsByRecipe(int recipeId)
+        {
+            return await _dbContext.Ingredients.Where(i => i.RecipeId == recipeId).ToListAsync();
+        }
+
         [HttpPost]
         [Route("AddIngredient")]
-        public async Task<Ingredient> Addingredient(Ingredient objingredient)
+        public async Task<Ingredient> AddIngredient(Ingredient objIngredient)
         {
-            string itemName = objingredient.ItemName;
+            string itemName = objIngredient.ItemName;
             if ( !await _dbContext.Items.AnyAsync(i => i.ItemName == itemName))
             {
                 var newItem = new Item
@@ -37,30 +44,30 @@ namespace CS180ChefsAnonymous.Controllers
                 };
                 _dbContext.Items.Add(newItem);
             }
-            _dbContext.Ingredients.Add(objingredient);
+            _dbContext.Ingredients.Add(objIngredient);
             await _dbContext.SaveChangesAsync();
-            return objingredient;
+            return objIngredient;
         }
 
         [HttpPatch]
         [Route("UpdateIngredient/{id}")]
-        public async Task<Ingredient> Updateingredient(Ingredient objingredient)
+        public async Task<Ingredient> UpdateIngredient(Ingredient objIngredient)
         {
-            _dbContext.Entry(objingredient).State = EntityState.Modified;
+            _dbContext.Entry(objIngredient).State = EntityState.Modified;
             await _dbContext.SaveChangesAsync();
-            return objingredient;
+            return objIngredient;
         }
 
         [HttpDelete]
         [Route("DeleteIngredient/{id}")]
-        public bool Deleteingredient(int id)
+        public bool DeleteIngredient(int id)
         {
             bool a = false;
-            var ingredient = _dbContext.Ingredients.Find(id);
-            if (ingredient != null)
+            var Ingredient = _dbContext.Ingredients.Find(id);
+            if (Ingredient != null)
             {
                 a = true;
-                _dbContext.Entry(ingredient).State = EntityState.Deleted;
+                _dbContext.Entry(Ingredient).State = EntityState.Deleted;
                 _dbContext.SaveChanges();
             }
             else

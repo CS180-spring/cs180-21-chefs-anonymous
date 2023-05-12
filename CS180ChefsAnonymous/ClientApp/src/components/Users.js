@@ -119,8 +119,21 @@ export function Users() {
             });
     }
 
-    function getAlphaList() {
-        fetch('/api/recipe/GetAlphaRecipes')
+    function getRecipesAscending() {
+        fetch("api/recipe/GetRecipesAscending")
+            .then((response) => response.json())
+            .then((responseJson) => {
+                console.log(responseJson);
+                setRecipes(responseJson);
+                console.log(recipes)
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+
+    function getRecipesDescending() {
+        fetch("api/recipe/GetRecipesDescending")
             .then((response) => response.json())
             .then((responseJson) => {
                 console.log(responseJson);
@@ -294,6 +307,7 @@ export function Users() {
             .then(data => console.log(data))
             .catch(error => console.error(error));
     }
+
     function removeItem() {
         fetch("api/item/DeleteItem/Banana", {
             method: 'DELETE',
@@ -303,6 +317,8 @@ export function Users() {
             .then(data => console.log(data))
             .catch(error => console.error(error));
     }
+
+
     //};
     // Ingredient Stuff
     const [ingredients, setIngredients] = useState([]);
@@ -357,9 +373,9 @@ export function Users() {
             },
             body: JSON.stringify(
                 {
-                    "ingredientId": 14,
-                    "recipeId": 3,
-                    "itemName": "Pepperoni",
+                    "ingredientId": 15,
+                    "recipeId": 1,
+                    "itemName": "asd",
                     "qty": 1,
                     "unit": "tsp",
                 }
@@ -402,6 +418,16 @@ export function Users() {
             .then(data => console.log(data))
             .catch(error => console.error(error));
     }
+
+    function getRecipeIngredients() {
+        fetch("api/recipe/GetRecipeIngredients/1", {
+            method: 'GET',
+        })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => error(error));
+    }
+
     //};
     // Inventory Stuff
     const [inventory, setInventory] = useState([]);
@@ -752,8 +778,11 @@ export function Users() {
             <button className="btn btn-primary" onClick={refreshRecipe}>
                 Refresh
             </button >
-            <button className="btn btn-primary" onClick={getAlphaList}>
-                Alphabetical
+            <button className="btn btn-primary" onClick={getRecipesAscending}>
+                Ascending
+            </button>
+            <button className="btn btn-primary" onClick={getRecipesDescending}>
+                Descending
             </button>
             <button className="btn btn-primary" onClick={addRecipe}>
                 Add
@@ -767,6 +796,9 @@ export function Users() {
             <button className="btn btn-primary" onClick={getSpecificRecipe}>
                 Get1
             </button >
+            <button className="btn btn-primary" onClick={getRecipeIngredients}>
+                Ingredients
+            </button>
 
             <h1>Items</h1>
             <div className="row">
