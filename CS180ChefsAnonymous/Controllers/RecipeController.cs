@@ -17,6 +17,7 @@ namespace CS180ChefsAnonymous.Controllers
             _dbContext = dbContext;
 
         }
+
         [HttpGet]
         [Route("GetRecipe/{id}")]
         public async Task<ActionResult<Recipe>> GetRecipe(int id)
@@ -30,11 +31,19 @@ namespace CS180ChefsAnonymous.Controllers
 
             return recipe;
         }
+
         [HttpGet]
         [Route("GetRecipes")]
         public async Task<IEnumerable<Recipe>> GetRecipes()
         {
             return await _dbContext.Recipes.ToListAsync();
+        }
+
+        [HttpGet]
+        [Route("GetAlphaRecipes")]
+        public async Task<IEnumerable<Recipe>> GetRecipesAlpha()
+        {
+            return await _dbContext.Recipes.OrderBy(r => r.RecipeTitle).ToListAsync();
         }
 
         [HttpPost]

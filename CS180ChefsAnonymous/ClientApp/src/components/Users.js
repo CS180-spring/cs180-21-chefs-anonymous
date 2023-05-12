@@ -87,6 +87,7 @@ export function Users() {
             .catch(error => console.error(error));
     }
 // Recipe stuff
+
     const [recipes, setRecipes] = useState([]);
     useEffect(() => {
         fetch("api/recipe/GetRecipes")
@@ -117,6 +118,21 @@ export function Users() {
                 console.error(error);
             });
     }
+
+    function getAlphaList() {
+        fetch('/api/recipe/GetAlphaRecipes')
+            .then((response) => response.json())
+            .then((responseJson) => {
+                console.log(responseJson);
+                setRecipes(responseJson);
+                console.log(recipes)
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+
+
     function getSpecificRecipe() {
         fetch("api/recipe/GetRecipe/3")
             .then((response) => response.json())
@@ -736,6 +752,9 @@ export function Users() {
             <button className="btn btn-primary" onClick={refreshRecipe}>
                 Refresh
             </button >
+            <button className="btn btn-primary" onClick={getAlphaList}>
+                Alphabetical
+            </button>
             <button className="btn btn-primary" onClick={addRecipe}>
                 Add
             </button >
