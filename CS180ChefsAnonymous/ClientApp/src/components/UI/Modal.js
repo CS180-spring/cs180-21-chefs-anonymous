@@ -1,5 +1,4 @@
 import React from "react";
-import Card from "./Card";
 import styles from "./Modal.module.css";
 
 const Modal = (props) => {

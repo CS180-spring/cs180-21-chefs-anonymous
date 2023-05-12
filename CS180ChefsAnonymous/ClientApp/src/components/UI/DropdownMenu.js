@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../UI/DropdownMenu.module.css";
 
 const Icon = () => {
@@ -10,27 +10,66 @@ const Icon = () => {
 };
 
 const DropdownMenu = (props) => {
+  const [showOptions, setShowOptions] = useState(false);
+  const [selectedOption, setSelectedOption] = useState(null);
+
   const getDisplay = () => {
+    if (selectedOption) {
+      return selectedOption.name;
+    }
     return props.placeHolder;
+  };
+
+  useEffect(() => {
+    const handler = () => setShowOptions(false);
+
+    window.addEventListener("click", handler);
+    return () => {
+      window.removeEventListener("click", handler);
+    };
+  });
+
+  const inputHandler = (event) => {
+    event.stopPropagation();
+    setShowOptions(true);
+  };
+
+  const selectOption = (option) => {
+    setSelectedOption(option);
+  };
+
+  const isSelected = (option) => {
+    if (!selectedOption) {
+      return false;
+    }
+    return selectedOption.id === option.id;
   };
 
   return (
     <div className={styles.dropdown_container}>
-      <div className={styles.dropdown_input}>
-        <div className={styles.dropdown_menu}>
-          {props.options.map((option) => (
-            <div key={option.id} className={styles.dropdown_item}>
-              {option.label}
-            </div>
-          ))}
-        </div>
-        {/* <div className={styles.dropdown_selected_value}>{getDisplay()}</div>
+      <div onClick={inputHandler} className={styles.dropdown_input}>
+        <div className={styles.dropdown_selected_value}>{getDisplay()}</div>
         <div className={styles.dropdown_tools}>
           <div className={styles.dropdown_tool}>
             <Icon />
           </div>
-        </div> */}
+        </div>
       </div>
+      {showOptions && (
+        <div className={styles.dropdown_menu}>
+          {props.options.map((option) => (
+            <div
+              key={option.id}
+              className={`${styles.dropdown_item} ${
+                isSelected(option) && styles.selected_option
+              }`}
+              onClick={() => selectOption(option)}
+            >
+              {option.name}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
