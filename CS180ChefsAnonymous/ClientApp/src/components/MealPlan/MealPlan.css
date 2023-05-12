@@ -67,3 +67,7 @@ th:first-child {
 .meal-modal-list {
     margin: 5rem;
 }
+
+.meal-modal-p {
+    text-align: center;
+}

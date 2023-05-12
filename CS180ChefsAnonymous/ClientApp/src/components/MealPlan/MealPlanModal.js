@@ -12,7 +12,7 @@ const MealPlanModal = ({toggleModal, recipe}) => {
         <div onClick={toggleModal} className="overlay1"/>
         <div className="modal-content1">
             <h3 className="mealplan-modal-head">Recipe Name: {recipe_name}</h3>
-            <p>You can select a meal:</p>
+            <p className='meal-modal-p'>You can select a meal from here:</p>
             <div className="meal-modal-list">
                 <RecipesList recipes={DUMMY_RECIPES}/>
             </div>
