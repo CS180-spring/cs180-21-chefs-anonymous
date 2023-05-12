@@ -17,11 +17,7 @@ const MultiselectDropdown = (props) => {
   const deleteOption = (option) => {
     return selectedOptions.filter((op) => op.id !== option.id);
   };
-  // Resets the selectedOptions array to exclude the deleted option
-  const onOptionDelete = (e, option) => {
-    e.stopPropagation();
-    setselectedOptions(deleteOption(option));
-  };
+
   // Clicking away from the dropdown box will close it
   useEffect(() => {
     const handler = () => setShowOptions(false);
@@ -49,10 +45,11 @@ const MultiselectDropdown = (props) => {
   };
   // When an option in Recipes.js is deleted, it is deleted from selectedOptions
   useEffect(() => {
-    setselectedOptions(
-      selectedOptions.filter((o) => o.id !== props.deleteOption.id)
+    setselectedOptions((prevOptions) =>
+      prevOptions.filter((o) => o.id !== props.deleteOption.id)
     );
   }, [props.deleteOption]);
+
   // Conditionally style selected options if they are in the selectedOptions array.
   const isSelected = (option) => {
     return selectedOptions.filter((o) => o.id === option.id).length > 0;
