@@ -1,16 +1,19 @@
 import React, { Component, useState, useMemo, useEffect } from "react";
 import styles from "./MealPlan.css";
-import data from "../../dummy-meal-plan.json";
+// import data from "../../dummy-meal-plan.json";
 import MealPlanModal from "./MealPlanModal";
 
 const MealPlan = (props) => {
-  const [currUser, setCurrUser] = useState(0);
-  setCurrUser(1)
+  // const [currUser, setCurrUser] = useState("");
+  // setCurrUser("1")
+  const [data, setData] = useState([])
   useEffect(() => {
-    fetch("api/mealplan/GetMealPlan/"+currUser)
+    // console.log("api/mealplan/GetMealPlan/"+currUser)
+    fetch("api/mealplan/GetMealPlan/1")
       .then((response) => response.json())
       .then((responseJson) => {
         console.log(responseJson);
+        setData(responseJson)
       })
       .catch((error) => {
         console.error(error);
@@ -27,7 +30,7 @@ const MealPlan = (props) => {
 
   const toggleModal = (i,j) => {
     setModal(!isModal);
-    setRecipe(filteredData.filter((jsonData) => jsonData.meal_time === i && jsonData.day_of_week === j)[0]?.recipe_id)
+    setRecipe(filteredData.filter((jsonData) => jsonData.mealTime === i && jsonData.dayOfWeek === j)[0]?.recipeId)
   }
 
   if (isModal) {
@@ -62,13 +65,14 @@ const MealPlan = (props) => {
     // Runs after EVERY rendering
   });
 
-  const filteredData = data.filter( (jsonData) => jsonData.user_id === 1);
+  // const filteredData = data.filter( (jsonData) => jsonData.user_id === 1);
+  const filteredData = data
 
   let copy = [...meal_matrix];
   for (let i = 1; i < rows; i++) {
     for (let j = 1; j < cols; j++) {
       copy[i-1][j-1] = filteredData.filter((jsonData) => 
-      jsonData.meal_time === i && jsonData.day_of_week === j)[0]?.recipe_id;
+      jsonData.mealTime === i && jsonData.dayOfWeek === j)[0]?.recipeId;
     }
   }
 
