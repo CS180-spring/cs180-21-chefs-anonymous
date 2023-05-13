@@ -29,6 +29,15 @@ export function Users() {
             });
     }
 
+    function login() {
+        fetch("api/user/Login", {
+            method: 'GET',
+        })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => error(error));
+    }
+
     function add() {
         fetch("api/user/AddUser", {
             method: 'POST',
