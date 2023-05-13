@@ -77,5 +77,13 @@ namespace CS180ChefsAnonymous.Controllers
             return a;
 
         }
+
+        [HttpGet]
+        [Route("GetMealPlan/{user_id}")]
+        public async Task<IEnumerable<MealPlan>> GetMealPlan(int user_id)
+        {
+            // var MealPlan = _dbContext.MealPlans.Find(user_id);
+            return await _dbContext.MealPlans.Where(mp => mp.UserId == user_id).ToListAsync();
+        }
     }
 }
