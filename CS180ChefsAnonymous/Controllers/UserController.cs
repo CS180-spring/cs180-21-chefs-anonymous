@@ -5,6 +5,8 @@ using CS180ChefsAnonymous.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Diagnostics.Metrics;
+using System.Threading.Channels;
 
 namespace CS180ChefsAnonymous.Controllers
 {
@@ -40,13 +42,38 @@ namespace CS180ChefsAnonymous.Controllers
             return user;
         }
 
+        /**
+         * Easy route for login, we can change later for better authentication
+         */
+        [HttpGet]
+        [Route("Login")] 
+        public async Task<IActionResult> Login([FromForm]string username, [FromForm]string password)
+        {
+            var user = await _dbContext.Users
+                .FirstOrDefaultAsync(u => u.Username == username && u.Password == password);
+
+
+            if (user == null)
+            {
+                return Unauthorized("Invalid user or password");
+            }
+
+            var options = new JsonSerializerOptions
+            {
+                ReferenceHandler = ReferenceHandler.Preserve
+            };
+
+            var json = JsonSerializer.Serialize(user, options);
+            return Ok(json);
+        }
+
         [HttpGet]
         [Route("GetUserRecipes/{userId}")]
         public async Task<IActionResult> GetUserRecipes(int userId)
         {
             var user = await _dbContext.Users
                 .Include(u => u.Recipes)
-                .FirstOrDefaultAsync(u => u.UserId == userId); //= await _dbContext.Users.FirstOrDefaultAsync(u => u.UserId == userId);
+                .FirstOrDefaultAsync(u => u.UserId == userId);
 
             if (user == null)
             {

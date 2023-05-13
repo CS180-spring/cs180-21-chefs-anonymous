@@ -29,6 +29,15 @@ export function Users() {
             });
     }
 
+    function login() {
+        fetch("api/user/Login", {
+            method: 'GET',
+        })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => error(error));
+    }
+
     function add() {
         fetch("api/user/AddUser", {
             method: 'POST',
@@ -87,6 +96,7 @@ export function Users() {
             .catch(error => console.error(error));
     }
 // Recipe stuff
+
     const [recipes, setRecipes] = useState([]);
     useEffect(() => {
         fetch("api/recipe/GetRecipes")
@@ -117,6 +127,34 @@ export function Users() {
                 console.error(error);
             });
     }
+
+    function getRecipesAscending() {
+        fetch("api/recipe/GetRecipesAscending")
+            .then((response) => response.json())
+            .then((responseJson) => {
+                console.log(responseJson);
+                setRecipes(responseJson);
+                console.log(recipes)
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+
+    function getRecipesDescending() {
+        fetch("api/recipe/GetRecipesDescending")
+            .then((response) => response.json())
+            .then((responseJson) => {
+                console.log(responseJson);
+                setRecipes(responseJson);
+                console.log(recipes)
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+
+
     function getSpecificRecipe() {
         fetch("api/recipe/GetRecipe/3")
             .then((response) => response.json())
@@ -278,6 +316,7 @@ export function Users() {
             .then(data => console.log(data))
             .catch(error => console.error(error));
     }
+
     function removeItem() {
         fetch("api/item/DeleteItem/Banana", {
             method: 'DELETE',
@@ -287,6 +326,8 @@ export function Users() {
             .then(data => console.log(data))
             .catch(error => console.error(error));
     }
+
+
     //};
     // Ingredient Stuff
     const [ingredients, setIngredients] = useState([]);
@@ -341,9 +382,9 @@ export function Users() {
             },
             body: JSON.stringify(
                 {
-                    "ingredientId": 14,
-                    "recipeId": 3,
-                    "itemName": "Pepperoni",
+                    "ingredientId": 15,
+                    "recipeId": 1,
+                    "itemName": "asd",
                     "qty": 1,
                     "unit": "tsp",
                 }
@@ -386,6 +427,16 @@ export function Users() {
             .then(data => console.log(data))
             .catch(error => console.error(error));
     }
+
+    function getRecipeIngredients() {
+        fetch("api/recipe/GetRecipeIngredients/1", {
+            method: 'GET',
+        })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => error(error));
+    }
+
     //};
     // Inventory Stuff
     const [inventory, setInventory] = useState([]);
@@ -736,6 +787,12 @@ export function Users() {
             <button className="btn btn-primary" onClick={refreshRecipe}>
                 Refresh
             </button >
+            <button className="btn btn-primary" onClick={getRecipesAscending}>
+                Ascending
+            </button>
+            <button className="btn btn-primary" onClick={getRecipesDescending}>
+                Descending
+            </button>
             <button className="btn btn-primary" onClick={addRecipe}>
                 Add
             </button >
@@ -748,6 +805,9 @@ export function Users() {
             <button className="btn btn-primary" onClick={getSpecificRecipe}>
                 Get1
             </button >
+            <button className="btn btn-primary" onClick={getRecipeIngredients}>
+                Ingredients
+            </button>
 
             <h1>Items</h1>
             <div className="row">
