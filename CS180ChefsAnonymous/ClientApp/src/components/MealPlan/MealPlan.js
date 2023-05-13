@@ -4,6 +4,19 @@ import data from "../../dummy-meal-plan.json";
 import MealPlanModal from "./MealPlanModal";
 
 const MealPlan = (props) => {
+  const [currUser, setCurrUser] = useState(0);
+  setCurrUser(1)
+  useEffect(() => {
+    fetch("api/mealplan/GetMealPlan/"+currUser)
+      .then((response) => response.json())
+      .then((responseJson) => {
+        console.log(responseJson);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
   const [isModal, setModal] = useState(false);
   // recipe is a recipe we can retrieve by clicking a cell
   const [recipe, setRecipe] = useState("");
