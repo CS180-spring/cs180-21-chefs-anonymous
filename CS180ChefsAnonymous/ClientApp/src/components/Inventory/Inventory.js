@@ -58,7 +58,7 @@ const Inventory = (props) => {
         <div>
           <InventoryList inventory={dummyInventory} />
           <Button type="submit" onClick={displayInventoryFormHandler}>
-            Add Inventory
+            Add Ingredient
           </Button>
         </div>
       )}
