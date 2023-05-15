@@ -9,8 +9,7 @@
 }
 
 .loginForm {
-    box-sizing: border-box;
-    position: absolute;
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -20,9 +19,47 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 494px;
     height: 297px;
-    left: 473px;
-    top: 350px;
+    top: 25%;
     background: #FFFEF0;
     mix-blend-mode: luminosity;
     border: 7px solid #EFA884;
+    margin: auto;
+}
+
+.Login_Username {
+    display: flex;
+    justify-content: center;
+    margin: 5px auto;
+    width: 80%;
+    height: 35px;
+    background: rgba(255, 206, 181, 0.5);
+    mix-blend-mode: luminosity;
+    border: 1px solid #EFA884;
+    border-radius: 5px;
+}
+
+
+.Login_Password {
+    display: flex;
+    justify-content: center;
+    margin: 5px auto;
+    width: 80%;
+    height: 35px;
+    background: rgba(255, 206, 181, 0.5);
+    mix-blend-mode: luminosity;
+    border: 1px solid #EFA884;
+    border-radius: 5px;
+}
+
+.Login_Button {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    width: 80%;
+    height: 35px;
+    background: rgba(255, 206, 181, 0.5);
+    mix-blend-mode: luminosity;
+    border: 1px solid #EFA884;
+    border-radius: 5px;
+    font-weight: bold;
 }

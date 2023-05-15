@@ -55,15 +55,13 @@ export class Login extends Component {
           }}>
               <form className="loginForm">
                   <label>
-                        Username:
-                        <input type="text" name="username" onChange={this.handleInputChange} />
+                        <input className="Login_Username" type="text" name="username" onChange={this.handleInputChange} placeholder="Username"/>
                   </label>
                   <label>
-                        Password:
-                        <input type="password" name="password" onChange={this.handleInputChange} />
+                      <input className="Login_Password" type="password" name="password" onChange={this.handleInputChange} placeholder="Password" />
                   </label>
                   <br />
-                  <button type="button" onClick={this.handleLogin}>Log in</button>
+                  <button className="Login_Button" type="button" onClick={this.handleLogin}>Log in</button>
               </form>
         </div>
     );
