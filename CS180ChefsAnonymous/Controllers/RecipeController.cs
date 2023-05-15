@@ -46,7 +46,7 @@ namespace CS180ChefsAnonymous.Controllers
             return objRecipe;
         }
 
-        [HttpPut]
+        [HttpPatch]
         [Route("UpdateRecipe/{id}")]
         public async Task<Recipe> UpdateRecipe(Recipe objRecipe)
         {
