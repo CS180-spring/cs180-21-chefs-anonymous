@@ -27,10 +27,26 @@ const MealPlan = (props) => {
   // meal_matrix is a table which contains recipe_id for displaying in a cell of table
   const [meal_matrix, setMealMatrix] = useState(Array.from({length: 5},()=> Array.from({length: 7}, () => null)));
 
+  const [recipesList, setRecipesList] = useState("")
+    useEffect(() => {
+        fetch("api/recipe/GetRecipes")
+            .then((response) => response.json())
+            //.then((response) => {
+            //    //console.log(response.json());
+            //    response.json()
+            //})
+            .then((responseJson) => {
+                console.log("response:",responseJson);
+                setRecipesList(responseJson);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }, []);
 
   const toggleModal = (i,j) => {
     setModal(!isModal);
-    setRecipe(filteredData.filter((jsonData) => jsonData.mealTime === i && jsonData.dayOfWeek === j)[0]?.recipeId)
+    setRecipe(filteredData.filter((jsonData) => jsonData.mealTime === i && jsonData.dayOfWeek === j)[0])
   }
 
   if (isModal) {
@@ -119,7 +135,7 @@ const MealPlan = (props) => {
         </tbody>
       </table>
       {isModal && (
-        <MealPlanModal toggleModal={toggleModal} recipe={recipe}/>
+        <MealPlanModal toggleModal={toggleModal} recipe={recipe} recipesList={recipesList}/>
       )}
     </div>
   );

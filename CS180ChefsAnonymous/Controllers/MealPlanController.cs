@@ -49,14 +49,29 @@ namespace CS180ChefsAnonymous.Controllers
             return objMealPlan;
         }
 
-        [HttpPatch]
-        [Route("UpdateMealPlan/{id}")]
-        public async Task<MealPlan> UpdateMealPlan(MealPlan objMealPlan)
-        {
-            _dbContext.Entry(objMealPlan).State = EntityState.Modified;
-            await _dbContext.SaveChangesAsync();
-            return objMealPlan;
-        }
+        // [HttpPut]
+        // [Route("UpdateMealPlan/{recipe_id}")]
+        // public async Task<MealPlan> UpdateMealPlan(MealPlan objMealPlan)
+        // {
+        //     // _dbContext.Entry(objMealPlan).State = EntityState.Modified;
+        //     // await _dbContext.SaveChangesAsync();
+        //     // return objMealPlan;
+
+        //     var existingMealPlan = await _dbContext.MealPlans.FindAsync(meal_plan_id);
+
+        //     if (existingMealPlan == null) {
+        //         return NotFound();
+        //     }
+        //     existingMealPlan.RecipeId = updatedMealPlan.RecipeId;
+        //     try {
+        //         await _dbContext.SaveChangesAsync();
+        //     }
+        //     catch (Exception){
+        //         throw;
+        //     }
+
+        //     return NoContent();
+        // }
 
         [HttpDelete]
         [Route("DeleteMealPlan/{id}")]
