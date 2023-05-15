@@ -4,11 +4,8 @@ import styles from "./MealPlan.css";
 import MealPlanModal from "./MealPlanModal";
 
 const MealPlan = (props) => {
-  // const [currUser, setCurrUser] = useState("");
-  // setCurrUser("1")
   const [data, setData] = useState([])
   useEffect(() => {
-    // console.log("api/mealplan/GetMealPlan/"+currUser)
     // need to figure out how to get user (need a login page)
     fetch("api/mealplan/GetMealPlan/1")
       .then((response) => response.json())
@@ -32,10 +29,6 @@ const MealPlan = (props) => {
     useEffect(() => {
         fetch("api/recipe/GetRecipes")
             .then((response) => response.json())
-            //.then((response) => {
-            //    //console.log(response.json());
-            //    response.json()
-            //})
             .then((responseJson) => {
                 console.log("response:",responseJson);
                 setRecipesList(responseJson);
@@ -82,7 +75,6 @@ const MealPlan = (props) => {
     // Runs after EVERY rendering
   });
 
-  // const filteredData = data.filter( (jsonData) => jsonData.user_id === 1);
   const filteredData = data
 
   let copy = [...meal_matrix];
@@ -136,7 +128,7 @@ const MealPlan = (props) => {
         </tbody>
       </table>
       {isModal && (
-        <MealPlanModal toggleModal={toggleModal} recipe={recipe} recipesList={recipesList}/>
+        <MealPlanModal toggleModal={toggleModal} recipe={recipe} recipesList={recipesList} />
       )}
     </div>
   );
