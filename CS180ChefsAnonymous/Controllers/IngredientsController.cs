@@ -31,6 +31,46 @@ namespace CS180ChefsAnonymous.Controllers
             return await _dbContext.Ingredients.Where(i => i.RecipeId == recipeId).ToListAsync();
         }
 
+        [HttpGet]
+        [Route("GetGrocery/{id}")]
+        public async Task<ActionResult<List<Ingredient>>> GetGrocery(int id)
+        {
+            var meals = await _dbContext.MealPlans.Where(mp => mp.UserId == id).ToListAsync();
+
+            if (meals == null || meals.Count == 0)
+            {
+                return NotFound();
+            }
+
+            var recipes = meals.Select(mp => mp.RecipeId).ToList();
+            var ingredients = await _dbContext.Ingredients.Where(i => recipes.Contains(i.RecipeId)).ToListAsync();
+
+            var inventory = await _dbContext.Inventories.Where(inv => inv.UserId == id).Select(inv => new { inv.ItemName, inv.Qty }).ToListAsync();
+
+            var groceryList = new List<Ingredient>();
+
+            foreach (var ingredient in ingredients)
+            {
+                var inventoryItem = inventory.FirstOrDefault(inv => inv.ItemName == ingredient.ItemName);
+                if (inventoryItem != null)
+                {
+//#TODO ADD CONVERT FUNCTION AFTER CHECKING UNITS
+                    if (inventoryItem.Qty < ingredient.Qty)
+                    {
+                        var remainder = ingredient.Qty- inventoryItem.Qty;
+                        groceryList.Add(new Ingredient { ItemName = ingredient.ItemName, Qty = remainder });
+                    }
+                }
+                else
+                {
+                    groceryList.Add(ingredient);
+                }
+            }
+
+            return groceryList;
+        }
+
+
         [HttpPost]
         [Route("AddIngredient")]
         public async Task<Ingredient> AddIngredient(Ingredient objIngredient)

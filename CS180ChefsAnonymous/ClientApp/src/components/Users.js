@@ -77,7 +77,7 @@ export function Users() {
             .then(data => console.log(data))
             .catch(error => console.error(error));
     }
-    function remove () {
+    function remove() {
         fetch("api/user/DeleteUser/6", {
             method: 'DELETE',
 
@@ -95,7 +95,7 @@ export function Users() {
             .then(data => console.log(data))
             .catch(error => console.error(error));
     }
-// Recipe stuff
+    // Recipe stuff
 
     const [recipes, setRecipes] = useState([]);
     useEffect(() => {
@@ -186,7 +186,7 @@ export function Users() {
                     "cookingTime": 3,
                     "userId": 3,
                     "categoryId": 1,
-                    
+
                 }
 
             )
@@ -328,6 +328,8 @@ export function Users() {
     }
 
 
+
+
     //};
     // Ingredient Stuff
     const [ingredients, setIngredients] = useState([]);
@@ -405,11 +407,11 @@ export function Users() {
             },
             body: JSON.stringify(
                 {
-                    "ingredientId": 3,
+                    "ingredientId": 2,
                     "recipeId": 3,
-                    "itemName": "Cheese",
-                    "qty": 2,
-                    "unit": "feet",
+                    "itemName": "Banana",
+                    "qty": 10,
+                    "unit": "bananas",
 
                 }
             )
@@ -487,11 +489,11 @@ export function Users() {
             },
             body: JSON.stringify(
                 {
-                    "inventoryId": 4,
+                    "inventoryId": 11,
                     "userId": 6,
-                    "itemName": "Pepperoni",
-                    "qty": 5,
-                    "unit": 1,
+                    "itemName": "Banana",
+                    "qty": 2,
+                    "unit": "bananas",
                 }
             )
         })
@@ -648,7 +650,6 @@ export function Users() {
             });
     }
 
-
     function addCategory() {
         fetch("api/category/AddCategory", {
             method: 'POST',
@@ -699,6 +700,20 @@ export function Users() {
             .then(data => console.log(data))
             .catch(error => console.error(error));
     }
+    const [grocery, setGrocery] = useState([]);
+
+    function getGroceryList() {
+        fetch("api/ingredient/GetGrocery/6")
+            .then((response) => response.json())
+            .then((responseJson) => {
+                console.log(responseJson);
+                setGrocery([responseJson]);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+
 
     return (
         <div className="container">
@@ -1036,7 +1051,9 @@ export function Users() {
             <button className="btn btn-primary" onClick={removeCategory}>
                 Delete
             </button>
-           
+            <button className="btn btn-primary" onClick={getGroceryList}>
+                GroceryList
+            </button>
 
 
         </div >
