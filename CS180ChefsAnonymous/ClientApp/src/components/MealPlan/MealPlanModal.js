@@ -3,7 +3,6 @@ import RecipesList from '../MealPlan/RecipesList'
 import DUMMY_RECIPES from "../Recipes/dummy-recipe-data.json";
 
 const MealPlanModal = ({toggleModal, recipe, recipesList}) => {
-  console.log(recipe)
   var recipe_name = ""
   if (recipe === undefined) { recipe_name = "-" }
   else { recipe_name = recipe.recipeId }

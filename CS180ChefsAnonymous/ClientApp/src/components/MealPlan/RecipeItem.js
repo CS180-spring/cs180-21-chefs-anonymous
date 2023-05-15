@@ -19,20 +19,20 @@ const RecipeItem = (props) => {
     };
 
     const updateMealPlan = (prop) => {
-        console.log("meal plan:",props.mealPlan)
-        console.log(prop.title);
-        fetch("api/mealplan/UpdateMealPlan/"+props.mealPlan.userId, {
+        console.log("meal plan:",prop.mealPlan);
+        console.log("recipe name:",prop.title, "recipe id:", prop.recipe_id);
+        fetch("api/mealplan/UpdateMealPlan/"+prop.mealPlan.mealPlanId, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 // pass the new user object as the request body
-                meal_plan_id: props.mealPlan.mealPlanId,
-                user_id: props.mealPlan.userId,
-                meal_time: props.mealPlan.mealTime,
-                day_of_week: props.mealPlan.dayOfWeek,
-                recipe_id: prop.recipe_id
+                mealPlanId: prop.mealPlan.mealPlanId,
+                userId: prop.mealPlan.userId,
+                mealTime: prop.mealPlan.mealTime,
+                dayOfWeek: prop.mealPlan.dayOfWeek,
+                recipeId: prop.recipe_id
             })
         })
             .then(response => response.json())

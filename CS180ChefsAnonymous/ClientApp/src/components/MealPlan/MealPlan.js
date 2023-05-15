@@ -9,6 +9,7 @@ const MealPlan = (props) => {
   const [data, setData] = useState([])
   useEffect(() => {
     // console.log("api/mealplan/GetMealPlan/"+currUser)
+    // need to figure out how to get user (need a login page)
     fetch("api/mealplan/GetMealPlan/1")
       .then((response) => response.json())
       .then((responseJson) => {
