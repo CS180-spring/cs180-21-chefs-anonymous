@@ -407,11 +407,11 @@ export function Users() {
             },
             body: JSON.stringify(
                 {
-                    "ingredientId": 3,
+                    "ingredientId": 2,
                     "recipeId": 3,
-                    "itemName": "Cheese",
-                    "qty": 2,
-                    "unit": "feet",
+                    "itemName": "Banana",
+                    "qty": 10,
+                    "unit": "bananas",
 
                 }
             )
@@ -489,11 +489,11 @@ export function Users() {
             },
             body: JSON.stringify(
                 {
-                    "inventoryId": 4,
+                    "inventoryId": 11,
                     "userId": 6,
-                    "itemName": "Pepperoni",
-                    "qty": 5,
-                    "unit": 1,
+                    "itemName": "Banana",
+                    "qty": 2,
+                    "unit": "bananas",
                 }
             )
         })

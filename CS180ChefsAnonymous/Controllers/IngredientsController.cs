@@ -57,7 +57,7 @@ namespace CS180ChefsAnonymous.Controllers
 //#TODO ADD CONVERT FUNCTION AFTER CHECKING UNITS
                     if (inventoryItem.Qty < ingredient.Qty)
                     {
-                        var remainder = inventoryItem.Qty - ingredient.Qty;
+                        var remainder = ingredient.Qty- inventoryItem.Qty;
                         groceryList.Add(new Ingredient { ItemName = ingredient.ItemName, Qty = remainder });
                     }
                 }
