@@ -4,12 +4,12 @@ import styles from "./MealPlan.css";
 import MealPlanModal from "./MealPlanModal";
 
 const MealPlan = (props) => {
-  const [data, setData] = useState([])
+  const [data, setData] = useState([]);
 
   const [isModal, setModal] = useState(false);
   // recipe is a recipe we can retrieve by clicking a cell
   const [recipe, setRecipe] = useState("");
-  const [meals, setMeals] = useState([])
+  const [publicRecipe, setPublicRecipe] = useState("");
   // meal_matrix is a table which contains recipe_id for displaying in a cell of table
   const [meal_matrix, setMealMatrix] = useState(Array.from({length: 5},()=> Array.from({length: 7}, () => null)));
 
@@ -36,20 +36,34 @@ const MealPlan = (props) => {
     fetch("api/mealplan/GetMealPlan/1")
       .then((response) => response.json())
       .then((responseJson) => {
+        // fix this later
         setTimeout(()=>{
           console.log("response json",responseJson);
-        setData(responseJson);
-        console.log("setdata is called");
-         }, 50)
-        // console.log("response json",responseJson);
-        // setData(responseJson);
-        // console.log("setdata is called");
+          setData(responseJson);
+          console.log("setdata is called");
+        }, 100);
       })
       .catch((error) => {
         console.error(error);
       });
       console.log("modal changed");
   }, [isModal]);
+
+  function getRecipeName(recipe_id) {
+    if (recipe_id !== undefined){
+    fetch("api/recipe/GetRecipe/"+recipe_id)
+    .then((response) => response.json())
+      .then((responseJson) => {
+        // console.log("getRecipeName json",responseJson);
+        return responseJson;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    } else {
+      return undefined;
+    }
+  }
 
   if (isModal) {
     document.body.classList.add('active-modal');
@@ -80,12 +94,16 @@ const MealPlan = (props) => {
   }
 
   const filteredData = data
-
+  console.log(filteredData)
   let copy = [...meal_matrix];
   for (let i = 1; i < rows; i++) {
     for (let j = 1; j < cols; j++) {
       copy[i-1][j-1] = filteredData.filter((jsonData) => 
       jsonData.mealTime === i && jsonData.dayOfWeek === j)[0]?.recipeId;
+      // copy[i-1][j-1] = recipesList.filter((data) => 
+      // data.recipeId === filteredData.filter((jsonData) => 
+      // jsonData.mealTime === i && jsonData.dayOfWeek === j)[0]?.recipeId
+      // );
     }
   }
 
@@ -109,11 +127,22 @@ const MealPlan = (props) => {
           );
         }
         else {
-          tableCells.push(
-            <td id={i+'-'+j} key={i+'-'+j} onClick={ () => toggleModal(i,j)}>
-              {meal_matrix[i-1][j-1]}
-            </td>
-          );
+          // console.log("meal matrix:",meal_matrix[i-1][j-1])
+          // console.log("This is getRecipeName after meal matrix:",getRecipeName(meal_matrix[i-1][j-1]));
+          if (getRecipeName(meal_matrix[i-1][j-1]) !== undefined){
+            tableCells.push(
+              <td id={i+'-'+j} key={i+'-'+j} onClick={ () => toggleModal(i,j)}>
+                {/* {meal_matrix[i-1][j-1]} */}
+                {getRecipeName(meal_matrix[i-1][j-1]).recipeTitle}
+              </td>
+            );
+          } else {
+            tableCells.push(
+              <td id={i+'-'+j} key={i+'-'+j} onClick={ () => toggleModal(i,j)}>
+                {meal_matrix[i-1][j-1]}
+              </td>
+            );
+          }
         }
       }
     }
