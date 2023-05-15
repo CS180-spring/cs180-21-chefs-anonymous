@@ -708,7 +708,6 @@ export function Users() {
             .then((responseJson) => {
                 console.log(responseJson);
                 setGrocery([responseJson]);
-                console.log(grocery);
             })
             .catch((error) => {
                 console.error(error);

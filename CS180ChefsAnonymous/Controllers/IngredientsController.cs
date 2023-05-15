@@ -41,16 +41,35 @@ namespace CS180ChefsAnonymous.Controllers
             {
                 return NotFound();
             }
+
             var recipes = meals.Select(mp => mp.RecipeId).ToList();
             var ingredients = await _dbContext.Ingredients.Where(i => recipes.Contains(i.RecipeId)).ToListAsync();
 
-            var inventory = await _dbContext.Inventories.Where(inv => inv.UserId == id).Select(inv => inv.ItemName).ToListAsync();
-            var groceryList = ingredients.Where(i => inventory.Contains(i.ItemName)).ToList();
+            var inventory = await _dbContext.Inventories.Where(inv => inv.UserId == id).Select(inv => new { inv.ItemName, inv.Qty }).ToListAsync();
+
+            var groceryList = new List<Ingredient>();
+
+            foreach (var ingredient in ingredients)
+            {
+                var inventoryItem = inventory.FirstOrDefault(inv => inv.ItemName == ingredient.ItemName);
+                if (inventoryItem != null)
+                {
+//#TODO ADD CONVERT FUNCTION AFTER CHECKING UNITS
+                    if (inventoryItem.Qty < ingredient.Qty)
+                    {
+                        var remainder = inventoryItem.Qty - ingredient.Qty;
+                        groceryList.Add(new Ingredient { ItemName = ingredient.ItemName, Qty = remainder });
+                    }
+                }
+                else
+                {
+                    groceryList.Add(ingredient);
+                }
+            }
+
             return groceryList;
-
-
-
         }
+
 
         [HttpPost]
         [Route("AddIngredient")]
