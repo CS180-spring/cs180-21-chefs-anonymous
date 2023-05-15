@@ -5,18 +5,6 @@ import MealPlanModal from "./MealPlanModal";
 
 const MealPlan = (props) => {
   const [data, setData] = useState([])
-  useEffect(() => {
-    // need to figure out how to get user (need a login page)
-    fetch("api/mealplan/GetMealPlan/1")
-      .then((response) => response.json())
-      .then((responseJson) => {
-        console.log(responseJson);
-        setData(responseJson)
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
 
   const [isModal, setModal] = useState(false);
   // recipe is a recipe we can retrieve by clicking a cell
@@ -25,23 +13,43 @@ const MealPlan = (props) => {
   // meal_matrix is a table which contains recipe_id for displaying in a cell of table
   const [meal_matrix, setMealMatrix] = useState(Array.from({length: 5},()=> Array.from({length: 7}, () => null)));
 
-  const [recipesList, setRecipesList] = useState("")
-    useEffect(() => {
-        fetch("api/recipe/GetRecipes")
-            .then((response) => response.json())
-            .then((responseJson) => {
-                console.log("response:",responseJson);
-                setRecipesList(responseJson);
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-    }, []);
+  const [recipesList, setRecipesList] = useState("");
+  useEffect(() => {
+      fetch("api/recipe/GetRecipes")
+          .then((response) => response.json())
+          .then((responseJson) => {
+              console.log("response:",responseJson);
+              setRecipesList(responseJson);
+          })
+          .catch((error) => {
+              console.error(error);
+          });
+  }, []);
 
   const toggleModal = (i,j) => {
     setModal(!isModal);
     setRecipe(filteredData.filter((jsonData) => jsonData.mealTime === i && jsonData.dayOfWeek === j)[0])
   }
+
+  useEffect(() => {
+    // need to figure out how to get user (need a login page)
+    fetch("api/mealplan/GetMealPlan/1")
+      .then((response) => response.json())
+      .then((responseJson) => {
+        setTimeout(()=>{
+          console.log("response json",responseJson);
+        setData(responseJson);
+        console.log("setdata is called");
+         }, 50)
+        // console.log("response json",responseJson);
+        // setData(responseJson);
+        // console.log("setdata is called");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+      console.log("modal changed");
+  }, [isModal]);
 
   if (isModal) {
     document.body.classList.add('active-modal');
@@ -70,10 +78,6 @@ const MealPlan = (props) => {
     else if (i===4) return 'Dinner'
     else if (i===5) return 'Dessert'
   }
-
-  useEffect(() => {
-    // Runs after EVERY rendering
-  });
 
   const filteredData = data
 
@@ -128,7 +132,7 @@ const MealPlan = (props) => {
         </tbody>
       </table>
       {isModal && (
-        <MealPlanModal toggleModal={toggleModal} recipe={recipe} recipesList={recipesList} />
+        <MealPlanModal toggleModal={toggleModal} recipe={recipe} recipesList={recipesList} isModal={isModal} setModal={setModal}/>
       )}
     </div>
   );

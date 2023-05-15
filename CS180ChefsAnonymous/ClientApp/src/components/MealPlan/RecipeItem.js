@@ -38,6 +38,7 @@ const RecipeItem = (props) => {
             .then(response => response.json())
             .then(data => console.log(data))
             .catch(error => console.error(error));
+        props.setModal(!props.isModal);
     }
     
     // Edit recipe
