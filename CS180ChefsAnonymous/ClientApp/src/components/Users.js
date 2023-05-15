@@ -77,7 +77,7 @@ export function Users() {
             .then(data => console.log(data))
             .catch(error => console.error(error));
     }
-    function remove () {
+    function remove() {
         fetch("api/user/DeleteUser/6", {
             method: 'DELETE',
 
@@ -95,7 +95,7 @@ export function Users() {
             .then(data => console.log(data))
             .catch(error => console.error(error));
     }
-// Recipe stuff
+    // Recipe stuff
 
     const [recipes, setRecipes] = useState([]);
     useEffect(() => {
@@ -186,7 +186,7 @@ export function Users() {
                     "cookingTime": 3,
                     "userId": 3,
                     "categoryId": 1,
-                    
+
                 }
 
             )
@@ -326,6 +326,8 @@ export function Users() {
             .then(data => console.log(data))
             .catch(error => console.error(error));
     }
+
+
 
 
     //};
@@ -648,7 +650,6 @@ export function Users() {
             });
     }
 
-
     function addCategory() {
         fetch("api/category/AddCategory", {
             method: 'POST',
@@ -699,6 +700,21 @@ export function Users() {
             .then(data => console.log(data))
             .catch(error => console.error(error));
     }
+    const [grocery, setGrocery] = useState([]);
+
+    function getGroceryList() {
+        fetch("api/ingredient/GetGrocery/6")
+            .then((response) => response.json())
+            .then((responseJson) => {
+                console.log(responseJson);
+                setGrocery([responseJson]);
+                console.log(grocery);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+
 
     return (
         <div className="container">
@@ -1036,7 +1052,9 @@ export function Users() {
             <button className="btn btn-primary" onClick={removeCategory}>
                 Delete
             </button>
-           
+            <button className="btn btn-primary" onClick={getGroceryList}>
+                GroceryList
+            </button>
 
 
         </div >
