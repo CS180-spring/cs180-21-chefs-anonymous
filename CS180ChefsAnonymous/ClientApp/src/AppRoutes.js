@@ -5,7 +5,7 @@ import Recipes from "./components/Recipes/Recipes";
 import MealPlan from "./components/MealPlan/MealPlan";
 import { Inventory } from "./components/Inventory";
 import { GroceryList } from "./components/GroceryList";
-import { Login } from "./components/Login";
+import { Login } from "./components/Login/Login";
 import { Register } from "./components/Register";
 import { Users } from "./components/Users";
 
