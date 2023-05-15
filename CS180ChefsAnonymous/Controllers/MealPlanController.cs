@@ -49,7 +49,7 @@ namespace CS180ChefsAnonymous.Controllers
             return objMealPlan;
         }
 
-        [HttpPatch]
+        [HttpPut]
         [Route("UpdateMealPlan/{id}")]
         public async Task<MealPlan> UpdateMealPlan(MealPlan objMealPlan)
         {
