@@ -59,6 +59,7 @@ namespace CS180ChefsAnonymous.Controllers
         [Route("AddRecipe")]
         public async Task<Recipe> AddRecipe(Recipe objRecipe)
         {
+            //objRecipe.RecipeId = Guid.NewGuid();
             _dbContext.Recipes.Add(objRecipe);
             await _dbContext.SaveChangesAsync();
             return objRecipe;

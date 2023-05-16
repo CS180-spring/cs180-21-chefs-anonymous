@@ -68,28 +68,95 @@ const RecipeForm = (props) => {
   const cancelHandler = () => {
     props.onCancel();
   };
-  const formSubmitHandler = (event) => {
+  const formSubmitHandler = async (event) => {          // Update form for the following json format             
     event.preventDefault();
-    const recipeData = {
-      title: enteredTitle,
-      cuisine: enteredCuisine,
-      description: enteredDescription,
-      preptime: {
-        hours: enteredHoursPreptime,
-        minutes: enteredMinutesPreptime,
-      },
-      cooktime: {
-        hours: enteredHoursCooktime,
-        minutes: enteredMinutesCooktime,
-      },
+    const recipeData = {                                
+        recipeId: enteredHoursPreptime,
+        recipeTitle: enteredTitle,
+        recipeDesc: enteredDescription,
+        preptime: enteredMinutesPreptime,
+        cooktime: enteredMinutesCooktime,
+        userId: 3,
+        categoryId: 1,
     };
+    /**   Talking about this^
+    // Change form to have the following json format
+        recipeId: 2,
+        recipeTitle: "Merman Kabob",
+        recipeDesc: "Not Jinbe",
+        instructions: "Catch and cook",
+        prepTime: 1,
+        cookingTime: 3,
+        userId: 3,
+        categoryId: 1,
+    */
 
+    /*
     props.onGetRecipeData(recipeData);
 
     setEnteredTitle("");
     setEnteredCuisine("");
     setEnteredDescription("");
+    */
+      try {
+          const response = await fetch("api/recipe/AddRecipe", {
+              method: "POST",
+              headers: {
+                  "Content-Type": "application/json",
+            },
+              body: JSON.stringify(recipeData),
+          });
+
+          if (!response.ok) {
+              throw new Error("Failed to add recipe");
+          }
+
+
+          const responseData = await response.json();
+          const recipeId = responseData.recipeId;
+
+          for (const ingredient of enteredIngredient) {
+              const ingredientData = {                      // Update form to have the following json format
+                  ingredientId: 22,
+                  recipeId: recipeId,
+                  itemName: ingredient.name,
+                  qty: enteredHoursCooktime,
+                  unit: enteredDescription,
+              };
+
+              /** Talking about this ^
+              Update form to have the following json format
+                ingredientId: GUID.newGUID(); ,        // We might have to update the models to use GUID
+                recipeId: recipeId,
+                itemName: ingredient.name,
+                qty: enteredQty,
+                unit: enteredUnit,        // example tsp, tbs, cup, etc     ie 3 letter abbreviations
+              */
+
+              const ingredientResponse = await fetch("api/ingredient/AddIngredient", {
+                  method: "POST",
+                  headers: {
+                      "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify(ingredientData),
+              });
+
+              if (!ingredientResponse.ok) {
+                  throw new Error("Failed to add ingredient");
+              }
+          }
+
+          // Resetting form inputs
+          setEnteredTitle("");
+          setEnteredCuisine("");
+          setEnteredDescription("");
+          setEnteredIngredient([]);
+      } catch (error) {
+          console.error(error);
+      }
   };
+
+    
 
   return (
     <div className={styles.backdrop}>
