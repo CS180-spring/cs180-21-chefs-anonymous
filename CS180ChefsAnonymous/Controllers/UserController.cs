@@ -45,12 +45,12 @@ namespace CS180ChefsAnonymous.Controllers
         /**
          * Easy route for login, we can change later for better authentication
          */
-        [HttpGet]
+        [HttpPost]
         [Route("Login")] 
-        public async Task<IActionResult> Login([FromForm]string username, [FromForm]string password)
+        public async Task<IActionResult> Login([FromBody]LoginModel loginModel)
         {
             var user = await _dbContext.Users
-                .FirstOrDefaultAsync(u => u.Username == username && u.Password == password);
+                .FirstOrDefaultAsync(u => u.Username == loginModel.UserName && u.Password == loginModel.Password);
 
 
             if (user == null)
