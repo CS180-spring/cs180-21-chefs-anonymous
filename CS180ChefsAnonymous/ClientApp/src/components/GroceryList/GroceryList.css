@@ -1,0 +1,47 @@
+﻿.grocery-list {
+    list-style-type: none; 
+    padding-left: 20px; 
+}
+
+
+.grocery-list li {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.grocery-list li:hover .delete-button {
+    display: inline-block;
+}
+
+.delete-button {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 30rem; /* Arbitrary distance of where delete should be */
+    transform: translate(-50%, -50%);
+    color: red;
+    cursor: pointer;
+}
+
+
+.grocery-list label {
+    display: flex; 
+    align-items: center; 
+}
+
+.grocery-list input[type="checkbox"] {
+    margin-right: 10px; 
+    appearance: none; 
+    width: 16px; 
+    height: 16px; 
+    border: 2px solid #ddd;
+    border-radius: 3px; 
+    outline: none;
+    cursor: pointer; 
+}
+
+.grocery-list input[type="checkbox"]:checked {
+    background-color: #5cb85c;
+    border-color: #5cb85c;
+}
+
