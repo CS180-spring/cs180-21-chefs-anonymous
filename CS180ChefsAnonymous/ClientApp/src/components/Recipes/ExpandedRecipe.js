@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./ExpandedRecipe.module.css";
 import Button from "../UI/Button";
 import Modal from "../UI/Modal";
@@ -7,6 +7,7 @@ import RecipeForm from "./RecipeForm";
 const ExpandedRecipe = (props) => {
   const [displayForm, setDisplayForm] = useState(false);
   const [displayDeleteModal, setDisplayDeleteModal] = useState(false);
+  const [recipeIngredients, setRecipeIngredients] = useState([]);
 
   const displayRecipeFormHandler = () => {
     setDisplayForm(true);
@@ -30,7 +31,7 @@ const ExpandedRecipe = (props) => {
     console.log("got form data!");
     setDisplayForm(false);
 
-    // Need API
+    // Need API: POST
   };
   // Delete recipe
   const deleteRecipeHandler = (e) => {
@@ -41,10 +42,25 @@ const ExpandedRecipe = (props) => {
     setDisplayDeleteModal(false);
   };
   const deleteDeleteModalHandler = () => {
-    // Need API
+    // Need API: DELETE FROM DB
     // need to go back to main recipe page
     setDisplayDeleteModal(false);
   };
+
+  useEffect(() => {
+    console.log("recipe id: ", props.recipe.id);
+    fetch("api/recipe/GetRecipeIngredients/" + props.recipe.id, {
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        console.log("recipe ingredients response:", responseJson);
+        setRecipeIngredients(responseJson);
+      })
+      .catch((error) => error(error));
+  }, [props.recipe.id]);
+
+  const recipeIngredientsList = recipeIngredients.$values;
 
   return (
     <div>
@@ -110,11 +126,12 @@ const ExpandedRecipe = (props) => {
 
       <div>
         <h4>Ingredients</h4>
-        {props.recipe.ingredients.map((ingredient) => (
-          <li key={ingredient.id}>
-            {ingredient.qty} {ingredient.name}
-          </li>
-        ))}
+        {recipeIngredientsList != undefined &&
+          recipeIngredientsList.map((ingredient) => (
+            <li key={ingredient.$id}>
+              {ingredient.Qty} {ingredient.ItemName}
+            </li>
+          ))}
       </div>
       <div className={styles.expanded_recipe__actions}>
         <Button type="button" onClick={displayRecipeFormHandler}>
