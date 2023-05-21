@@ -68,10 +68,10 @@ const RecipeForm = (props) => {
   const cancelHandler = () => {
     props.onCancel();
   };
-  const formSubmitHandler = async (event) => {          // Update form for the following json format             
+  const formSubmitHandler = async (event) => {                     
     event.preventDefault();
     const recipeData = {                                
-        recipeId: enteredHoursPreptime,
+        recipeId: 28,
         recipeTitle: enteredTitle,
         recipeDesc: enteredDescription,
         preptime: enteredMinutesPreptime,
@@ -79,8 +79,8 @@ const RecipeForm = (props) => {
         userId: 3,
         categoryId: 1,
     };
-    /**   Talking about this^
-    // Change form to have the following json format
+    /** Update form^ for the following json format
+     
         recipeId: 2,
         recipeTitle: "Merman Kabob",
         recipeDesc: "Not Jinbe",
@@ -89,14 +89,6 @@ const RecipeForm = (props) => {
         cookingTime: 3,
         userId: 3,
         categoryId: 1,
-    */
-
-    /*
-    props.onGetRecipeData(recipeData);
-
-    setEnteredTitle("");
-    setEnteredCuisine("");
-    setEnteredDescription("");
     */
       try {
           const response = await fetch("api/recipe/AddRecipe", {
@@ -116,15 +108,15 @@ const RecipeForm = (props) => {
           const recipeId = responseData.recipeId;
 
           for (const ingredient of enteredIngredient) {
-              const ingredientData = {                      // Update form to have the following json format
-                  ingredientId: 22,
+              const ingredientData = {                      
+                  ingredientId: 24,
                   recipeId: recipeId,
                   itemName: ingredient.name,
                   qty: enteredHoursCooktime,
-                  unit: enteredDescription,
+                  unit: "tsp",
               };
 
-              /** Talking about this ^
+              /** Update form^ for the following json format
               Update form to have the following json format
                 ingredientId: GUID.newGUID(); ,        // We might have to update the models to use GUID
                 recipeId: recipeId,
