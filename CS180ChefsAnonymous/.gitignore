@@ -25,9 +25,9 @@ obj/
 Obj/
 
 node_modules/
-!folder_name/node_modules/.package-lock.json
-!folder_name/package-lock.json
-!folder_name/package.json
+!node_modules/.package-lock.json
+!package-lock.json
+!package.json
 
 # Visual Studio 2015 cache/options directory
 .vs/
