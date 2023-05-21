@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import RecipesContext from "./RecipesContext";
 import ExpandedRecipe from "./ExpandedRecipe";
 import RecipesList from "./RecipesList";
@@ -28,6 +28,21 @@ const Recipes = (props) => {
   const [recipeItemData, setRecipeItemData] = useState(null);
   const [filterOptions, setFilterOptions] = useState([]);
   const [optionToDelete, setOptionToDelete] = useState(null);
+  const [recipesList, setRecipesList] = useState("");
+
+  useEffect(() => {
+    fetch("api/user/GetUserRecipes/6")
+      .then((response) => response.json())
+      .then((responseJson) => {
+        console.log("response:", responseJson);
+        setRecipesList(responseJson);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+    console.log();
+  }, []);
 
   const displayRecipeFormHandler = () => {
     setDisplayForm(true);
@@ -78,10 +93,6 @@ const Recipes = (props) => {
     setOptionToDelete(option);
   };
 
-  // const resetDeleteOptionHandler = (option) => {
-  //   setOptionToDelete(null);
-  // };
-
   return (
     <div>
       <RecipesContext.Provider
@@ -119,12 +130,11 @@ const Recipes = (props) => {
                 options={dummyFilters}
                 onGetDisplayOptions={displayOptionsHandler}
                 deleteOption={optionToDelete}
-                // resetDeleteOption={resetDeleteOptionHandler}
               />
             </div>
             <div>{displayFilters()}</div>
 
-            <RecipesList recipes={dummyRecipes} />
+            <RecipesList recipes={recipesList} />
             <Button type="submit" onClick={displayRecipeFormHandler}>
               Add Recipe
             </Button>
