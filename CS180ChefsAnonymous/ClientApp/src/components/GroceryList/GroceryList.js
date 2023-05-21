@@ -2,57 +2,57 @@ import React, { Component } from 'react';
 import './GroceryList.css';
 
 export class GroceryList extends Component {
-    static displayName = GroceryList.name;
+  constructor(props) {
+    super(props);
+    this.state = {
+      groceries: []
+    };
+    this.user = JSON.parse(localStorage.getItem('user'));
+  }
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            groceries: []
-        };
-    }
+  componentDidMount() {
+    this.fetchGroceryList();
+  }
 
-    componentDidMount() {
-        this.fetchGroceryList();
-    }
+  fetchGroceryList() {
+    // Use the user variable here as needed
+    console.log(this.user)
+    const { UserId } = this.user;
 
-    fetchGroceryList() {
-        fetch('api/ingredient/GetGrocery/6')
-            .then(response => response.json())
-            .then(data => {
-                this.setState({ groceries: data });
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    }
+    fetch(`api/ingredient/GetGrocery/${UserId}`)
+      .then(response => response.json())
+      .then(data => {
+        this.setState({ groceries: data });
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
 
-    handleDelete = (itemName) => {
-        this.setState(prevState => ({
-            groceries: prevState.groceries.filter(item => item.itemName !== itemName)
-        }));
-    }
+  handleDelete = (itemName) => {
+    this.setState(prevState => ({
+      groceries: prevState.groceries.filter(item => item.itemName !== itemName)
+    }));
+  }
 
+  render() {
+    const { groceries } = this.state;
 
-    render() {
-        const { groceries } = this.state;
-
-        return (
-            <div>
-                <h1>GroceryList</h1>
-                <ul className="grocery-list">
-                    {groceries.map(item => (
-                        <li key={item.itemName}>
-                            <label>
-                                <input type="checkbox" />
-                                {item.itemName} - {item.qty} {item.unit}
-                            </label>
-                            <span className="delete-button" onClick={() => this.handleDelete(item.itemName)}>Delete</span>
-
-                                
-                        </li>
-                    ))}
-                </ul>
-            </div>
-        );
-    }
+    return (
+      <div>
+        <h1>GroceryList</h1>
+        <ul className="grocery-list">
+          {groceries.map(item => (
+            <li key={item.itemName}>
+              <label>
+                <input type="checkbox" />
+                {item.itemName} - {item.qty} {item.unit}
+              </label>
+              <span className="delete-button" onClick={() => this.handleDelete(item.itemName)}>Delete</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
 }

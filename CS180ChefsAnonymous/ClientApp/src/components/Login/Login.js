@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Navigate } from 'react-router-dom';
+
 import backgroundImage from '../../loginBackground.jpg';
 import './Login.css';
 
@@ -9,7 +11,9 @@ export class Login extends Component {
         super(props);
         this.state = {
             username: '',
-            password: ''
+            password: '',
+            redirectToRecipes: false,
+
         };
     }
 
@@ -38,6 +42,12 @@ export class Login extends Component {
             .then(data => {
                 // Handle the response from the API
                 console.log(data);
+                // Save the user object to local storage
+                localStorage.setItem('user', JSON.stringify(data));
+
+
+                // Redirect to the recipe page
+                this.setState({ redirectToRecipes: true });
             })
             .catch(error => {
                 // Handle any error that occurs during the request
@@ -45,7 +55,12 @@ export class Login extends Component {
             });
     }
 
-  render() {
+    render() {
+        // Redirect to the recipe page if the login was successful
+        if (this.state.redirectToRecipes) {
+            return <Navigate to="/recipes" />;
+        }
+
       return (
         
         <div className="loginPage" style={{
