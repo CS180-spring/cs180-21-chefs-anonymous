@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, {useState } from "react";
 import Card from "../UI/Card";
 import Button from "../UI/Button";
 import styles from "./InventoryForm.module.css";
@@ -29,29 +29,6 @@ const InventoryForm = (props) => {
   const cancelHandler = () => {
     props.onCancel();
   };
-  /*const formSubmitHandler = (event) => {
-    event.preventDefault();
-
-    const inventoryData = {
-      title: enteredTitle,
-      cuisine: enteredCuisine,
-      description: enteredDescription,
-      preptime: {
-        hours: enteredHoursPreptime,
-        minutes: enteredMinutesPreptime,
-      },
-      cooktime: {
-        hours: enteredHoursCooktime,
-        minutes: enteredMinutesCooktime,
-      },
-    };
-
-    props.onGetInventoryData(inventoryData);
-
-    setEnteredTitle("");
-    setEnteredCuisine("");
-    setEnteredDescription("");
-  };*/
 
   return (
     <Card>
