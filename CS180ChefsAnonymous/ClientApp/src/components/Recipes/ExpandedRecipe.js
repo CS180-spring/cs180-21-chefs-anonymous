@@ -1,13 +1,45 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import RecipesContext from "./RecipesContext";
 import styles from "./ExpandedRecipe.module.css";
 import Button from "../UI/Button";
 import Modal from "../UI/Modal";
 import RecipeForm from "./RecipeForm";
 
+const Icon = () => {
+  return (
+    <svg
+      fill="#000000"
+      height="15"
+      width="15"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g data-name="Layer 2">
+        <g data-name="arrow-ios-back">
+          <rect
+            width="24"
+            height="24"
+            transform="rotate(90 12 12)"
+            opacity="0"
+          />
+
+          <path d="M13.83 19a1 1 0 0 1-.78-.37l-4.83-6a1 1 0 0 1 0-1.27l5-6a1 1 0 0 1 1.54 1.28L10.29 12l4.32 5.36a1 1 0 0 1-.78 1.64z" />
+        </g>
+      </g>
+    </svg>
+  );
+};
+
 const ExpandedRecipe = (props) => {
+  const context = useContext(RecipesContext);
   const [displayForm, setDisplayForm] = useState(false);
   const [displayDeleteModal, setDisplayDeleteModal] = useState(false);
   const [recipeIngredients, setRecipeIngredients] = useState([]);
+
+  const backButtonHandler = () => {
+    context.recipeListToDisplay(props.fullRecipesList);
+    context.recipeItemToMinimize();
+  };
 
   const displayRecipeFormHandler = () => {
     setDisplayForm(true);
@@ -16,16 +48,16 @@ const ExpandedRecipe = (props) => {
     setDisplayForm(false);
   };
 
-  let totalMin =
-    parseInt(props.recipe.preptime.minutes) +
-    parseInt(props.recipe.cooktime.minutes);
-  let totalHr =
-    parseInt(props.recipe.preptime.hours) +
-    parseInt(props.recipe.cooktime.hours);
-  if (totalMin >= 60) {
-    totalHr += Math.floor(totalMin / 60);
-    totalMin = totalMin % 60;
-  }
+  // let totalMin =
+  //   parseInt(props.recipe.preptime.minutes) +
+  //   parseInt(props.recipe.cooktime.minutes);
+  // let totalHr =
+  //   parseInt(props.recipe.preptime.hours) +
+  //   parseInt(props.recipe.cooktime.hours);
+  // if (totalMin >= 60) {
+  //   totalHr += Math.floor(totalMin / 60);
+  //   totalMin = totalMin % 60;
+  // }
 
   const getRecipeDataHandler = (enteredRecipeData) => {
     console.log("got form data!");
@@ -43,22 +75,30 @@ const ExpandedRecipe = (props) => {
   };
   const deleteDeleteModalHandler = () => {
     // Need API: DELETE FROM DB
+    // fetch("api/recipe/DeleteRecipe/" + props.recipe.id, {
+    //   method: "DELETE",
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => console.log(data))
+    //   .catch((error) => console.error(error));
+
     // need to go back to main recipe page
+    context.recipeItemToMinimize();
     setDisplayDeleteModal(false);
   };
 
   useEffect(() => {
-    console.log("recipe id: ", props.recipe.id);
-    fetch("api/recipe/GetRecipeIngredients/" + props.recipe.id, {
+    // console.log("recipe id: ", props.recipe.id);
+    fetch("api/recipe/GetRecipeIngredients/" + props.recipe.RecipeId, {
       method: "GET",
     })
       .then((response) => response.json())
       .then((responseJson) => {
-        console.log("recipe ingredients response:", responseJson);
+        // console.log("recipe ingredients response:", responseJson);
         setRecipeIngredients(responseJson);
       })
       .catch((error) => error(error));
-  }, [props.recipe.id]);
+  }, [props.recipe.RecipeId]);
 
   const recipeIngredientsList = recipeIngredients.$values;
 
@@ -82,7 +122,7 @@ const ExpandedRecipe = (props) => {
       )}
       {displayDeleteModal === true && (
         <Modal>
-          <h2>Delete {props.recipe.title}?</h2>
+          <h2>Delete {props.recipe.RecipeTitle}?</h2>
           <div className={styles.delete_modal__buttons}>
             <Button
               onClick={cancelDeleteModalHandler}
@@ -100,27 +140,32 @@ const ExpandedRecipe = (props) => {
           </div>
         </Modal>
       )}
-      <h1>{props.recipe.title}</h1>
-      <h2>{props.recipe.cuisine}</h2>
-      <p>{props.recipe.description}</p>
+      <div
+        className={styles.back_button_Recipes_page}
+        onClick={backButtonHandler}
+      >
+        <Icon />
+        <p className={styles.underline_on_hover}>Recipes</p>
+      </div>
+
+      <h1>{props.recipe.RecipeTitle}</h1>
+      <p>{props.recipe.RecipeDesc}</p>
       <div className={styles.container}>
         <div>
           <h4>Preptime</h4>
           <span>
-            {props.recipe.preptime.hours} hr {props.recipe.preptime.minutes} min
+            {/* {props.recipe.preptime.hours} hr {props.recipe.preptime.minutes} min */}
           </span>
         </div>
         <div>
           <h4>Cooktime</h4>
           <span>
-            {props.recipe.cooktime.hours} hr {props.recipe.cooktime.minutes} min
+            {/* {props.recipe.cooktime.hours} hr {props.recipe.cooktime.minutes} min */}
           </span>
         </div>
         <div>
           <h4>Total Time</h4>
-          <span>
-            {totalHr} hr {totalMin} min
-          </span>
+          <span>{/* {totalHr} hr {totalMin} min */}</span>
         </div>
       </div>
 

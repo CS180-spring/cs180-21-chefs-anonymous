@@ -7,7 +7,7 @@ const RecipesList = (props) => {
     return <h2 className={styles.recieps_list__fallback}>Found no recipes.</h2>;
   }
 
-  const recipesList = props.recipes.$values;
+  const recipesList = props.recipes;
 
   if (recipesList !== undefined) {
     return (
@@ -16,12 +16,12 @@ const RecipesList = (props) => {
           {recipesList.map((recipe) => (
             <RecipeItem
               key={recipe.RecipeId}
-              id={recipe.RecipeId}
-              title={recipe.RecipeTitle}
+              RecipeId={recipe.RecipeId}
+              RecipeTitle={recipe.RecipeTitle}
               // cuisine={recipe.cuisine}
-              description={recipe.RecipeDesc}
-              preptime={recipe.PrepTime}
-              cooktime={recipe.CookingTime}
+              RecipeDesc={recipe.RecipeDesc}
+              PrepTime={recipe.PrepTime}
+              CookingTime={recipe.CookingTime}
               // ingredients={recipe.ingredients}
             />
           ))}
