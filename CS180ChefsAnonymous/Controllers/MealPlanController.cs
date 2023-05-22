@@ -80,10 +80,47 @@ namespace CS180ChefsAnonymous.Controllers
 
         [HttpGet]
         [Route("GetMealPlan/{user_id}")]
-        public async Task<IEnumerable<MealPlan>> GetMealPlan(int user_id)
+        public async Task<ActionResult<List<List<MealPlan>>>> GetMealPlan(int user_id)
         {
             // var MealPlan = _dbContext.MealPlans.Find(user_id);
-            return await _dbContext.MealPlans.Where(mp => mp.UserId == user_id).ToListAsync();
+            // return await _dbContext.MealPlans.Where(mp => mp.UserId == user_id).ToListAsync();
+            var meals = await _dbContext.MealPlans.Where(mp => mp.UserId == user_id).ToListAsync();
+            string[,] mealNameArr = new string[5,7];
+            // if (meals == null)
+            // {
+            //     return NotFound();
+            // }
+            // return await meals
+            var mealNames = new List<List<String>>();
+            Console.WriteLine("heree");
+            foreach (var meal in meals) {
+                // i want mealName list like this []
+                // mealNames.Add(meal);
+                // var mealName = await _dbContext.Recipes.FindAsync(meal.RecipeId);
+                // if (mealName != null)
+                // {
+                //     // mealNames.Add(mealName.RecipeTitle);
+                //     Console.WriteLine(meal);
+                // }
+                // var mealName = await _dbContext.Recipes.Where(mp => mp.RecipeId == meal.RecipeId).ToListAsync();
+                for (int i = 0; i < 5; i++) {
+                    for (int j = 0; j < 7; j++) {
+                        // if (mealName != null) {
+                        //     mealNameArr[i, j] = mealName.RecipeTitle;
+                        // } else {
+                        //     // mealNameArr[i, j] = null;
+                        // }
+                    }
+                }
+            }
+
+            return mealNames;
+            // var mealplan_name = await _dbContext.Recipes.Where(mp => mp.RecipeId == id).ToList();
+
+            // // Extract the recipe names from the included recipes
+            // var recipeNames = meals.Select(mp => mp.Recipe?.RecipeName).ToList();
+
+            // return recipeNames;
         }
     }
 }
