@@ -80,7 +80,7 @@ namespace CS180ChefsAnonymous.Controllers
 
         [HttpGet]
         [Route("GetMealPlan/{user_id}")]
-        public async Task<ActionResult<List<List<MealPlan>>>> GetMealPlan(int user_id)
+        public async Task<ActionResult<List<List<string>>>> GetMealPlan(int user_id)
         {
             // var MealPlan = _dbContext.MealPlans.Find(user_id);
             // return await _dbContext.MealPlans.Where(mp => mp.UserId == user_id).ToListAsync();
@@ -91,7 +91,7 @@ namespace CS180ChefsAnonymous.Controllers
             //     return NotFound();
             // }
             // return await meals
-            var mealNames = new List<List<String>>();
+            var mealNames = new List<List<string>>();
             Console.WriteLine("heree");
             foreach (var meal in meals) {
                 // i want mealName list like this []
