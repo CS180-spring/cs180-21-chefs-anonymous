@@ -82,8 +82,42 @@ namespace CS180ChefsAnonymous.Controllers
         [Route("GetMealPlan/{user_id}")]
         public async Task<IEnumerable<MealPlan>> GetMealPlan(int user_id)
         {
-            // var MealPlan = _dbContext.MealPlans.Find(user_id);
             return await _dbContext.MealPlans.Where(mp => mp.UserId == user_id).ToListAsync();
+        }
+
+        [HttpGet]
+        [Route("GetMealPlanName/{user_id}")]
+        public async Task<ActionResult<List<List<string>>>> GetMealPlanName(int user_id)
+        {
+            var meals = await _dbContext.MealPlans.Where(mp => mp.UserId == user_id).ToListAsync();
+
+            var mealNames = new List<List<string>>();
+            var list1 = new List<string>(new string[7]);
+            var list2 = new List<string>(new string[7]);
+            var list3 = new List<string>(new string[7]);
+            var list4 = new List<string>(new string[7]);
+            var list5 = new List<string>(new string[7]);
+
+            Console.WriteLine("heree");
+            foreach (var meal in meals) {
+                var mealName = await _dbContext.Recipes.FindAsync(meal.RecipeId);
+                if (mealName != null)
+                {
+                    int i = meal.MealTime ?? -1;
+                    int j = meal.DayOfWeek ?? -1;
+                    if (i == 1) list1[j-1] = mealName.RecipeTitle;
+                    else if (i == 2) list2[j-1] = mealName.RecipeTitle;
+                    else if (i == 3) list3[j-1] = mealName.RecipeTitle;
+                    else if (i == 4) list4[j-1] = mealName.RecipeTitle;
+                    else if (i == 5) list5[j-1] = mealName.RecipeTitle;
+                }
+            }
+            mealNames.Add(list1);
+            mealNames.Add(list2);
+            mealNames.Add(list3);
+            mealNames.Add(list4);
+            mealNames.Add(list5);
+            return mealNames;
         }
     }
 }
