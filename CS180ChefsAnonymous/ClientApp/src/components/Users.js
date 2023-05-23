@@ -172,10 +172,10 @@ export function Users() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        recipeId: 32,
-        recipeTitle: "Blue Blueberry",
-        recipeDesc: "blue, round, and yummy",
-        instructions: "pick from a bush",
+        recipeId: 78,
+        recipeTitle: "testdelete1",
+        recipeDesc: "test",
+        instructions: "test",
         prepTime: 12,
         cookingTime: 34,
         userId: 6,
@@ -213,7 +213,10 @@ export function Users() {
       .catch((error) => console.error(error));
   }
   function removeRecipe() {
-    fetch("api/recipe/DeleteRecipe/3", {
+    // Must call removeRecipeIngredients() first to remove FK reference in ingredients table
+    removeRecipeIngredients();
+
+    fetch("api/recipe/DeleteRecipe/78", {
       method: "DELETE",
     })
       .then((response) => response.json())
@@ -360,9 +363,9 @@ export function Users() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        ingredientId: 36,
-        recipeId: 32,
-        itemName: "sunshine",
+        ingredientId: 78,
+        recipeId: 78,
+        itemName: "testingredient1",
         qty: 1,
         unit: "tsp",
       }),
@@ -391,12 +394,20 @@ export function Users() {
       .catch((error) => console.error(error));
   }
   function removeIngredient() {
-    fetch("api/ingredient/DeleteIngredient/3", {
+    fetch("api/ingredient/DeleteIngredient/35", {
       method: "DELETE",
     })
       .then((response) => response.json())
       .then((data) => console.log(data))
       .catch((error) => console.error(error));
+  }
+  function removeRecipeIngredients() {
+    fetch("api/ingredient/DeleteIngredientsByRecipe/78", {
+      method: "DELETE",
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.error("oops: ", error));
   }
 
   function getRecipeIngredients() {
@@ -736,7 +747,7 @@ export function Users() {
             </thead>
             <tbody>
               {recipes.map((recipe) => (
-                <tr key={recipe.recipeTitle}>
+                <tr key={recipe.recipeId}>
                   <td>{recipe.recipeId}</td>
                   <td>{recipe.recipeTitle}</td>
                   <td>{recipe.recipeDesc}</td>
@@ -853,6 +864,9 @@ export function Users() {
       </button>
       <button className="btn btn-primary" onClick={removeIngredient}>
         Delete
+      </button>
+      <button className="btn btn-primary" onClick={removeRecipeIngredients}>
+        Delete all from specific Recipe
       </button>
       <button className="btn btn-primary" onClick={getSpecificIngredient}>
         Get1
