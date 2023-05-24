@@ -74,15 +74,19 @@ const ExpandedRecipe = (props) => {
     setDisplayDeleteModal(false);
   };
   const deleteDeleteModalHandler = () => {
-    // Need API: DELETE FROM DB
-    // fetch("api/recipe/DeleteRecipe/" + props.recipe.id, {
-    //   method: "DELETE",
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => console.log(data))
-    //   .catch((error) => console.error(error));
-
-    // need to go back to main recipe page
+    fetch("api/ingredient/DeleteIngredientsByRecipe/" + props.recipe.RecipeId, {
+      method: "DELETE",
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.error(error));
+    fetch("api/recipe/DeleteRecipe/" + props.recipe.RecipeId, {
+      method: "DELETE",
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.error(error));
+    context.refreshRecipes();
     context.recipeItemToMinimize();
     setDisplayDeleteModal(false);
   };

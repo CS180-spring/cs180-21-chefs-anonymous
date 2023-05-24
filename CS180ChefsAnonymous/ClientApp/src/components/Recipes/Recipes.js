@@ -30,6 +30,7 @@ const Recipes = (props) => {
   const [optionToDelete, setOptionToDelete] = useState(null);
   const [recipesList, setRecipesList] = useState("");
   const [searchList, setSearchList] = useState("");
+  const [refresh, setRefresh] = useState(true);
 
   useEffect(() => {
     fetch("api/user/GetUserRecipes/6")
@@ -44,10 +45,14 @@ const Recipes = (props) => {
       });
 
     console.log();
-  }, []);
+  }, [refresh]);
+
+  const refreshRecipesHandler = (props) => {
+    console.log("refreshed!");
+    setRefresh((prevRefresh) => !prevRefresh);
+  };
 
   const recipeListDisplayHandler = (recipeSearchResults) => {
-    // console.log(recipeSearchResults);
     setRecipesList(recipeSearchResults);
   };
 
@@ -65,7 +70,7 @@ const Recipes = (props) => {
   };
 
   const expandRecipeItemDataHandler = (recipeItem) => {
-    console.log("expanding: ", recipeItem);
+    // console.log("expanding: ", recipeItem);
     setRecipeItemData(recipeItem);
     setDisplayExpandedrecipe(true);
   };
@@ -111,12 +116,13 @@ const Recipes = (props) => {
           recipeItemToExpand: expandRecipeItemDataHandler,
           recipeItemToMinimize: minimizeRecipeItemHandler,
           recipeListToDisplay: recipeListDisplayHandler,
+          refreshRecipes: refreshRecipesHandler,
         }}
       >
         {displayExpandedRecipe === true && (
           <ExpandedRecipe
             recipe={recipeItemData}
-            fullRecipesList={searchList}
+            fullRecipesList={recipesList}
           />
         )}
         {displayExpandedRecipe === false && (

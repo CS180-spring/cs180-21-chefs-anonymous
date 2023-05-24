@@ -42,6 +42,7 @@ const RecipeItem = (props) => {
     console.log("expanding from RecipeItem: ", props);
     context.recipeItemToExpand(props);
   };
+
   // Delete recipe
   const deleteRecipeHandler = (e) => {
     e.stopPropagation();
@@ -51,9 +52,22 @@ const RecipeItem = (props) => {
     setDisplayDeleteModal(false);
   };
   const deleteDeleteModalHandler = () => {
-    // Need API
+    fetch("api/ingredient/DeleteIngredientsByRecipe/" + props.RecipeId, {
+      method: "DELETE",
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.error(error));
+    fetch("api/recipe/DeleteRecipe/" + props.RecipeId, {
+      method: "DELETE",
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.error(error));
+    context.refreshRecipes();
     setDisplayDeleteModal(false);
   };
+
   // Edit recipe
   const getRecipeDataHandler = (enteredRecipeData) => {
     console.log("recipe data: ", enteredRecipeData);

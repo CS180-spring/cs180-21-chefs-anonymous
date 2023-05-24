@@ -172,8 +172,8 @@ export function Users() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        recipeId: 78,
-        recipeTitle: "testdelete1",
+        recipeId: 79,
+        recipeTitle: "testdelete2",
         recipeDesc: "test",
         instructions: "test",
         prepTime: 12,
@@ -363,9 +363,9 @@ export function Users() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        ingredientId: 78,
-        recipeId: 78,
-        itemName: "testingredient1",
+        ingredientId: 79,
+        recipeId: 79,
+        itemName: "testingredient2",
         qty: 1,
         unit: "tsp",
       }),
