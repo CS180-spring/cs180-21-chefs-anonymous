@@ -6,7 +6,7 @@ import RecipeForm from "./RecipeForm";
 import Button from "../UI/Button";
 import DUMMY_RECIPES from "./dummy-recipe-data.json";
 import dummyFilters from "./dummy-filter-options.json";
-import Searchbar from "../UI/Searchbar";
+import Searchbar from "./Searchbar";
 import MultiselectDropdown from "./MultiselectDropdown";
 import styles from "./Recipes.module.css";
 
@@ -29,20 +29,32 @@ const Recipes = (props) => {
   const [filterOptions, setFilterOptions] = useState([]);
   const [optionToDelete, setOptionToDelete] = useState(null);
   const [recipesList, setRecipesList] = useState("");
+  const [searchList, setSearchList] = useState("");
+  const [refresh, setRefresh] = useState(true);
 
   useEffect(() => {
     fetch("api/user/GetUserRecipes/6")
       .then((response) => response.json())
       .then((responseJson) => {
-        console.log("response:", responseJson);
-        setRecipesList(responseJson);
+        console.log("response:", responseJson.$values);
+        setRecipesList(responseJson.$values);
+        setSearchList(responseJson.$values);
       })
       .catch((error) => {
         console.error(error);
       });
 
     console.log();
-  }, []);
+  }, [refresh]);
+
+  const refreshRecipesHandler = (props) => {
+    console.log("refreshed!");
+    setRefresh((prevRefresh) => !prevRefresh);
+  };
+
+  const recipeListDisplayHandler = (recipeSearchResults) => {
+    setRecipesList(recipeSearchResults);
+  };
 
   const displayRecipeFormHandler = () => {
     setDisplayForm(true);
@@ -58,8 +70,12 @@ const Recipes = (props) => {
   };
 
   const expandRecipeItemDataHandler = (recipeItem) => {
+    // console.log("expanding: ", recipeItem);
     setRecipeItemData(recipeItem);
     setDisplayExpandedrecipe(true);
+  };
+  const minimizeRecipeItemHandler = () => {
+    setDisplayExpandedrecipe(false);
   };
 
   const displayFilters = () => {
@@ -98,10 +114,16 @@ const Recipes = (props) => {
       <RecipesContext.Provider
         value={{
           recipeItemToExpand: expandRecipeItemDataHandler,
+          recipeItemToMinimize: minimizeRecipeItemHandler,
+          recipeListToDisplay: recipeListDisplayHandler,
+          refreshRecipes: refreshRecipesHandler,
         }}
       >
         {displayExpandedRecipe === true && (
-          <ExpandedRecipe recipe={recipeItemData} />
+          <ExpandedRecipe
+            recipe={recipeItemData}
+            fullRecipesList={recipesList}
+          />
         )}
         {displayExpandedRecipe === false && (
           <div>
@@ -123,7 +145,7 @@ const Recipes = (props) => {
               }}
             >
               <div style={{ marginRight: "10px" }}>
-                <Searchbar recipes={dummyRecipes} />
+                <Searchbar recipes={recipesList} fullRecipesList={searchList} />
               </div>
               <MultiselectDropdown
                 placeHolder="Filter by..."

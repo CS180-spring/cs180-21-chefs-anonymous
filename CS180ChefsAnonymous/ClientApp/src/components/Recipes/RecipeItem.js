@@ -39,8 +39,10 @@ const RecipeItem = (props) => {
 
   // Expand full recipe
   const expandFullRecipeHandler = () => {
+    console.log("expanding from RecipeItem: ", props);
     context.recipeItemToExpand(props);
   };
+
   // Delete recipe
   const deleteRecipeHandler = (e) => {
     e.stopPropagation();
@@ -50,9 +52,22 @@ const RecipeItem = (props) => {
     setDisplayDeleteModal(false);
   };
   const deleteDeleteModalHandler = () => {
-    // Need API
+    fetch("api/ingredient/DeleteIngredientsByRecipe/" + props.RecipeId, {
+      method: "DELETE",
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.error(error));
+    fetch("api/recipe/DeleteRecipe/" + props.RecipeId, {
+      method: "DELETE",
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.error(error));
+    context.refreshRecipes();
     setDisplayDeleteModal(false);
   };
+
   // Edit recipe
   const getRecipeDataHandler = (enteredRecipeData) => {
     console.log("recipe data: ", enteredRecipeData);
@@ -81,7 +96,7 @@ const RecipeItem = (props) => {
       )}
       {displayDeleteModal === true && (
         <Modal>
-          <h2>Delete {props.title}?</h2>
+          <h2>Delete {props.RecipeTitle}?</h2>
           <div className={styles.delete_modal__buttons}>
             <Button
               onClick={cancelDeleteModalHandler}
@@ -106,7 +121,7 @@ const RecipeItem = (props) => {
           onMouseOver={mouseOverDisplayDeleteHandler}
           onMouseLeave={mouseLeaveDisplayDeleteHandler}
         >
-          <h2>{props.title}</h2>
+          <h2>{props.RecipeTitle}</h2>
           {displayEditDelete === true && (
             <p
               className={styles.delete_recipe_item}
