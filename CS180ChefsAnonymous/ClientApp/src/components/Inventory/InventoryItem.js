@@ -39,6 +39,7 @@ const InventoryItem = (props) => {
     };
 
     const expandFullInventoryHandler = () => {
+      console.log(props);
       context.onExpandFullInventory(props);
     };
 
@@ -78,7 +79,7 @@ const InventoryItem = (props) => {
 
       {displayDeleteModal === true && (
         <Modal>
-          <h2>Delete {props.title}?</h2>
+          <h2>Delete {props.ingredient}?</h2>
           <div className={styles.delete_modal__buttons}>
             <Button
               onClick={cancelDeleteModalHandler}
@@ -103,7 +104,7 @@ const InventoryItem = (props) => {
           onMouseOver={mouseOverDisplayDeleteHandler}
           onMouseLeave={mouseLeaveDisplayDeleteHandler}
         >
-          <h2>{props.title}</h2>
+          <h2>{props.ingredient}</h2>
           {displayEditDelete === true && (
             <p
               className={styles.delete_recipe_item}

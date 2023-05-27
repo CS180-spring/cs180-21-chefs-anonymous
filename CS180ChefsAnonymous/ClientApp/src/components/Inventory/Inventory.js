@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, {useState } from "react";
 //import Card from "../UI/Card";
 import InventoryList from "./InventoryList";
 import InventoryForm from "./InventoryForm";
@@ -23,7 +23,7 @@ const DUMMY_INVENTORY = [
   },
   
   {
-    id: "e2",
+    id: "e3",
     ingredient: "Cheese",
     quantity: "3", 
     expiryDate: new Date(2020, 3, 4), 

@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, {useState } from "react";
 //import Card from "../UI/Card";
 import RecipesList from "./RecipesList";
 import RecipeForm from "./RecipeForm";
