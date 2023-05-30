@@ -75,7 +75,6 @@ namespace CS180ChefsAnonymous.Controllers
                 a = false;
             }
             return a;
-
         }
 
         [HttpGet]
