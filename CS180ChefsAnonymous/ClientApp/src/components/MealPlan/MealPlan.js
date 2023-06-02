@@ -15,7 +15,14 @@ const MealPlan = (props) => {
   // nameRecipe is a list of recipe's names for manipulating table
   const [nameRecipe, setNameRecipe] = useState(Array.from({length: 5},()=> Array.from({length: 7}, () => null)));
 
+  // recipeDisplay is a recipe that is displayed in modal 
+  const [recipeDisplay, setRecipeDisplay] = useState("");
+
   const [loading, setLoading] = useState(false);
+  const [refresh, setRefresh] = useState(false);
+
+  // specificRecipe is a recipe that i clicked in modal
+  const [specificRecipe, setSpecificRecipe] = useState("");
 
   useEffect(() => {
       fetch("api/recipe/GetRecipes")
@@ -29,24 +36,24 @@ const MealPlan = (props) => {
           });
   }, []);
 
-  // const toggleModal = (i,j) => {
-  //   setModal(!isModal);
-  //   setRecipe(data.filter((jsonData) => jsonData.mealTime === i && jsonData.dayOfWeek === j)[0])
-  // }
-
   useEffect(() => {
     // need to figure out how to get user (need a login page)
+    let ignore = false
     fetch("api/mealplan/GetMealPlan/1")
       .then((response) => response.json())
       .then((responseJson) => {
-        console.log("response json",responseJson);
-        setData(responseJson);
-        console.log("setdata is called");
+        if(!ignore){
+          console.log("response json",responseJson);
+          setData(responseJson);
+          console.log("setdata is called");
+        }
       })
       .catch((error) => {
         console.error(error);
       });
       console.log("modal changed");
+
+      return () => {ignore=true}
   }, [isModal]);
 
   useEffect(() => {
@@ -61,11 +68,13 @@ const MealPlan = (props) => {
       .catch((error) => {
         console.error(error);
       });
-  },[isModal]);
+  },[]);
 
   const toggleModal = (i,j) => {
-    setModal(!isModal);
-    setRecipe(data.filter((jsonData) => jsonData.mealTime === i && jsonData.dayOfWeek === j)[0])
+    setModal(prev => !prev);
+    setRecipe(data.filter((jsonData) => jsonData.mealTime === i && jsonData.dayOfWeek === j)[0]);
+    console.log("heeeeeeeeeeeeeeeeeeeeeeeeeeeeee",i,j, nameRecipe[i-1][j-1])
+    setRecipeDisplay(nameRecipe[i-1][j-1]);
   }
 
   if (isModal) {
@@ -116,7 +125,7 @@ const MealPlan = (props) => {
           );
         }
         else {
-          console.log("This is nameReipe:",nameRecipe);
+          // console.log("This is nameReipe:", nameRecipe);
           if (nameRecipe !== undefined){
             tableCells.push(
               <td id={i+'-'+j} key={i+'-'+j} onClick={ () => toggleModal(i,j)}>
@@ -124,7 +133,7 @@ const MealPlan = (props) => {
                   <div>Loading</div>
                 )}
                 {!loading && (
-                nameRecipe[i-1][j-1]
+                  nameRecipe[i-1][j-1]
                 )}
               </td>
             );
@@ -147,7 +156,11 @@ const MealPlan = (props) => {
         </tbody>
       </table>
       {isModal && (
-        <MealPlanModal toggleModal={toggleModal} recipe={recipe} recipesList={recipesList} isModal={isModal} setModal={setModal}/>
+        <MealPlanModal toggleModal={toggleModal} recipe={recipe} 
+        recipesList={recipesList} isModal={isModal} setModal={setModal}
+         refresh={refresh} setRefresh={setRefresh} specificRecipe={specificRecipe}
+         setSpecificRecipe={setSpecificRecipe} setNameRecipe={setNameRecipe}
+         nameRecipe={nameRecipe} recipeDisplay={recipeDisplay}/>
       )}
     </div>
   );

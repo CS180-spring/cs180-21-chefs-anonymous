@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styles from "../Recipes/RecipesList.module.css";
 import RecipeItem from "./RecipeItem";
 
-const RecipesList = ({recipes, mealPlan, isModal, setModal}) => {
+const RecipesList = ({recipes, mealPlan, isModal, setModal, refresh, setRefresh, specificRecipe, setSpecificRecipe, setNameRecipe, nameRecipe}) => {
     if (recipes.length === 0) {
         return <h2 className={styles.recieps_list__fallback}>Found no recipes.</h2>;
     }
@@ -21,6 +21,12 @@ const RecipesList = ({recipes, mealPlan, isModal, setModal}) => {
             mealPlan={mealPlan}
             setModal={setModal}
             isModal={isModal}
+            refresh={refresh}
+            setRefresh={setRefresh}
+            specificRecipe={specificRecipe}
+            setSpecificRecipe={setSpecificRecipe}
+            setNameRecipe={setNameRecipe}
+            nameRecipe={nameRecipe}
           />
         ))}
       </ul>
