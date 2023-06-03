@@ -427,6 +427,7 @@ export function Users() {
     fetch("api/inventory/GetInventory")
       .then((response) => response.json())
       .then((responseJson) => {
+        console.log("Set Ingredient");
         console.log(responseJson);
         setInventory(responseJson);
       })
@@ -468,11 +469,11 @@ export function Users() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        inventoryId: 11,
+        inventoryId: 12,
         userId: 6,
-        itemName: "Banana",
+        itemName: "tes5",
         qty: 2,
-        unit: "bananas",
+        unit: "cc",
       }),
     })
       .then((response) => response.json())

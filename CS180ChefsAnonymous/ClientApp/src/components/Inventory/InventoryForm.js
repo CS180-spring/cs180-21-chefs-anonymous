@@ -1,6 +1,6 @@
 import React, {useState } from "react";
 //import Card from "../UI/Card";
-import Modal from "../UI/Modal";
+import Modal from "../UI/Card";
 import Button from "../UI/Button";
 import styles from "./InventoryForm.module.css";
 

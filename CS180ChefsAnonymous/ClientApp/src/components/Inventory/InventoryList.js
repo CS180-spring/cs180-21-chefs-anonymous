@@ -4,6 +4,8 @@ import InventoryItem from "./InventoryItem";
 import ExpandedInventory from "./ExpandedInventory";
 
 const InventoryList = (props) => {
+
+  console.log(props);
   const [displayFullInventory, setDisplayFullInventory] = useState(false);
 
   if (props.inventory.length === 0) {
@@ -23,8 +25,8 @@ const InventoryList = (props) => {
           {props.inventory.map((inventory) => (
             <InventoryItem
               key={inventory.id}
-              ingredient={inventory.ingredient}
-              quantity = {inventory.quantity}
+              ingredient={inventory.itemName}
+              quantity = {inventory.qty}
               expiryDate = {inventory.expiryDate}
               currentDate = {inventory.currentDate}
               onExpandFullInventory={expandFullInventoryHandler}
