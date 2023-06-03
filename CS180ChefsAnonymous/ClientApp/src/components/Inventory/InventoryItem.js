@@ -107,7 +107,7 @@ const InventoryItem = (props) => {
           <h2>{props.ingredient}</h2>
           {displayEditDelete === true && (
             <p
-              className={styles.delete_recipe_item}
+              className={styles.delete_inventory_item}
               onClick={displayInventoryFormHandler}
               onMouseOver={mouseOverHandler}
               onMouseLeave={mouseLeaveHandler}

@@ -1,5 +1,6 @@
 import React, {useState } from "react";
-import Card from "../UI/Card";
+//import Card from "../UI/Card";
+import Modal from "../UI/Modal";
 import Button from "../UI/Button";
 import styles from "./InventoryForm.module.css";
 
@@ -31,7 +32,7 @@ const InventoryForm = (props) => {
   };
 
   return (
-    <Card>
+    <Modal>
       {/* <form onSubmit={formSubmitHandler}> */}
       <form>
         <div className={styles.new_inventory__controls}>
@@ -87,7 +88,7 @@ const InventoryForm = (props) => {
           <Button type="submit">Submit</Button>
         </div>
       </form>
-    </Card>
+    </Modal>
   );
 };
 
