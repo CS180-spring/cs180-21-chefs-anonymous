@@ -13,7 +13,7 @@ public partial class MealPlan
 
     public int? DayOfWeek { get; set; }
 
-    public int? RecipeId { get; set; }
+    public Guid? RecipeId { get; set; }
 
     public virtual Recipe? Recipe { get; set; }
 

@@ -223,7 +223,7 @@ export function Users() {
             .catch(error => console.error(error));
     }
     function removeRecipe() {
-        fetch("api/recipe/DeleteRecipe/3", {
+        fetch("api/recipe/DeleteRecipe/99", {
             method: 'DELETE',
 
         })

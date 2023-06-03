@@ -27,11 +27,12 @@ const Recipes = (props) => {
   const [dummyRecipes, setDummyRecipes] = useState(DUMMY_RECIPES);
   const [recipeItemData, setRecipeItemData] = useState(null);
   const [filterOptions, setFilterOptions] = useState([]);
-  const [optionToDelete, setOptionToDelete] = useState(null);
-  const [recipesList, setRecipesList] = useState("");
+    const [optionToDelete, setOptionToDelete] = useState(null);
+    const userId = JSON.parse(localStorage.getItem('user')).userId;
 
+  const [recipesList, setRecipesList] = useState("");
   useEffect(() => {
-    fetch("api/user/GetUserRecipes/6")
+    fetch(`api/user/GetUserRecipes/${userId}`)
       .then((response) => response.json())
       .then((responseJson) => {
         console.log("response:", responseJson);
@@ -41,8 +42,8 @@ const Recipes = (props) => {
         console.error(error);
       });
 
-    console.log();
-  }, []);
+    console.log(userId);
+  }, [userId]);
 
   const displayRecipeFormHandler = () => {
     setDisplayForm(true);
@@ -110,6 +111,7 @@ const Recipes = (props) => {
                 <RecipeForm
                   onCancel={cancelFormHandler}
                   onGetRecipeData={getRecipeDataHandler}
+                  userId = {userId}
                 />
               </div>
             )}
