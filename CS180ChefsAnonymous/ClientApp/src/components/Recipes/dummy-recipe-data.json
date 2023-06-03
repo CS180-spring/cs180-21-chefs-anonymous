@@ -1,0 +1,30 @@
+[
+    {
+      "id": "e1",
+      "title": "Chicken Curry",
+      "description": "Best meal for cold days",
+      "cuisine": "Japanese",
+      "preptime": { "hours": 0, "minutes": 20 },
+      "cooktime": { "hours": 1, "minutes": 0 },
+      "ingredients": [{"id": 10, "name": "Potato", "qty": 3}, {"id": 11, "name": "Curry Base", "qty": 1}, {"id": 12, "name": "Carrots", "qty": 2}]
+    },
+    {
+      "id": "e2",
+      "title": "Burger",
+      "description": "Dad's recipe",
+      "cuisine": "American",
+      "preptime": { "hours": 1, "minutes": 0 },
+      "cooktime": { "hours": 0, "minutes": 10 },
+      "ingredients": [{ "id": 13, "name": "Bread Bun", "qty": 2}, { "id": 14, "name": "Beef Patty", "qty": 1}, { "id": 15, "name": "Lettuce", "qty": 1}, { "id": 16, "name": "Ketchup", "qty": 1}, { "id": 17, "name": "Onions", "qty": 0.5}]
+    },
+    {
+      "id": "e3",
+      "title": "Chocolate Sponge Roll",
+      "description": "My favorite dessert",
+      "cuisine": "Chinese",
+      "preptime": { "hours": 2, "minutes": 15 },
+      "cooktime": { "hours": 0, "minutes": 45 },
+      "ingredients": [{ "id": 13, "name": "Chocolate" , "qty": 1}, { "id": 14, "name": "Heavy Whipping Cream", "qty": 1}, { "id": 15, "name": "Flour", "qty": 1}, { "id": 16, "name": "Eggs", "qty": 2}, { "id": 17, "name": "Sugar", "qty": 1}]
+    }
+  ]
+

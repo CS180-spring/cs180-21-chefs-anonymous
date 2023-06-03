@@ -1,0 +1,12 @@
+[
+  { "id": 1, "name": "A-Z" },
+  { "id": 2, "name": "Favorites" },
+  { "id": 3, "name": "Cuisine" },
+  { "id": 4, "name": "Cooktime" },
+  { "id": 5, "name": "Vegetarian" },
+  { "id": 6, "name": "Breakfast" },
+  { "id": 7, "name": "Lunch" },
+  { "id": 8, "name": "Dinner" },
+  { "id": 9, "name": "Snacks" }
+  
+]

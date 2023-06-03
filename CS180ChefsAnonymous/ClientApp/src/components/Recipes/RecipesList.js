@@ -1,42 +1,58 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./RecipesList.module.css";
 import RecipeItem from "./RecipeItem";
-import ExpandedRecipe from "./ExpandedRecipe";
 
 const RecipesList = (props) => {
-  const [displayFullRecipe, setDisplayFullRecipe] = useState(false);
-
   if (props.recipes.length === 0) {
     return <h2 className={styles.recieps_list__fallback}>Found no recipes.</h2>;
   }
 
-  let selectedRecipe;
-  const expandFullRecipeHandler = (recipeToExpand) => {
-    selectedRecipe = recipeToExpand;
-    setDisplayFullRecipe(true);
-  };
+  const recipesList = props.recipes;
 
-  return (
-    <div>
-      {!displayFullRecipe && (
+  if (recipesList !== undefined) {
+    return (
+      <div>
         <ul className={styles.recipes_list}>
-          {props.recipes.map((recipe) => (
+          {recipesList.map((recipe) => (
             <RecipeItem
-              key={recipe.id}
-              title={recipe.title}
-              cuisine={recipe.cuisine}
-              description={recipe.description}
-              preptime={recipe.preptime}
-              cooktime={recipe.cooktime}
-              ingredients={recipe.ingredients}
-              onExpandFullRecipe={expandFullRecipeHandler}
+              key={recipe.RecipeId}
+              RecipeId={recipe.RecipeId}
+              RecipeTitle={recipe.RecipeTitle}
+              // cuisine={recipe.cuisine}
+              RecipeDesc={recipe.RecipeDesc}
+              PrepTime={recipe.PrepTime}
+              CookingTime={recipe.CookingTime}
+              // ingredients={recipe.ingredients}
             />
           ))}
         </ul>
-      )}
-      {displayFullRecipe && <ExpandedRecipe recipe={selectedRecipe} />}
-    </div>
-  );
+      </div>
+    );
+  }
 };
+// const RecipesList = (props) => {
+//   // if (props.recipes.length === 0) {
+//   //   return <h2 className={styles.recieps_list__fallback}>Found no recipes.</h2>;
+//   // }
+//   console.log("here", props.recipes);
+
+//   return (
+//     <div>
+//       <ul className={styles.recipes_list}>
+//         {props.recipes.map((recipe) => (
+//           <RecipeItem
+//             key={recipe.id}
+//             title={recipe.title}
+//             cuisine={recipe.cuisine}
+//             description={recipe.description}
+//             preptime={recipe.preptime}
+//             cooktime={recipe.cooktime}
+//             ingredients={recipe.ingredients}
+//           />
+//         ))}
+//       </ul>
+//     </div>
+//   );
+// };
 
 export default RecipesList;

@@ -1,0 +1,16 @@
+.dropdown_tags {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+.dropdown_tag_item {
+    color: white;
+    background-color: #769996;
+    padding: 2px 4px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+

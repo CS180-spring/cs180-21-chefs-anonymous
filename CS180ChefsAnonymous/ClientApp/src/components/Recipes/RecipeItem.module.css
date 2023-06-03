@@ -4,7 +4,7 @@
   align-items: center;
   padding: 0.5rem;
   margin: 1rem 0;
-  background-color: #ffffff;
+  background-color: transparent;
 }
 
 .recipe_item__description {
@@ -14,6 +14,7 @@
   align-items: flex-end;
   flex-flow: column-reverse;
   justify-content: flex-start;
+  margin: 1rem 0;
   flex: 1;
 }
 
@@ -22,6 +23,47 @@
   font-size: 1rem;
   flex: 1;
   margin: 0 1rem;
+}
+
+.recipe_item:hover {
+    background-color: #dfe6e3;
+}
+
+.delete_recipe_item {
+  color: #666666;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  margin:  0 1rem;
+  background-color: transparent;
+}
+
+.delete_modal__buttons {
+  text-align: right;
+}
+
+.delete_button {
+  background: #f25c54;
+  border-color: #f25c54;
+}
+
+.delete_button:hover,
+.delete_button:active {
+  background: #c1413a;
+  border-color: #c1413a;
+  color: white;
+}
+.cancel_button {
+  border: 1px solid #afafaf;
+  background: transparent;
+  color: #afafaf;
+}
+
+.cancel_button:hover,
+.cancel_button:active {
+  background: #afafaf;
+  border-color: #afafaf;
   color: white;
 }
 
