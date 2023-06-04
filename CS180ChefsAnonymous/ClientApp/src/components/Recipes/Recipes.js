@@ -138,7 +138,6 @@ const Recipes = (props) => {
                 />
               </div>
             )}
-            <h1 style={{position: "absolute", top: "7rem"}}>Public Recipes</h1>
 
             <div className={styles.recipe_wrapper}>
               <div>
@@ -146,7 +145,7 @@ const Recipes = (props) => {
                   style={{
                     display: "flex",
                     alignItems: "center",
-                    justifyContent: "flex-end",
+                    justifyContent: "center",
                   }}
                 >
                   <div style={{ marginRight: "10px" }}>
@@ -161,8 +160,11 @@ const Recipes = (props) => {
                 </div>
                 <div>{displayFilters()}</div>
               </div>
-              <div className={styles.list_container}>
-                <RecipesList recipes={recipesList} />
+              <div style={{display:"flex", margin: "2rem 0"}}>
+                <div className={styles.list_container}>
+                  <RecipesList recipes={recipesList} />
+                </div>
+                <div className={styles.pic_container}/>
               </div>
             </div>
             <Button type="submit" onClick={displayRecipeFormHandler}>

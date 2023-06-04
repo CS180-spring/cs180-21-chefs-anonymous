@@ -2,7 +2,6 @@
     margin-top: 1rem;
     margin-bottom: 0.5rem;
     display: flex;
-    flex-direction: column;
     flex-wrap: wrap;
     gap: 5px;
 }
@@ -13,6 +12,7 @@
     border-radius: 5px;
     display: flex;
     justify-content: space-between;
+    min-width: 8rem;
 }
 
 .dropdown_tag_close {
@@ -21,20 +21,27 @@
 
 .list_container {
     padding: 1rem 3rem;
-    background-image: url(/public/recipe.png);
-    background-position: center;
-    background-repeat: no-repeat;
-    object-fit: cover;
-    width: 50vw;
-    height: 50vh;
+    background-color: rgb(229, 227, 221);
+    box-shadow: inset 0 0 20px 10px rgba(0, 0, 0, 0.044);
+    width: 30vw;
+    height: 60vh;
     border-radius: 30px;
     margin: 0 3rem;
     overflow-y: scroll;
 }
 
+.pic_container {
+    width: 60vw;
+    background-image: url(/public/recipe.png); 
+    background-position: center;
+    background-repeat: no-repeat;
+    object-fit: cover;
+    border-radius: 50px;
+}
+
 .recipe_wrapper {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 .recipe_container {
