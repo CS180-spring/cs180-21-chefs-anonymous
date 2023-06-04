@@ -162,24 +162,25 @@ const RecipeForm = (props) => {
   const cancelHandler = () => {
     props.onCancel();
   };
-
+    
   const formSubmitHandler = async (event) => {
-    event.preventDefault();
-  const newGUID = uuid();
+      event.preventDefault();
+      const recipeID = uuid();
     // Post recipe to Recipe table in DB
-    const recipeData = {
-      recipeId: newGUID,
-      recipeTitle: enteredTitle,
-      recipeDesc: enteredDescription,
-      preptime:
+      const recipeData = {
+        recipeId: recipeID,
+        recipeTitle: enteredTitle,
+        recipeDesc: enteredDescription,
+        preptime:
         parseInt(enteredMinutesPreptime) + parseInt(enteredHoursPreptime) * 60,
-      cooktime:
+        cooktime:
         parseInt(enteredMinutesCooktime) + parseInt(enteredHoursCooktime) * 60,
-      userId: 6,
-      categoryId: 1,
+        userId: 6,
+        categoryId: 1,
     };
 
-    console.log(recipeData);
+      console.log(recipeData);
+      
     try {
       const response = await fetch("api/recipe/AddRecipe", {
         method: "POST",
@@ -194,20 +195,20 @@ const RecipeForm = (props) => {
       }
 
       const responseData = await response.json();
-      const recipeId = responseData.recipeId;
+      //const recipeId = responseData.recipeId;
 
 
       // Post ingredients to Ingredients table in DB
       for (const ingredient of enteredIngredient) {
-        const newGUID = new uuid();
+        const newGUID = uuid();
         const ingredientData = {
           ingredientId: newGUID,
-          recipeId: recipeId,
+          recipeId: recipeID,
           itemName: ingredient.name,
           qty: enteredHoursCooktime,
           unit: "tsp",
         };
-
+        
         const ingredientResponse = await fetch("api/ingredient/AddIngredient", {
           method: "POST",
           headers: {
