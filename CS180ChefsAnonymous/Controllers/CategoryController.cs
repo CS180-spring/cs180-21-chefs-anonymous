@@ -27,22 +27,30 @@ namespace CS180ChefsAnonymous.Controllers
             foreach (var category in categories)
             {
                 category.Favorite = category.Favorite ?? "No";
-                category.Category_type = category.Category_type ?? "None";
+                category.CategoryType = category.CategoryType ?? "None";
             }
     
             return categories;
 
         }
-        
+
 
         [HttpPost]
         [Route("AddCategory")]
-        public async Task<Category> AddCategoruy(Category objCategory)
+        public async Task<Category> AddCategory(Category objCategory)
         {
+            int catId = 1;
+            while (await _dbContext.Categories.AnyAsync(inv => inv.CategoryId == catId))
+            {
+                catId++;
+            }
+
+            objCategory.CategoryId = catId;
             _dbContext.Categories.Add(objCategory);
             await _dbContext.SaveChangesAsync();
             return objCategory;
         }
+
 
         [HttpPatch]
         [Route("UpdateCategory/{id}")]

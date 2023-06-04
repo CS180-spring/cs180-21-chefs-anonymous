@@ -15,7 +15,7 @@ public partial class Inventory
 
     public string? Unit { get; set; }
 
-    public virtual Item? ItemNameNavigation { get; set; } 
+    public virtual Item ItemNameNavigation { get; set; } = null!;
 
-    public virtual User? User { get; set; } 
+    public virtual User User { get; set; } = null!;
 }

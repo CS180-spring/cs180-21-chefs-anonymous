@@ -87,7 +87,8 @@ const RecipeForm = (props) => {
 
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredCuisine, setEnteredCuisine] = useState("");
-  const [enteredCategory, setEnteredCategory] = useState("");
+    const [enteredCategory, setEnteredCategory] = useState({});
+
   const [enteredMealtime, setEnteredMealtime] = useState("");
   const [enteredDescription, setEnteredDescription] = useState("");
   const [enteredHoursPreptime, setEnteredHoursPreptime] = useState(0);
@@ -122,6 +123,7 @@ const RecipeForm = (props) => {
   const selectCategoryHandler = (selectedCategory) => {
     setEnteredCategory(selectedCategory);
   };
+
   const selectMealtimeHandler = (selectedMealtime) => {
     setEnteredMealtime(selectedMealtime);
   };
@@ -198,48 +200,25 @@ const RecipeForm = (props) => {
       //const recipeId = responseData.recipeId;
 
 
-      // Post ingredients to Ingredients table in DB
-      for (const ingredient of enteredIngredient) {
-        const newGUID = uuid();
-        const ingredientData = {
-          ingredientId: newGUID,
-          recipeId: recipeID,
-          itemName: ingredient.name,
-          qty: enteredHoursCooktime,
-          unit: "tsp",
-        };
         
-        const ingredientResponse = await fetch("api/ingredient/AddIngredient", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(ingredientData),
-        });
 
-        if (!ingredientResponse.ok) {
-          throw new Error("Failed to add ingredient");
-        }
-      }
-
-      // Post cuisine,categoryType,favorite,mealtime to Category table in DB
-      const CategoryData = {
-        categoryId: 22,
-        cuisine: enteredCuisine,
-        categoryType: enteredCategory,
-        difficulty: 3,
-        favorite: "Yes",
-        amntOfServings: 1.0,
-      };
-
-      const categoryResponse = await fetch("api/category/AddCategory", {
+        const categoryResponse =
+            
+            await fetch("api/category/AddCategory", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          CategoryData,
-        }),
+        body: JSON.stringify(
+
+
+
+
+
+
+                        CategoryData
+
+        ),
       })
         .then((response) => response.json())
         .then((data) => console.log(data))
@@ -254,6 +233,37 @@ const RecipeForm = (props) => {
     } catch (error) {
       console.error(error);
     }
+
+      // Post ingredients to Ingredients table in DB
+      for (const ingredient of enteredIngredient) {
+          const newGUID = uuid();
+          const ingredientData = {
+              ingredientId: newGUID,
+              recipeId: recipeID,
+              itemName: ingredient.name,
+              qty: enteredHoursCooktime,
+              unit: "tsp",
+          };
+
+          const ingredientResponse = await fetch("api/ingredient/AddIngredient", {
+              method: "POST",
+              headers: {
+                  "Content-Type": "application/json",
+              },
+              body: JSON.stringify(ingredientData),
+          });
+
+          if (!ingredientResponse.ok) {
+              throw new Error("Failed to add ingredient");
+          }
+      }
+
+      // Post cuisine,categoryType,favorite,mealtime to Category table in DB
+      const CategoryData = {
+
+          "categoryId": 1, "cuisine": enteredCuisine.title, "categoryType": enteredCategory.title, "difficulty": 3, "favorite": "Yes", "amntOfServings": 1, "mealtime": "Breakfast"
+      };
+
   };
 
   return (

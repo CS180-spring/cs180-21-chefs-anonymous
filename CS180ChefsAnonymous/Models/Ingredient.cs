@@ -9,7 +9,7 @@ public partial class Ingredient
 
     public Guid? RecipeId { get; set; }
 
-    public string? ItemName { get; set; }
+    public string? ItemName { get; set; } 
 
     public int? Qty { get; set; }
 

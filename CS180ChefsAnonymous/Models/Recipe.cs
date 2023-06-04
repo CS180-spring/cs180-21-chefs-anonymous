@@ -27,7 +27,6 @@ public partial class Recipe
     public virtual ICollection<Ingredient> Ingredients { get; set; } = new List<Ingredient>();
 
     public virtual ICollection<MealPlan> MealPlans { get; set; } = new List<MealPlan>();
-
     [JsonIgnore]
     public virtual User? User { get; set; }
 }

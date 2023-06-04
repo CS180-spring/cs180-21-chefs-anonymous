@@ -37,7 +37,7 @@ public partial class ChefDbContext : DbContext
     {
         modelBuilder.Entity<Category>(entity =>
         {
-            entity.HasKey(e => e.CategoryId).HasName("PK__Category__23CAF1F8A25D7402");
+            entity.HasKey(e => e.CategoryId).HasName("PK__tmp_ms_x__23CAF1F82E48405F");
 
             entity.ToTable("Category");
 
@@ -47,11 +47,19 @@ public partial class ChefDbContext : DbContext
             entity.Property(e => e.AmntOfServings)
                 .HasColumnType("decimal(10, 2)")
                 .HasColumnName("amnt_of_servings");
+            entity.Property(e => e.CategoryType)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("categoryType");
             entity.Property(e => e.Cuisine)
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("cuisine");
             entity.Property(e => e.Difficulty).HasColumnName("difficulty");
+            entity.Property(e => e.Favorite)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("favorite");
             entity.Property(e => e.Mealtime)
                 .HasMaxLength(50)
                 .IsUnicode(false)
@@ -60,7 +68,7 @@ public partial class ChefDbContext : DbContext
 
         modelBuilder.Entity<Ingredient>(entity =>
         {
-            entity.HasKey(e => e.IngredientId).HasName("PK__Ingredie__B0E453CF3D56EC39");
+            entity.HasKey(e => e.IngredientId).HasName("PK__tmp_ms_x__B0E453CFAD6D7542");
 
             entity.Property(e => e.IngredientId)
                 .ValueGeneratedNever()
@@ -71,16 +79,19 @@ public partial class ChefDbContext : DbContext
                 .HasColumnName("item_name");
             entity.Property(e => e.Qty).HasColumnName("qty");
             entity.Property(e => e.RecipeId).HasColumnName("recipe_id");
-            entity.Property(e => e.Unit).HasColumnName("unit");
+            entity.Property(e => e.Unit)
+                .HasMaxLength(10)
+                .IsUnicode(false)
+                .HasColumnName("unit");
 
             entity.HasOne(d => d.ItemNameNavigation).WithMany(p => p.Ingredients)
                 .HasForeignKey(d => d.ItemName)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Ingredien__item___2180FB33");
+                .HasConstraintName("FK__Ingredien__item___18B6AB08");
 
             entity.HasOne(d => d.Recipe).WithMany(p => p.Ingredients)
                 .HasForeignKey(d => d.RecipeId)
-                .HasConstraintName("FK__Ingredien__recip__208CD6FA");
+                .HasConstraintName("FK_Ingredients_Recipes");
         });
 
         modelBuilder.Entity<Inventory>(entity =>
@@ -129,7 +140,7 @@ public partial class ChefDbContext : DbContext
 
         modelBuilder.Entity<MealPlan>(entity =>
         {
-            entity.HasKey(e => e.MealPlanId).HasName("PK__MealPlan__05C576072E6428CD");
+            entity.HasKey(e => e.MealPlanId).HasName("PK__tmp_ms_x__05C576073340C26E");
 
             entity.ToTable("MealPlan");
 
@@ -143,11 +154,11 @@ public partial class ChefDbContext : DbContext
 
             entity.HasOne(d => d.Recipe).WithMany(p => p.MealPlans)
                 .HasForeignKey(d => d.RecipeId)
-                .HasConstraintName("FK__MealPlan__recipe__19DFD96B");
+                .HasConstraintName("RecipeId");
 
             entity.HasOne(d => d.User).WithMany(p => p.MealPlans)
                 .HasForeignKey(d => d.UserId)
-                .HasConstraintName("FK__MealPlan__user_i__18EBB532");
+                .HasConstraintName("FK__MealPlan__user_i__15DA3E5D");
         });
 
         modelBuilder.Entity<Recipe>(entity =>
