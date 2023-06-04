@@ -1,0 +1,65 @@
+.main-img {
+    background-image: url("/public/home.png");
+    /* background-image: linear-gradient(rgba(10, 10, 10, 0), rgba(244, 234, 211, 0.104)), url("/public/home.png"); */
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 95vh;
+    width: 100vw;
+    position:absolute;
+    top: 5vh;
+    left: 0;
+    z-index: -1;
+}
+
+.subtitle1 {
+    margin: 75vh 0 0 0;
+    font-size: 2rem;
+    color: #3e763e;
+}
+
+.subtitle2 {
+    font-size: 3rem;
+    color: #3e763e;
+
+}
+
+.btn {
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    justify-content: end;
+    border-radius: 4rem;
+    font-size: 1.5rem;
+    height: 3rem;
+}
+
+.btn-login {
+    margin-right: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #507c47;
+    width: 9rem;
+    border:none;
+}
+
+.btn-login:hover {
+    background-color: #569e56 !important;
+}
+
+.btn-signup {
+    margin-left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #507c47;
+    background-color: inherit;
+    font-weight:bolder;
+    border:solid 2px #507c47;
+    width: 9rem;
+}
+
+.btn-signup:hover {
+    background-color: #61b361 !important;
+    border:solid 2px #61b361;
+}
