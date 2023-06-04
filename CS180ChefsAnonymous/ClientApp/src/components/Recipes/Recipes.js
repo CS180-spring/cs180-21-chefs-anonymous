@@ -33,8 +33,9 @@ const Recipes = (props) => {
   const [searchList, setSearchList] = useState("");
   const [refresh, setRefresh] = useState(true);
 
+  const [recipesList, setRecipesList] = useState("");
   useEffect(() => {
-    fetch("api/user/GetUserRecipes/6")
+    fetch(`api/user/GetUserRecipes/${userId}`)
       .then((response) => response.json())
       .then((responseJson) => {
         console.log("response:", responseJson.$values);
@@ -133,6 +134,7 @@ const Recipes = (props) => {
                 <RecipeForm
                   onCancel={cancelFormHandler}
                   onGetRecipeData={getRecipeDataHandler}
+                  userId = {userId}
                 />
               </div>
             )}

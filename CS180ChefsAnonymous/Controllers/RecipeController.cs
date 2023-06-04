@@ -96,7 +96,7 @@ namespace CS180ChefsAnonymous.Controllers
 
         [HttpGet]
         [Route("GetRecipeIngredients/{recipeId}")]
-        public async Task<IActionResult> GetRecipeIngredients(int recipeId)
+        public async Task<IActionResult> GetRecipeIngredients(Guid recipeId)
         {
             var recipe = await _dbContext.Recipes
                 .Include(r => r.Ingredients)

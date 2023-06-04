@@ -1,6 +1,7 @@
 ﻿import React, { useState, useEffect } from "react";
 
 export function Users() {
+
   const [users, setUsers] = useState([]);
   useEffect(() => {
     fetch("api/user/GetUsers")
@@ -1003,6 +1004,7 @@ export function Users() {
       </button>
     </div>
   );
+
 }
 
 /*
