@@ -101,7 +101,7 @@ namespace CS180ChefsAnonymous.Controllers
 
         [HttpDelete]
         [Route("DeleteIngredient/{id}")]
-        public bool DeleteIngredient(int id)
+        public bool DeleteIngredient(Guid id)
         {
             bool a = false;
             var Ingredient = _dbContext.Ingredients.Find(id);
