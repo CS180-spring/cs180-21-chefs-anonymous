@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import UlStyles from "./RecipesList.module.css";
+import RecipesContext from "./RecipesContext";
 import Modal from "../UI/Modal";
 import Button from "../UI/Button";
 import styles from "./RecipeForm.module.css";
@@ -61,6 +62,7 @@ const RecipeForm = (props) => {
     { id: 4, title: "Dinner" },
   ];
 
+  const context = useContext(RecipesContext);
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredCuisine, setEnteredCuisine] = useState({});
   const [enteredCategory, setEnteredCategory] = useState({});
@@ -237,12 +239,8 @@ const RecipeForm = (props) => {
           .then((data) => console.log(data))
           .catch((error) => console.error(error));
 
-        // Resetting form inputs
-        setEnteredTitle("");
-        setEnteredCuisine("");
-        setEnteredCategory("");
-        setEnteredDescription("");
-        setEnteredIngredient([]);
+        context.refreshRecipes();
+        props.onCancel();
       } catch (error) {
         console.error(error);
       }
@@ -277,6 +275,9 @@ const RecipeForm = (props) => {
       // Update ingredient table in DB
 
       // Update category table in DB
+
+      context.refreshRecipes();
+      props.onCancel();
     }
   };
 
