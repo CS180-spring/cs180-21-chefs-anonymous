@@ -39,7 +39,7 @@ namespace CS180ChefsAnonymous.Controllers
 
             if (meals == null || meals.Count == 0)
             {
-                return NotFound();
+                return NotFound("No meals found for the specified user.");
             }
 
             var recipes = meals.Select(mp => mp.RecipeId).ToList();
