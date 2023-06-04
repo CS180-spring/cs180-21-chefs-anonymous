@@ -37,7 +37,7 @@ public partial class ChefDbContext : DbContext
     {
         modelBuilder.Entity<Category>(entity =>
         {
-            entity.HasKey(e => e.CategoryId).HasName("PK__Category__23CAF1F8A25D7402");
+            entity.HasKey(e => e.CategoryId).HasName("PK__tmp_ms_x__23CAF1F82E48405F");
 
             entity.ToTable("Category");
 
@@ -47,11 +47,19 @@ public partial class ChefDbContext : DbContext
             entity.Property(e => e.AmntOfServings)
                 .HasColumnType("decimal(10, 2)")
                 .HasColumnName("amnt_of_servings");
+            entity.Property(e => e.CategoryType)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("categoryType");
             entity.Property(e => e.Cuisine)
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("cuisine");
             entity.Property(e => e.Difficulty).HasColumnName("difficulty");
+            entity.Property(e => e.Favorite)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("favorite");
             entity.Property(e => e.Mealtime)
                 .HasMaxLength(50)
                 .IsUnicode(false)
