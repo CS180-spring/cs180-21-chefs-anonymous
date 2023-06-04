@@ -51,22 +51,28 @@ const RecipeItem = (props) => {
   const cancelDeleteModalHandler = () => {
     setDisplayDeleteModal(false);
   };
-  const deleteDeleteModalHandler = () => {
-    fetch("api/ingredient/DeleteIngredientsByRecipe/" + props.RecipeId, {
-      method: "DELETE",
-    })
-      .then((response) => response.json())
-      .then((data) => console.log(data))
-      .catch((error) => console.error(error));
-    fetch("api/recipe/DeleteRecipe/" + props.RecipeId, {
-      method: "DELETE",
-    })
-      .then((response) => response.json())
-      .then((data) => console.log(data))
-      .catch((error) => console.error(error));
-    context.refreshRecipes();
-    setDisplayDeleteModal(false);
-  };
+  
+const deleteDeleteModalHandler = async () => {
+    try {
+        await fetch("api/ingredient/DeleteIngredientsByRecipe/" + props.RecipeId, {
+            method: "DELETE",
+        })
+            .then((response) => response.json())
+            .then((data) => console.log(data))
+            .catch((error) => console.error(error));
+        await fetch("api/recipe/DeleteRecipe/" + props.RecipeId, {
+            method: "DELETE",
+        })
+            .then((response) => response.json())
+            .then((data) => console.log(data))
+            .catch((error) => console.error(error));
+        context.refreshRecipes();
+        context.recipeItemToMinimize();
+        setDisplayDeleteModal(false);
+    } catch (error) {
+        console.error(error);
+    }
+};
 
   // Edit recipe
   const getRecipeDataHandler = (enteredRecipeData) => {
