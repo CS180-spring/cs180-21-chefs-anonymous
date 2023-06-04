@@ -69,6 +69,7 @@ const DropdownMenu = (props) => {
     <div className={styles.dropdown_container}>
       <div onClick={inputHandler} className={styles.dropdown_input}>
         <div className={styles.dropdown_selected_value}>{getDisplay()}</div>
+
         <div className={styles.dropdown_tools}>
           <div className={styles.dropdown_tool}>
             <Icon />
