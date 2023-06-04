@@ -62,6 +62,16 @@ const InventoryItem = (props) => {
       // Need API
     };
 
+    function removeInventoryItem(key) {
+      console.log(props.inventoryId, key);
+      fetch(`api/inventory/DeleteInventory/${key}`, {
+        method: "DELETE",
+      })
+        .then((response) => response.json())
+        .then((data) => console.log(data))
+        .catch((error) => console.error(error));
+    }
+
   return (
     <div>
       {displayForm === true && (
@@ -88,7 +98,7 @@ const InventoryItem = (props) => {
               Cancel
             </Button>{" "}
             <Button
-              onClick={deleteDeleteModalHandler}
+              onClick={() => {deleteDeleteModalHandler(); removeInventoryItem(props.inventoryId);}}
               type="submit"
               className={styles.delete_button}
             >
@@ -121,7 +131,7 @@ const InventoryItem = (props) => {
           {displayEditDelete === true && (
             <p
               className={styles.delete_inventory_item}
-              onClick={deleteInventoryHandler}
+              onClick={deleteInventoryHandler }
               onMouseOver={mouseOverHandler}
               onMouseLeave={mouseLeaveHandler}
             >

@@ -25,6 +25,7 @@ const InventoryList = (props) => {
           {props.inventory.map((inventory) => (
             <InventoryItem
               key={inventory.id}
+              inventoryId={inventory.inventoryId}
               ingredient={inventory.itemName}
               quantity = {inventory.qty}
               expiryDate = {inventory.expiryDate}
