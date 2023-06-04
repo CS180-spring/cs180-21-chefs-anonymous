@@ -64,9 +64,9 @@ const RecipeForm = (props) => {
 
   const context = useContext(RecipesContext);
   const [enteredTitle, setEnteredTitle] = useState("");
-  const [enteredCuisine, setEnteredCuisine] = useState({});
-  const [enteredCategory, setEnteredCategory] = useState({});
-  const [enteredMealtime, setEnteredMealtime] = useState("");
+    const [enteredCuisine, setEnteredCuisine] = useState({});
+    const [enteredCategory, setEnteredCategory] = useState({});
+    const [enteredMealtime, setEnteredMealtime] = useState({});
   const [enteredDescription, setEnteredDescription] = useState("");
   const [enteredHoursPreptime, setEnteredHoursPreptime] = useState(0);
   const [enteredMinutesPreptime, setEnteredMinutesPreptime] = useState(0);
@@ -112,8 +112,10 @@ const RecipeForm = (props) => {
   const selectCategoryHandler = (selectedCategory) => {
     setEnteredCategory(selectedCategory);
   };
-  const selectMealtimeHandler = (selectedMealtime) => {
-    setEnteredMealtime(selectedMealtime);
+    const selectMealtimeHandler = (selectedMealtime) => {
+        setEnteredMealtime(selectedMealtime);
+        console.log(enteredMealtime);
+
   };
   const descriptionChangeHandler = (event) => {
     setEnteredDescription(event.target.value);
@@ -152,27 +154,75 @@ const RecipeForm = (props) => {
   const cancelHandler = () => {
     props.onCancel();
   };
+    let userId;
+    try {
+        const userJSON = localStorage.getItem('user');
+        if (userJSON) {
+            const user = JSON.parse(userJSON);
+            userId = user.UserId;
+        } else {
+            console.error('User data not found in localStorage.');
+        }
+    } catch (error) {
+        console.error('Error parsing user data from localStorage:', error);
+        userId = 3;
 
+    }
+    
   const formSubmitHandler = async (event) => {
-    event.preventDefault();
-    if (!props.isEditing) {
-      const recipeID = uuid();
-      // Post recipe to Recipe table in DB
-      const recipeData = {
-        recipeId: recipeID,
-        recipeTitle: enteredTitle,
-        recipeDesc: enteredDescription,
-        prepTime:
-          parseInt(enteredMinutesPreptime) +
-          parseInt(enteredHoursPreptime) * 60,
-        cookingTime:
-          parseInt(enteredMinutesCooktime) +
-          parseInt(enteredHoursCooktime) * 60,
-        userId: 6,
-        categoryId: 1,
-      };
+      event.preventDefault();
+    // Post recipe to Recipe table in DB
+          if (!props.isEditing) {
 
-      console.log(recipeData);
+
+      
+      try {
+          const recipeID = uuid();
+          const recipe_temp = recipeID;
+          const recipeData = {
+              recipeId: recipeID,
+              recipeTitle: enteredTitle,
+              recipeDesc: enteredDescription,
+              preptime:
+                  parseInt(enteredMinutesPreptime) + parseInt(enteredHoursPreptime) * 60,
+              cookingTime:
+                  parseInt(enteredMinutesCooktime) + parseInt(enteredHoursCooktime) * 60,
+              userId: userId,
+              categoryId: 1,
+          };
+          console.log("before launch");
+          console.log(recipeData);
+
+
+          // Post cuisine,categoryType,favorite,mealtime to Category table in DB
+          let CategoryData = {
+              categoryId: 22,
+              cuisine: enteredCuisine.title,
+              categoryType: enteredCategory.title,
+              difficulty: 3,
+              favorite: "Yes",
+              amntOfServings: 1.0,
+              mealtime: enteredMealtime.title,
+          };
+
+          const categoryResponse = await fetch("api/category/AddCategory", {
+              method: "POST",
+              headers: {
+                  "Content-Type": "application/json",
+              },
+              body: JSON.stringify(CategoryData),
+          });
+
+          try {
+              const data = await categoryResponse.json();
+              console.log("Here");
+
+              console.log(data);
+              recipeData.categoryId = data.categoryId;
+          } catch (error) {
+              console.error(error);
+          }
+
 
       try {
         const response = await fetch("api/recipe/AddRecipe", {
@@ -187,63 +237,50 @@ const RecipeForm = (props) => {
           throw new Error("Failed to add recipe");
         }
 
-        const responseData = await response.json();
-        //const recipeId = responseData.recipeId;
+      const responseData = await response.json();
+      const recipeId = responseData.recipeId;
 
-        // Post ingredients to Ingredients table in DB
-        for (const ingredient of enteredIngredient) {
+
+// Post ingredients to Ingredients table in DB
+      for (const ingredient of enteredIngredient) {
           const newGUID = uuid();
-          const ingredientData = {
-            ingredientId: newGUID,
-            recipeId: recipeID,
-            itemName: ingredient.name,
-            qty: enteredHoursCooktime,
-            unit: "tsp",
-          };
 
-          const ingredientResponse = await fetch(
-            "api/ingredient/AddIngredient",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(ingredientData),
-            }
-          );
-
-          if (!ingredientResponse.ok) {
-            throw new Error("Failed to add ingredient");
-          }
-        }
-
-        // Post cuisine,categoryType,favorite,mealtime to Category table in DB
-        const CategoryData = {
-          categoryId: 22,
-          cuisine: enteredCuisine.title,
-          categoryType: enteredCategory.title,
-          difficulty: 3,
-          favorite: "Yes",
-          amntOfServings: 1.0,
-          mealtime: "breakfast",
+        const ingredientData = {
+          ingredientId: newGUID,
+          recipeId: recipeId,
+          itemName: ingredient.name,
+          qty: enteredHoursCooktime,
+          unit: "tsp",
         };
+          console.log("ingredientData");
 
-        const categoryResponse = await fetch("api/category/AddCategory", {
+          console.log(ingredientData);
+
+        
+        const ingredientResponse = await fetch("api/ingredient/AddIngredient", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(CategoryData),
-        })
-          .then((response) => response.json())
-          .then((data) => console.log(data))
-          .catch((error) => console.error(error));
+          body: JSON.stringify(ingredientData),
+        });
 
-        context.refreshRecipes();
-        props.onCancel();
-      } catch (error) {
-        console.error(error);
+        if (!ingredientResponse.ok) {
+          throw new Error("Failed to add ingredient");
+        }
       }
+
+     
+
+      // Resetting form inputs
+      setEnteredTitle("");
+      setEnteredCuisine("");
+      setEnteredCategory("");
+      setEnteredDescription("");
+      setEnteredIngredient([]);
+    } catch (error) {
+      console.error(error);
+    }
     } else {
       // Update recipe table in DB
       const updatedRecipeData = {
