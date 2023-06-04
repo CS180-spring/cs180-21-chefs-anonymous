@@ -51,12 +51,34 @@ namespace CS180ChefsAnonymous.Controllers
 
         [HttpPut]
         [Route("UpdateMealPlan/{id}")]
-        public async Task<MealPlan> UpdateMealPlan(MealPlan objMealPlan)
+        public async Task<MealPlan> UpdateSpecificMealPlan(MealPlan objMealPlan)
         {
             _dbContext.Entry(objMealPlan).State = EntityState.Modified;
             await _dbContext.SaveChangesAsync();
             return objMealPlan;
         }
+
+        [HttpPost]
+        [Route("UpdateMealPlan")]
+        public async Task<MealPlan> UpdateMealPlan(MealPlan objMealPlan)
+        {
+            // Check if mealplan exists
+            if (objMealPlan.MealPlanId != -5)
+            {
+                // If it exists, update it
+                _dbContext.Entry(objMealPlan).State = EntityState.Modified;
+            }
+            else
+            {
+                // If it doesn't exist, create a new meal plan
+                _dbContext.MealPlans.Add(objMealPlan);
+            }
+
+            await _dbContext.SaveChangesAsync();
+            return objMealPlan;
+        }
+
+
 
         [HttpDelete]
         [Route("DeleteMealPlan/{id}")]

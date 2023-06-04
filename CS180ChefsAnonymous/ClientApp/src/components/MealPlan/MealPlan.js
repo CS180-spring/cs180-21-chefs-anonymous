@@ -71,6 +71,7 @@ const MealPlan = (props) => {
   },[]);
 
   const toggleModal = (i,j) => {
+    console.log("yeeeeeeeeeeeeeeeeeeeeeeeee",data)
     setModal(prev => !prev);
     setRecipe(data.filter((jsonData) => jsonData.mealTime === i && jsonData.dayOfWeek === j)[0]);
     console.log("heeeeeeeeeeeeeeeeeeeeeeeeeeeeee",i,j, nameRecipe[i-1][j-1])
