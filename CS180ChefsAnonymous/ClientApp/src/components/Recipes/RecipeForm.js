@@ -86,8 +86,8 @@ const RecipeForm = (props) => {
   // const [newIngredient, setNewIngredient] = useState("");
 
   const [enteredTitle, setEnteredTitle] = useState("");
-  const [enteredCuisine, setEnteredCuisine] = useState("");
-  const [enteredCategory, setEnteredCategory] = useState("");
+    const [enteredCuisine, setEnteredCuisine] = useState({});
+    const [enteredCategory, setEnteredCategory] = useState({});
   const [enteredMealtime, setEnteredMealtime] = useState("");
   const [enteredDescription, setEnteredDescription] = useState("");
   const [enteredHoursPreptime, setEnteredHoursPreptime] = useState(0);
@@ -225,11 +225,12 @@ const RecipeForm = (props) => {
       // Post cuisine,categoryType,favorite,mealtime to Category table in DB
       const CategoryData = {
         categoryId: 22,
-        cuisine: enteredCuisine,
-        categoryType: enteredCategory,
+        cuisine: enteredCuisine.title,
+        categoryType: enteredCategory.title,
         difficulty: 3,
         favorite: "Yes",
-        amntOfServings: 1.0,
+          amntOfServings: 1.0,
+          mealtime:"breakfast",
       };
 
       const categoryResponse = await fetch("api/category/AddCategory", {
@@ -237,9 +238,9 @@ const RecipeForm = (props) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
+        body: JSON.stringify(
           CategoryData,
-        }),
+        ),
       })
         .then((response) => response.json())
         .then((data) => console.log(data))
