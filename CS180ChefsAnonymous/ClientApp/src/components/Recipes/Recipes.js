@@ -32,8 +32,22 @@ const Recipes = (props) => {
   const [recipesList, setRecipesList] = useState("");
   const [searchList, setSearchList] = useState("");
   const [refresh, setRefresh] = useState(true);
-    const userId = 6;
-  useEffect(() => {
+    let userId;
+    try {
+        const userJSON = localStorage.getItem('user');
+        if (userJSON) {
+            const user = JSON.parse(userJSON);
+            userId = user.UserId;
+        } else {
+            console.error('User data not found in localStorage.');
+        }
+    } catch (error) {
+        console.error('Error parsing user data from localStorage:', error);
+        userId = 3;
+
+    }
+
+    useEffect(() => {
     fetch(`api/user/GetUserRecipes/${userId}`)
       .then((response) => response.json())
       .then((responseJson) => {

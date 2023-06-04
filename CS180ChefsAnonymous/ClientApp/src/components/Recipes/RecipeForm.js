@@ -162,6 +162,20 @@ const RecipeForm = (props) => {
   const cancelHandler = () => {
     props.onCancel();
   };
+    let userId;
+    try {
+        const userJSON = localStorage.getItem('user');
+        if (userJSON) {
+            const user = JSON.parse(userJSON);
+            userId = user.UserId;
+        } else {
+            console.error('User data not found in localStorage.');
+        }
+    } catch (error) {
+        console.error('Error parsing user data from localStorage:', error);
+        userId = 3;
+
+    }
     
   const formSubmitHandler = async (event) => {
       event.preventDefault();
@@ -175,13 +189,44 @@ const RecipeForm = (props) => {
         parseInt(enteredMinutesPreptime) + parseInt(enteredHoursPreptime) * 60,
         cooktime:
         parseInt(enteredMinutesCooktime) + parseInt(enteredHoursCooktime) * 60,
-        userId: 6,
+        userId: userId,
         categoryId: 1,
     };
 
       console.log(recipeData);
       
-    try {
+      try {
+
+          // Post cuisine,categoryType,favorite,mealtime to Category table in DB
+          let CategoryData = {
+              categoryId: 22,
+              cuisine: enteredCuisine.title,
+              categoryType: enteredCategory.title,
+              difficulty: 3,
+              favorite: "Yes",
+              amntOfServings: 1.0,
+              mealtime: "breakfast",
+          };
+
+          const categoryResponse = await fetch("api/category/AddCategory", {
+              method: "POST",
+              headers: {
+                  "Content-Type": "application/json",
+              },
+              body: JSON.stringify(CategoryData),
+          });
+
+          try {
+              const data = await categoryResponse.json();
+              console.log("Here");
+
+              console.log(data);
+              recipeData.categoryId = data.categoryId;
+          } catch (error) {
+              console.error(error);
+          }
+
+
       const response = await fetch("api/recipe/AddRecipe", {
         method: "POST",
         headers: {
@@ -222,29 +267,7 @@ const RecipeForm = (props) => {
         }
       }
 
-      // Post cuisine,categoryType,favorite,mealtime to Category table in DB
-      const CategoryData = {
-        categoryId: 22,
-        cuisine: enteredCuisine.title,
-        categoryType: enteredCategory.title,
-        difficulty: 3,
-        favorite: "Yes",
-          amntOfServings: 1.0,
-          mealtime:"breakfast",
-      };
-
-      const categoryResponse = await fetch("api/category/AddCategory", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(
-          CategoryData,
-        ),
-      })
-        .then((response) => response.json())
-        .then((data) => console.log(data))
-        .catch((error) => console.error(error));
+     
 
       // Resetting form inputs
       setEnteredTitle("");
