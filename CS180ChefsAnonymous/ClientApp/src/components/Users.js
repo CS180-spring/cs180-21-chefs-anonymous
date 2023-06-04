@@ -424,6 +424,7 @@ export function Users() {
   // Inventory Stuff
   const [inventory, setInventory] = useState([]);
 
+  //finished useEffect
   useEffect(() => {
     fetch("api/inventory/GetInventory")
       .then((response) => response.json())
@@ -463,6 +464,7 @@ export function Users() {
       });
   }
 
+//finished adding inventory item
   function addInventoryItem() {
     fetch("api/inventory/AddInventory", {
       method: "POST",
@@ -501,6 +503,7 @@ export function Users() {
       .catch((error) => console.error(error));
   }
 
+//finished with remove inventory item
   function removeInventoryItem() {
     fetch("api/inventory/DeleteInventory/4", {
       method: "DELETE",
@@ -509,6 +512,10 @@ export function Users() {
       .then((data) => console.log(data))
       .catch((error) => console.error(error));
   }
+
+
+
+
 
   // MealPlan Stuff
   const [mealplan, setMeal] = useState([]);
