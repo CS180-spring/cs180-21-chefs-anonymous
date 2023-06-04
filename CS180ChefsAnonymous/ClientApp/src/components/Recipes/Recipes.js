@@ -88,7 +88,7 @@ const Recipes = (props) => {
       <div className={styles.dropdown_tags}>
         {filterOptions.map((option) => (
           <div key={option.id} className={styles.dropdown_tag_item}>
-            {option.name}
+            <span>{option.name}</span>
             <span
               onClick={() => onOptionDelete(option)}
               className={styles.dropdown_tag_close}
@@ -128,7 +128,7 @@ const Recipes = (props) => {
           />
         )}
         {displayExpandedRecipe === false && (
-          <div>
+          <div className={styles.recipe_container}>
             {displayForm === true && (
               <div>
                 <RecipeForm
@@ -138,28 +138,33 @@ const Recipes = (props) => {
                 />
               </div>
             )}
-            <h1>Recipes</h1>
+            <h1 style={{position: "absolute", top: "7rem"}}>Public Recipes</h1>
 
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "flex-end",
-              }}
-            >
-              <div style={{ marginRight: "10px" }}>
-                <Searchbar recipes={recipesList} fullRecipesList={searchList} />
+            <div className={styles.recipe_wrapper}>
+              <div>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "flex-end",
+                  }}
+                >
+                  <div style={{ marginRight: "10px" }}>
+                    <Searchbar recipes={recipesList} fullRecipesList={searchList} />
+                  </div>
+                  <MultiselectDropdown
+                    placeHolder="Filter by..."
+                    options={dummyFilters}
+                    onGetDisplayOptions={displayOptionsHandler}
+                    deleteOption={optionToDelete}
+                  />
+                </div>
+                <div>{displayFilters()}</div>
               </div>
-              <MultiselectDropdown
-                placeHolder="Filter by..."
-                options={dummyFilters}
-                onGetDisplayOptions={displayOptionsHandler}
-                deleteOption={optionToDelete}
-              />
+              <div className={styles.list_container}>
+                <RecipesList recipes={recipesList} />
+              </div>
             </div>
-            <div>{displayFilters()}</div>
-
-            <RecipesList recipes={recipesList} />
             <Button type="submit" onClick={displayRecipeFormHandler}>
               Add Recipe
             </Button>

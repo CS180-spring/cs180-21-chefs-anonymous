@@ -2,15 +2,44 @@
     margin-top: 1rem;
     margin-bottom: 0.5rem;
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
     gap: 5px;
 }
 .dropdown_tag_item {
     color: white;
     background-color: #769996;
-    padding: 2px 4px;
+    padding: 3px 20px;
     border-radius: 5px;
     display: flex;
-    align-items: center;
+    justify-content: space-between;
 }
 
+.dropdown_tag_close {
+    align-self: end;
+}
+
+.list_container {
+    padding: 1rem 3rem;
+    background-image: url(/public/recipe.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    object-fit: cover;
+    width: 50vw;
+    height: 50vh;
+    border-radius: 30px;
+    margin: 0 3rem;
+    overflow-y: scroll;
+}
+
+.recipe_wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+.recipe_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: calc(95vh - 2rem);
+}
