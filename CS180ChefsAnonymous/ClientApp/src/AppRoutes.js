@@ -1,6 +1,6 @@
 import { Counter } from "./components/Counter";
 import { FetchData } from "./components/FetchData";
-import { Home } from "./components/Home";
+import { Home } from "./components/Home/Home";
 import Recipes from "./components/Recipes/Recipes";
 import  Inventory  from "./components/Inventory/Inventory";
 import MealPlan from "./components/MealPlan/MealPlan";
