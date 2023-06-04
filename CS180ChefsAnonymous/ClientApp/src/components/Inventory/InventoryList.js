@@ -24,13 +24,14 @@ const InventoryList = (props) => {
         <ul className={styles.inventory_list}>
           {props.inventory.map((inventory) => (
             <InventoryItem
-              key={inventory.id}
-              inventoryId={inventory.inventoryId}
-              ingredient={inventory.itemName}
-              quantity = {inventory.qty}
-              expiryDate = {inventory.expiryDate}
-              currentDate = {inventory.currentDate}
-              onExpandFullInventory={expandFullInventoryHandler}
+                  key={inventory.id}
+                  inventoryId={inventory.inventoryId}
+                  ingredient={inventory.itemName}
+                  quantity={inventory.qty}
+                  expiryDate={inventory.expiryDate}
+                  currentDate={inventory.currentDate}
+                  onExpandFullInventory={expandFullInventoryHandler}
+                  setRefresh={ props.setRefresh}
             />
           ))}
         </ul>

@@ -139,7 +139,12 @@ export class GroceryList extends Component {
                                 checked={item.completed}
                                 onChange={() => this.handleCheckboxChange(item.itemName)}
                             />
+                            {item.qty}
+                            {" "}
+
                             {item.itemName}
+
+
                         </label>
                         <button onClick={() => this.handleDelete(item.itemName)}>Delete</button>
                     </div>
