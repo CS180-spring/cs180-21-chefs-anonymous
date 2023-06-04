@@ -88,28 +88,35 @@ const Inventory = (props) => {
 
   return (
     <div>
-      <h1>Inventory</h1>
-      {displayForm === false && (
-        <div>
-
-          {/* <InventoryList inventory={dummyInventory} /> */}
-          <InventoryList inventory={inventoryList} />
-
-        <Button
-            type="submit"
-            onClick={displayInventoryFormHandler}
-            isEditing={false}
-        >
+      {displayForm && (
+        <InventoryForm
+          onCancel={cancelFormHandler}
+          onGetInventoryData={getInventoryDataHandler}
+          isEditing={false}
+        />
+      )}
+      {/* {displayForm === false && ( */}
+        <div style={{display:"flex", flexDirection:"column",height: "calc(95vh - 2rem)",alignItems: "center", justifyContent:"center"}}>
+          <div style={{display:"flex", margin: "2rem 0px", width: "85vw"}}>
+            <div style={{padding:" 1rem 3rem",backgroundColor: "rgb(229, 227, 221)",
+            boxShadow: "inset 0 0 20px 10px rgba(0, 0, 0, 0.044)",width: "40vw",height: "60vh",
+            borderRadius: "30px",marginRight: "3rem",overflowY: "scroll"}}>
+              <InventoryList inventory={inventoryList} />
+            </div>
+            <div style={{width:"60vw", backgroundImage:"url(https://localhost:44462/static/media/inventory.8b99f88c801dd5532e8a.png)",borderRadius:"40px",
+            backgroundPosition: "center",backgroundRepeat: "no-repeat",objectFit: "cover"}} />
+          </div>
+          <Button type="submit" onClick={displayInventoryFormHandler} isEditing={false}>
             Add Ingredient
           </Button>
         </div>
-      )}
-      {displayForm === true && (
+      
+      {/* {displayForm === true && (
         <InventoryForm
           onCancel={cancelFormHandler}
           onGetInventoryData={getInventoryDataHandler}
         />
-      )}
+      )} */}
     </div>
   );
 };

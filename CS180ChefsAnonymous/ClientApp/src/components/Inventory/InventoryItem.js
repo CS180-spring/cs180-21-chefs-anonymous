@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import styles from "./InventoryItem.module.css";
+import recipeStyles from "../Recipes/RecipeItem.module.css"
 import InventoryContext from "./InventoryContext";
 import Card from "../UI/Card";
 import Button from "../UI/Button";
@@ -31,11 +32,9 @@ const InventoryItem = (props) => {
 
     const mouseOverHandler = (event) => {
       event.target.style.fontWeight = "bold";
-      event.target.style.background = "#dfe6e3";
     };
     const mouseLeaveHandler = (event) => {
       event.target.style.fontWeight = "normal";
-      event.target.style.background = "white";
     };
 
     const expandFullInventoryHandler = () => {
@@ -119,6 +118,7 @@ const InventoryItem = (props) => {
           </div>
         </Modal>
       )}
+      {!displayForm && (
       <li>
         <Card
           className={styles.inventory_item}
@@ -132,20 +132,17 @@ const InventoryItem = (props) => {
 
           {displayEditDelete === true && (
             <p
-                className={styles.delete_inventory_item}
-                onClick={displayInventoryFormHandler}
-                onMouseOver={mouseOverHandler}
-                onMouseLeave={mouseLeaveHandler}
-
-
-                
+              className={recipeStyles.delete_recipe_item}
+              onClick={displayInventoryFormHandler}
+              onMouseOver={mouseOverHandler}
+              onMouseLeave={mouseLeaveHandler}
             >
               Edit
             </p>
           )}
           {displayEditDelete === true && (
             <p
-              className={styles.delete_inventory_item}
+              className={recipeStyles.delete_recipe_item}
               onClick={deleteInventoryHandler }
               onMouseOver={mouseOverHandler}
               onMouseLeave={mouseLeaveHandler}
@@ -154,7 +151,7 @@ const InventoryItem = (props) => {
             </p>
           )}
         </Card>
-      </li>
+      </li>)}
     </div>
   );
 };

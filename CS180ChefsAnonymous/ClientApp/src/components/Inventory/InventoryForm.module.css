@@ -24,8 +24,5 @@
 
 
 .new_inventory__actions {
-
-  padding: 0.5rem;
-  margin-left: 0.5rem;
-  text-align: right;
+  display: flex;
 }

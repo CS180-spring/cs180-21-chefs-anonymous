@@ -2,7 +2,8 @@ import React, {useState, useEffect } from "react";
 //import Card from "../UI/Card";
 import Modal from "../UI/Card";
 import Button from "../UI/Button";
-import styles from "./InventoryForm.module.css";
+import stylesRecipe from "../Recipes/RecipeForm.module.css"
+import styles from "../UI/Modal.module.css"
 import { v4 as uuid } from 'uuid';
 
 const InventoryForm = (props) => {
@@ -134,11 +135,12 @@ const InventoryForm = (props) => {
 
 
   return (
+    <div className={styles.backdrop}>
     <Modal>
       <form onSubmit={formSubmitHandler}>
       {/* <form> */}
-        <div className={styles.new_inventory__controls}>
-          <div className={styles.new_inventory__control}>
+        <div className={stylesRecipe.new_recipe__controls}>
+          <div className={stylesRecipe.new_recipe__control}>
             <label>Ingredient</label>
             <input
               type="text"
@@ -148,7 +150,7 @@ const InventoryForm = (props) => {
           </div>
 
 
-          <div className={styles.new_inventory__control}>
+          <div className={stylesRecipe.new_recipe__control}>
             <label>Quantity</label>
             <input
               type="number"
@@ -160,7 +162,7 @@ const InventoryForm = (props) => {
         </div>
 
 
-          <div className={styles.new_inventory__control}>
+          <div className={stylesRecipe.new_recipe__control}>
           <label>Expiry Date</label>
           <input
             type="date"
@@ -171,7 +173,7 @@ const InventoryForm = (props) => {
           />
         </div>
 
-        <div className={styles.new_inventory__control}>
+        <div className={stylesRecipe.new_recipe__control}>
           <label>Date Stored</label>
           <input
             type="date"
@@ -185,12 +187,13 @@ const InventoryForm = (props) => {
         </div>
 
         {/*Submit button */}
-        <div className={styles.new_inventory__actions}>
+        <div className={stylesRecipe.new_recipe__actions}>
           <Button onClick={cancelHandler}>Cancel</Button>
           <Button type="submit">Submit</Button>
         </div>
       </form>
     </Modal>
+    </div>
   );
 };
 
