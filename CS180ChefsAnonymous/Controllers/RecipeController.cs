@@ -74,25 +74,25 @@ namespace CS180ChefsAnonymous.Controllers
             return objRecipe;
         }
 
+
         [HttpDelete]
         [Route("DeleteRecipe/{id}")]
-        public bool DeleteRecipe(int id)
+        public async Task<IActionResult> DeleteRecipe(Guid id)
         {
-            bool a = false;
-            var Recipe = _dbContext.Recipes.Find(id);
-            if (Recipe != null)
-            {
-                a = true;
-                _dbContext.Entry(Recipe).State = EntityState.Deleted;
-                _dbContext.SaveChanges();
-            }
-            else
-            {
-                a = false;
-            }
-            return a;
+            var recipe = await _dbContext.Recipes.Include(r => r.Ingredients).FirstOrDefaultAsync(r => r.RecipeId == id);
 
+            if (recipe == null)
+            {
+                return NotFound();
+            }
+
+            _dbContext.Ingredients.RemoveRange(recipe.Ingredients);
+            _dbContext.Recipes.Remove(recipe);
+            await _dbContext.SaveChangesAsync();
+
+            return Ok();
         }
+
 
         [HttpGet]
         [Route("GetRecipeIngredients/{recipeId}")]
