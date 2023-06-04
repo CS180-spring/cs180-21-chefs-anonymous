@@ -21,7 +21,16 @@ namespace CS180ChefsAnonymous.Controllers
         [Route("GetCategory")]
         public async Task<IEnumerable<Category>> GetCategories()
         {
-            return await _dbContext.Categories.ToListAsync();
+            // return await _dbContext.Categories.ToListAsync();
+            var categories = await _dbContext.Categories.ToListAsync();
+    
+            foreach (var category in categories)
+            {
+                category.Favorite = category.Favorite ?? "No";
+                category.Category_type = category.Category_type ?? "None";
+            }
+    
+            return categories;
 
         }
         

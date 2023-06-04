@@ -37,7 +37,7 @@ const ExpandedRecipe = (props) => {
   const [recipeIngredients, setRecipeIngredients] = useState([]);
 
   const backButtonHandler = () => {
-    context.recipeListToDisplay(props.fullRecipesList);
+    context.refreshRecipes();
     context.recipeItemToMinimize();
   };
 

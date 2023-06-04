@@ -12,13 +12,7 @@ const Icon = () => {
 const DropdownMenu = (props) => {
   const [showOptions, setShowOptions] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
-
-  const getDisplay = () => {
-    if (selectedOption) {
-      return selectedOption.name;
-    }
-    return props.placeHolder;
-  };
+  const [searchValue, setSearchValue] = useState("");
 
   useEffect(() => {
     const handler = () => setShowOptions(false);
@@ -29,13 +23,39 @@ const DropdownMenu = (props) => {
     };
   });
 
-  const inputHandler = (event) => {
-    event.stopPropagation();
+  // If the dropdown is searchable
+
+  const onSearch = (e) => {
+    setShowOptions(true);
+    setSearchValue(e.target.value);
+  };
+
+  const getOptions = () => {
+    if (!searchValue) {
+      return props.options;
+    }
+    return props.options.filter(
+      (option) =>
+        option.title.toLowerCase().indexOf(searchValue.toLowerCase()) >= 0
+    );
+  };
+
+  // Basic dropdown menu functions
+  const getDisplay = () => {
+    if (selectedOption) {
+      return selectedOption.title;
+    }
+    return props.placeHolder;
+  };
+
+  const inputHandler = (e) => {
+    e.stopPropagation();
     setShowOptions(true);
   };
 
   const selectOption = (option) => {
     setSelectedOption(option);
+    props.OnSelectedOption(option);
   };
 
   const isSelected = (option) => {
@@ -57,7 +77,16 @@ const DropdownMenu = (props) => {
       </div>
       {showOptions && (
         <div className={styles.dropdown_menu}>
-          {props.options.map((option) => (
+          {props.isSearchable == true && (
+            <div className={styles.search_box}>
+              <input
+                onClick={(e) => e.stopPropagation()}
+                onChange={onSearch}
+                value={searchValue}
+              />
+            </div>
+          )}
+          {getOptions().map((option) => (
             <div
               key={option.id}
               className={`${styles.dropdown_item} ${
@@ -65,7 +94,7 @@ const DropdownMenu = (props) => {
               }`}
               onClick={() => selectOption(option)}
             >
-              {option.name}
+              {option.title}
             </div>
           ))}
         </div>
