@@ -8,6 +8,7 @@ import { GroceryList } from "./components/GroceryList/GroceryList";
 import { Login } from "./components/Login/Login";
 import { Register } from "./components/Register";
 import { Users } from "./components/Users";
+import { Signup } from "./components/Signup/Signup";
 
 const AppRoutes = [
   {
@@ -41,6 +42,10 @@ const AppRoutes = [
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/signup",
+    element: <Signup />,
   },
   {
     path: "/register",

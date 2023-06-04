@@ -1,0 +1,65 @@
+.signupPage {
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    left: 0;
+    top: 0;
+}
+
+.signupForm {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 494px;
+    height: 297px;
+    top: 25%;
+    background: #FFFEF0;
+    mix-blend-mode: luminosity;
+    border: 7px solid #EFA884;
+    margin: auto;
+}
+
+.Signup_Username {
+    display: flex;
+    justify-content: center;
+    margin: 5px auto;
+    width: 80%;
+    height: 35px;
+    background: rgba(255, 206, 181, 0.5);
+    mix-blend-mode: luminosity;
+    border: 1px solid #EFA884;
+    border-radius: 5px;
+}
+
+
+.Signup_Password {
+    display: flex;
+    justify-content: center;
+    margin: 5px auto;
+    width: 80%;
+    height: 35px;
+    background: rgba(255, 206, 181, 0.5);
+    mix-blend-mode: luminosity;
+    border: 1px solid #EFA884;
+    border-radius: 5px;
+}
+
+.Signup_Button {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    width: 80%;
+    height: 35px;
+    background: rgba(255, 206, 181, 0.5);
+    mix-blend-mode: luminosity;
+    border: 1px solid #EFA884;
+    border-radius: 5px;
+    font-weight: bold;
+}
