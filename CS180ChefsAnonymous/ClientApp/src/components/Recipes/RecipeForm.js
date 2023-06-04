@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import UlStyles from "./RecipesList.module.css";
+import RecipesContext from "./RecipesContext";
 import Modal from "../UI/Modal";
 import Button from "../UI/Button";
 import styles from "./RecipeForm.module.css";
 import DropdownMenu from "../UI/DropdownMenu";
-import { v4 as uuid } from 'uuid';
+import { v4 as uuid } from "uuid";
 
 const RecipeForm = (props) => {
   // Array containing category types
@@ -61,30 +62,7 @@ const RecipeForm = (props) => {
     { id: 4, title: "Dinner" },
   ];
 
-  // const [enteredTitle, setEnteredTitle] = useState("");
-  // // const [enteredTitle, setEnteredTitle] = useState(props.title);
-  // const [enteredCuisine, setEnteredCuisine] = useState("");
-  // // const [enteredCuisine, setEnteredCuisine] = useState(props.cuisine);
-  // const [enteredCategory, setEnteredCategory] = useState("");
-  // // const [enteredCategory, setEnteredCategory] = useState(props.category);
-  // const [enteredDescription, setEnteredDescription] = useState(
-  //   props.description
-  // );
-  // const [enteredHoursPreptime, setEnteredHoursPreptime] = useState(
-  //   props.prepHr
-  // );
-  // const [enteredMinutesPreptime, setEnteredMinutesPreptime] = useState(
-  //   props.prepMin
-  // );
-  // const [enteredHoursCooktime, setEnteredHoursCooktime] = useState(
-  //   props.cookHr
-  // );
-  // const [enteredMinutesCooktime, setEnteredMinutesCooktime] = useState(
-  //   props.cookMin
-  // );
-  // const [enteredIngredient, setEnteredIngredient] = useState(props.ingredients);
-  // const [newIngredient, setNewIngredient] = useState("");
-
+  const context = useContext(RecipesContext);
   const [enteredTitle, setEnteredTitle] = useState("");
     const [enteredCuisine, setEnteredCuisine] = useState({});
     const [enteredCategory, setEnteredCategory] = useState({});
@@ -97,19 +75,31 @@ const RecipeForm = (props) => {
   const [enteredIngredient, setEnteredIngredient] = useState([]);
   const [newIngredient, setNewIngredient] = useState("");
 
-  // If props contains values (Form populates w/ existing recipe info), initialize recipe info states
+  // Initialize recipe info states if editing a recipe
   useEffect(() => {
     if (props.title != undefined) {
+      console.log("Editing is true: ", props.isEditing, props);
+      // Populate form with existing recipe data
       setEnteredTitle(props.title);
-      setEnteredCuisine(props.cuisine);
-      setEnteredCategory(props.category);
-      setEnteredMealtime(props.mealtime);
       setEnteredDescription(props.description);
-      setEnteredHoursPreptime(props.prepHr);
-      setEnteredMinutesPreptime(props.prepMin);
-      setEnteredHoursCooktime(props.cookHr);
-      setEnteredMinutesCooktime(props.cookMin);
-      setEnteredIngredient(props.ingredients);
+      setEnteredHoursPreptime(Math.floor(parseInt(props.preptime) / 60));
+      setEnteredMinutesPreptime(parseInt(props.preptime) % 60);
+      setEnteredHoursCooktime(Math.floor(parseInt(props.cooktime) / 60));
+      setEnteredMinutesCooktime(parseInt(props.cooktime) % 60);
+
+      // Populate form with existing category data
+      // fetch("api/category/GetCategory")
+      //   .then((response) => response.json())
+      //   .then((responseJson) => {
+      //     console.log("category data: ", responseJson);
+      //     setCategory(responseJson);
+      //   })
+      //   .catch((error) => {
+      //     console.error(error);
+      //   });
+      // setEnteredCuisine(props.cuisine);
+      // setEnteredCategory(props.category);
+      // setEnteredMealtime(props.mealtime);
     }
   }, []);
 
@@ -182,7 +172,8 @@ const RecipeForm = (props) => {
   const formSubmitHandler = async (event) => {
       event.preventDefault();
     // Post recipe to Recipe table in DB
-      
+          if (!props.isEditing) {
+
 
       
       try {
@@ -233,23 +224,24 @@ const RecipeForm = (props) => {
           }
 
 
-      const response = await fetch("api/recipe/AddRecipe", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(recipeData),
-      });
+      try {
+        const response = await fetch("api/recipe/AddRecipe", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(recipeData),
+        });
 
-      if (!response.ok) {
-        throw new Error("Failed to add recipe");
-      }
+        if (!response.ok) {
+          throw new Error("Failed to add recipe");
+        }
 
       const responseData = await response.json();
       const recipeId = responseData.recipeId;
 
 
-      // Post ingredients to Ingredients table in DB
+// Post ingredients to Ingredients table in DB
       for (const ingredient of enteredIngredient) {
           const newGUID = uuid();
 
@@ -288,6 +280,41 @@ const RecipeForm = (props) => {
       setEnteredIngredient([]);
     } catch (error) {
       console.error(error);
+    }
+    } else {
+      // Update recipe table in DB
+      const updatedRecipeData = {
+        recipeId: props.recipeId,
+        recipeTitle: enteredTitle,
+        recipeDesc: enteredDescription,
+        instructions: "Instructions coming soon...",
+        prepTime:
+          parseInt(enteredMinutesPreptime) +
+          parseInt(enteredHoursPreptime) * 60,
+        cookingTime:
+          parseInt(enteredMinutesCooktime) +
+          parseInt(enteredHoursCooktime) * 60,
+        userId: 6,
+        categoryId: 1,
+      };
+
+      fetch("api/recipe/UpdateRecipe/" + props.recipeId, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedRecipeData),
+      })
+        .then((response) => response.json())
+        .then((data) => console.log(data))
+        .catch((error) => console.error(error));
+
+      // Update ingredient table in DB
+
+      // Update category table in DB
+
+      context.refreshRecipes();
+      props.onCancel();
     }
   };
 
