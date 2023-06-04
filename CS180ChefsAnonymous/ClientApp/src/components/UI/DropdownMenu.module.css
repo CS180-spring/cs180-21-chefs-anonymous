@@ -55,3 +55,15 @@
   background-color: #769996;
   color: #fff;
 }
+
+.search_box {
+    padding: 5px;
+    background-color: #eee;
+}
+.search_box input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}

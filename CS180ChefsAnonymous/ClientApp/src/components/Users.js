@@ -173,10 +173,10 @@ export function Users() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        recipeId: 79,
-        recipeTitle: "testdelete2",
-        recipeDesc: "test",
-        instructions: "test",
+        recipeId: 78,
+        recipeTitle: "Mabo Tofu",
+        recipeDesc: "Get the sauce from Hmart",
+        instructions: "Stir fry with beef and tofu",
         prepTime: 12,
         cookingTime: 34,
         userId: 6,
@@ -364,9 +364,9 @@ export function Users() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        ingredientId: 79,
-        recipeId: 79,
-        itemName: "testingredient2",
+        ingredientId: 80,
+        recipeId: 78,
+        itemName: "Sauce packet",
         qty: 1,
         unit: "tsp",
       }),
@@ -603,7 +603,7 @@ export function Users() {
     fetch("api/category/GetCategory")
       .then((response) => response.json())
       .then((responseJson) => {
-        console.log(responseJson);
+        console.log("category data: ", responseJson);
         setCategory(responseJson);
       })
       .catch((error) => {
@@ -630,10 +630,12 @@ export function Users() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        categoryId: 10,
-        cuisine: "Indian",
-        mealtime: "2023-04-21T19:30:00",
+        categoryId: 21,
+        cuisine: "Armenian",
+        categoryType: "Appetizer",
+        mealtime: "breakfast",
         difficulty: 3,
+        favorite: "Yes",
         amntOfServings: 1.0,
       }),
     })
@@ -651,8 +653,10 @@ export function Users() {
       body: JSON.stringify({
         categoryId: 10,
         cuisine: "Not Indian",
+        categoryType: "Side Dish",
         mealtime: "2023-04-21T19:30:00",
         difficulty: 3,
+        favorite: "Yes",
         amntOfServings: 1.0,
       }),
     })
@@ -662,7 +666,7 @@ export function Users() {
   }
 
   function removeCategory() {
-    fetch("api/category/DeleteCategory/10", {
+    fetch("api/category/DeleteCategory/21", {
       method: "DELETE",
     })
       .then((response) => response.json())
@@ -968,8 +972,10 @@ export function Users() {
               <tr>
                 <th>CategoryID</th>
                 <th>Cuisine</th>
+                <th>Category</th>
                 <th>MealTime</th>
                 <th>difficulty</th>
+                <th>favorite</th>
                 <th>amntOfServings</th>
               </tr>
             </thead>
@@ -978,8 +984,10 @@ export function Users() {
                 <tr key={item.categoryId}>
                   <td>{item.categoryId}</td>
                   <td>{item.cuisine}</td>
+                  <td>{item.categoryType}</td>
                   <td>{item.mealtime}</td>
                   <td>{item.difficulty}</td>
+                  <td>{item.favorite}</td>
                   <td>{item.amntOfServings}</td>
                 </tr>
               ))}
