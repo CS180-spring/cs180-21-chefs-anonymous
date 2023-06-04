@@ -30,7 +30,6 @@ const Icon = () => {
   );
 };
 
-
 const ExpandedRecipe = (props) => {
   const context = useContext(RecipesContext);
   const [displayForm, setDisplayForm] = useState(false);
@@ -49,16 +48,16 @@ const ExpandedRecipe = (props) => {
     setDisplayForm(false);
   };
 
-  // let totalMin =
-  //   parseInt(props.recipe.preptime.minutes) +
-  //   parseInt(props.recipe.cooktime.minutes);
-  // let totalHr =
-  //   parseInt(props.recipe.preptime.hours) +
-  //   parseInt(props.recipe.cooktime.hours);
-  // if (totalMin >= 60) {
-  //   totalHr += Math.floor(totalMin / 60);
-  //   totalMin = totalMin % 60;
-  // }
+  let totalMin =
+    (parseInt(props.recipe.PrepTime) % 60) +
+    (parseInt(props.recipe.CookingTime) % 60);
+  let totalHr =
+    Math.floor(parseInt(props.recipe.PrepTime) / 60) +
+    Math.floor(parseInt(props.recipe.CookingTime) / 60);
+  if (totalMin >= 60) {
+    totalHr += Math.floor(totalMin / 60);
+    totalMin = totalMin % 60;
+  }
 
   const getRecipeDataHandler = (enteredRecipeData) => {
     console.log("got form data!");
@@ -74,27 +73,29 @@ const ExpandedRecipe = (props) => {
   const cancelDeleteModalHandler = () => {
     setDisplayDeleteModal(false);
   };
-    const deleteDeleteModalHandler = async () => {
-        try {
-            await fetch("api/ingredient/DeleteIngredientsByRecipe/" + props.recipe.RecipeId, {
-                method: "DELETE",
-            })
-                .then((response) => response.json())
-                .then((data) => console.log(data))
-                .catch((error) => console.error(error));
-            await fetch("api/recipe/DeleteRecipe/" + props.recipe.RecipeId, {
-                method: "DELETE",
-            })
-                .then((response) => response.json())
-                .then((data) => console.log(data))
-                .catch((error) => console.error(error));
-            context.refreshRecipes();
-            context.recipeItemToMinimize();
-            setDisplayDeleteModal(false);
-        } catch (error) {
-            console.error(error);
+  const deleteDeleteModalHandler = async () => {
+    try {
+      await fetch(
+        "api/ingredient/DeleteIngredientsByRecipe/" + props.recipe.RecipeId,
+        {
+          method: "DELETE",
         }
-    
+      )
+        .then((response) => response.json())
+        .then((data) => console.log(data))
+        .catch((error) => console.error(error));
+      await fetch("api/recipe/DeleteRecipe/" + props.recipe.RecipeId, {
+        method: "DELETE",
+      })
+        .then((response) => response.json())
+        .then((data) => console.log(data))
+        .catch((error) => console.error(error));
+      context.refreshRecipes();
+      context.recipeItemToMinimize();
+      setDisplayDeleteModal(false);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   useEffect(() => {
@@ -117,16 +118,14 @@ const ExpandedRecipe = (props) => {
       {displayForm === true && (
         <div>
           <RecipeForm
-            title={props.recipe.title}
-            cuisine={props.recipe.cuisine}
-            description={props.recipe.description}
-            prepHr={props.recipe.preptime.hours}
-            prepMin={props.recipe.preptime.minutes}
-            cookHr={props.recipe.cooktime.hours}
-            cookMin={props.recipe.cooktime.minutes}
-            ingredients={props.recipe.ingredients}
+            recipeId={props.recipe.RecipeId}
+            title={props.recipe.RecipeTitle}
+            description={props.recipe.RecipeDesc}
+            preptime={props.recipe.PrepTime}
+            cooktime={props.recipe.CookingTime}
             onCancel={cancelFormHandler}
             onGetRecipeData={getRecipeDataHandler}
+            isEditing={true}
           />
         </div>
       )}
@@ -164,18 +163,22 @@ const ExpandedRecipe = (props) => {
         <div>
           <h4>Preptime</h4>
           <span>
-            {/* {props.recipe.preptime.hours} hr {props.recipe.preptime.minutes} min */}
+            {Math.floor(parseInt(props.recipe.PrepTime) / 60)} hr{" "}
+            {Math.floor(parseInt(props.recipe.PrepTime) % 60)}
           </span>
         </div>
         <div>
           <h4>Cooktime</h4>
           <span>
-            {/* {props.recipe.cooktime.hours} hr {props.recipe.cooktime.minutes} min */}
+            {Math.floor(parseInt(props.recipe.CookingTime) / 60)} hr{" "}
+            {Math.floor(parseInt(props.recipe.CookingTime) % 60)}
           </span>
         </div>
         <div>
           <h4>Total Time</h4>
-          <span>{/* {totalHr} hr {totalMin} min */}</span>
+          <span>
+            {totalHr} hr {totalMin} min
+          </span>
         </div>
       </div>
 
