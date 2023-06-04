@@ -194,11 +194,13 @@ const RecipeForm = (props) => {
               recipeDesc: enteredDescription,
               preptime:
                   parseInt(enteredMinutesPreptime) + parseInt(enteredHoursPreptime) * 60,
-              cooktime:
+              cookingTime:
                   parseInt(enteredMinutesCooktime) + parseInt(enteredHoursCooktime) * 60,
               userId: userId,
               categoryId: 1,
           };
+          console.log("before launch");
+          console.log(recipeData);
 
 
           // Post cuisine,categoryType,favorite,mealtime to Category table in DB
