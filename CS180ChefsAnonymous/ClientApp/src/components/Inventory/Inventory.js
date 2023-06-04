@@ -76,16 +76,14 @@ const Inventory = (props) => {
       {displayForm === false && (
         <div>
 
-
-
-
-
-
-
           {/* <InventoryList inventory={dummyInventory} /> */}
           <InventoryList inventory={inventoryList} />
 
-          <Button type="submit" onClick={displayInventoryFormHandler}>
+        <Button
+            type="submit"
+            onClick={displayInventoryFormHandler}
+            isEditing={false}
+        >
             Add Ingredient
           </Button>
         </div>

@@ -82,7 +82,9 @@ const InventoryItem = (props) => {
             expiryDate={props.expiryDate}
             currentDate={props.currentDate}
             onCancel={cancelFormHandler}
-            onGetInventoryData={getInventoryDataHandler}
+                      onGetInventoryData={getInventoryDataHandler}
+                      isEditing={true}
+                      ingredientId={props.ingredient.ingredientId}
           />
         </div>
       )}
@@ -120,10 +122,12 @@ const InventoryItem = (props) => {
 
           {displayEditDelete === true && (
             <p
-              className={styles.delete_inventory_item}
-              onClick={displayInventoryFormHandler}
-              onMouseOver={mouseOverHandler}
-              onMouseLeave={mouseLeaveHandler}
+                className={styles.delete_inventory_item}
+                onClick={displayInventoryFormHandler}
+                onMouseOver={mouseOverHandler}
+                onMouseLeave={mouseLeaveHandler}
+                
+                
             >
               Edit
             </p>
