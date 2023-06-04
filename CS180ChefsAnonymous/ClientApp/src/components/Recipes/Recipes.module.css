@@ -22,7 +22,7 @@
 .list_container {
     padding: 1rem 3rem;
     background-image: url(/public/recipe.png);
-    background-position: center;
+    background-position:top left;
     background-repeat: no-repeat;
     object-fit: cover;
     width: 50vw;
