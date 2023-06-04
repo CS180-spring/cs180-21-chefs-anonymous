@@ -61,13 +61,29 @@ const Inventory = (props) => {
   const cancelFormHandler = () => {
     setDisplayForm(false);
   };
-  const getInventoryDataHandler = (enteredInventoryData) => {
-    const inventoryData = { ...enteredInventoryData, id: Math.random().toString() };
-    const newList = [...dummyInventory, inventoryData];
-    setDummyInventory(newList);
-
-    console.log(dummyInventory);
-    setDisplayForm(false);
+  const getInventoryDataHandler = async (enteredInventoryData) => {
+    //const inventoryData = { ...enteredInventoryData, id: Math.random().toString() };
+    //const newList = [...dummyInventory, inventoryData];
+    //setDummyInventory(newList);
+    //console.log(dummyInventory);
+    //setDisplayForm(false);
+      try {
+          const response = await fetch("api/inventory/AddInventory", {
+              method: "POST",
+              headers: {
+                  "Content-Type": "application/json",
+              },
+              body: JSON.stringify(enteredInventoryData),
+          });
+          if (response.ok) {
+              setRefresh((prevRefresh) => !prevRefresh);
+              setDisplayForm(false);
+          } else {
+              console.error("Failed to add inventory item");
+          }
+      } catch (error) {
+          console.error(error);
+      }
   };
 
   return (

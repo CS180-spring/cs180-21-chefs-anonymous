@@ -63,13 +63,23 @@ const InventoryItem = (props) => {
     };
 
     function removeInventoryItem(key) {
-      console.log(props.inventoryId, key);
-      fetch(`api/inventory/DeleteInventory/${key}`, {
-        method: "DELETE",
-      })
-        .then((response) => response.json())
-        .then((data) => console.log(data))
-        .catch((error) => console.error(error));
+      //console.log(props.inventoryId, key);
+      //fetch(`api/inventory/DeleteInventory/${key}`, {
+      //  method: "DELETE",
+      //})
+      //  .then((response) => response.json())
+      //  .then((data) => console.log(data))
+      //  .catch((error) => console.error(error));
+        console.log(props.inventoryId, key);
+        fetch(`api/inventory/DeleteInventory/${key}`, {
+            method: "DELETE",
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                props.setRefresh((prevRefresh) => !prevRefresh); // Call setRefresh from props
+            })
+            .catch((error) => console.error(error));
     }
 
   return (

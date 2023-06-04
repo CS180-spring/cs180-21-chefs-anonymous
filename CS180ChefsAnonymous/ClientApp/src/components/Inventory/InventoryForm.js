@@ -35,7 +35,7 @@ const InventoryForm = (props) => {
   const formSubmitHandler = async (event) => {   
       
       event.preventDefault();
-      const invId = 39; // Change later for the following comments. (uniqueID for new inventory item && same inventory number for updating)
+      const invId = 34; // Change later for the following comments. (uniqueID for new inventory item && same inventory number for updating)
       const inventoryData = {
           inventoryId: invId, // Should be a new inventory ID
           itemName: enteredTitle,
@@ -54,13 +54,11 @@ const InventoryForm = (props) => {
               itemName: enteredTitle,
               qty: enteredAmount,
               unit: "haruki",
-              // expiryDate: expiryDate,
-              // currentDate: currentDate,
               userId: 3,
           };
           try {
 
-              fetch(`api/inventory/DeleteInventory/${sameId}`, {
+              await fetch(`api/inventory/DeleteInventory/${sameId}`, {
                   method: "DELETE",
               })
                   .then((response) => response.json())
@@ -74,7 +72,7 @@ const InventoryForm = (props) => {
                   },
                   body: JSON.stringify(editInventoryData)
               }).then(response => { response.json(); console.log(response.json()) })
-                  .then(data => console.log(data))
+                  .then(editData => console.log(editData))
                   .catch(error => console.log(error));
 
               const responseData = await response.json();
@@ -94,15 +92,6 @@ const InventoryForm = (props) => {
 
       } else {
           try {
-              if (props.isEditing) {
-                  fetch(`api/inventory/DeleteInventory/${invId}`, {
-                      method: "DELETE",
-                  })
-                      .then((response) => response.json())
-                      .then((data) => console.log(data))
-                      .catch((error) => console.error(error));
-              }
-              // end delete
 
               const response = await fetch("api/inventory/AddInventory", {
                   method: "POST",
@@ -110,11 +99,12 @@ const InventoryForm = (props) => {
                       "Content-Type": "application/json",
                   },
                   body: JSON.stringify(inventoryData)
-              }).then(response => { response.json(); console.log(response.json()) })
-                  .then(data => console.log(data))
-                  .catch(error => console.log(error));
+              })//.then(response => { response.json();})
+                  //.then(data => console.log(data))
+                  //.catch(error => console.log(error));
+                  
 
-              const responseData = await response.json();
+              const responseData = response.json();
               console.log("response:", responseData);
               const inventoryId = responseData.inventoryId;
 
