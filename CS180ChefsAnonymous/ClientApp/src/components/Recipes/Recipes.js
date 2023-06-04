@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import RecipesContext from "./RecipesContext";
 import ExpandedRecipe from "./ExpandedRecipe";
@@ -48,6 +47,7 @@ const Recipes = (props) => {
     }
 
     useEffect(() => {
+
     fetch(`api/user/GetUserRecipes/${userId}`)
       .then((response) => response.json())
       .then((responseJson) => {
@@ -86,7 +86,7 @@ const Recipes = (props) => {
   };
 
   const expandRecipeItemDataHandler = (recipeItem) => {
-    // console.log("expanding: ", recipeItem);
+    console.log("expanding: ", recipeItem);
     setRecipeItemData(recipeItem);
     setDisplayExpandedrecipe(true);
   };
@@ -148,7 +148,8 @@ const Recipes = (props) => {
                 <RecipeForm
                   onCancel={cancelFormHandler}
                   onGetRecipeData={getRecipeDataHandler}
-                  userId = {userId}
+                  userId={userId}
+                  isEditing={false}
                 />
               </div>
             )}
