@@ -38,9 +38,25 @@ const MealPlan = (props) => {
 
   useEffect(() => {
     // need to figure out how to get user (need a login page)
-    let ignore = false
-    fetch("api/mealplan/GetMealPlan/1")
-      .then((response) => response.json())
+      let userId;
+      try {
+          const userJSON = localStorage.getItem('user');
+          if (userJSON) {
+              const user = JSON.parse(userJSON);
+              userId = user.UserId;
+          } else {
+              console.error('User data not found in localStorage.');
+          }
+      } catch (error) {
+          console.error('Error parsing user data from localStorage:', error);
+          userId = 3;
+
+      }
+
+      let ignore = false
+
+      fetch(`api/mealplan/GetMealPlan/${userId}`)
+          .then((response) => response.json())
       .then((responseJson) => {
         if(!ignore){
           console.log("response json",responseJson);
@@ -56,9 +72,23 @@ const MealPlan = (props) => {
       return () => {ignore=true}
   }, [isModal]);
 
-  useEffect(() => {
+    useEffect(() => {
+        let userId;
+        try {
+            const userJSON = localStorage.getItem('user');
+            if (userJSON) {
+                const user = JSON.parse(userJSON);
+                userId = user.UserId;
+            } else {
+                console.error('User data not found in localStorage.');
+            }
+        } catch (error) {
+            console.error('Error parsing user data from localStorage:', error);
+            userId = 3;
+
+        }
     setLoading(true);
-    fetch("api/mealplan/GetMealPlanName/1")
+      fetch(`api/mealplan/GetMealPlanName/${userId}`)
       .then((response) => response.json())
       .then((responseJson) => {
         console.log("getRecipeName json",responseJson);
