@@ -4,6 +4,7 @@ import Modal from "../UI/Modal";
 import Button from "../UI/Button";
 import styles from "./RecipeForm.module.css";
 import DropdownMenu from "../UI/DropdownMenu";
+import { v4 as uuid } from 'uuid';
 
 const RecipeForm = (props) => {
   // Array containing category types
@@ -161,12 +162,13 @@ const RecipeForm = (props) => {
   const cancelHandler = () => {
     props.onCancel();
   };
+
   const formSubmitHandler = async (event) => {
     event.preventDefault();
-
+  const newGUID = uuid();
     // Post recipe to Recipe table in DB
     const recipeData = {
-      recipeId: 31,
+      recipeId: newGUID,
       recipeTitle: enteredTitle,
       recipeDesc: enteredDescription,
       preptime:
@@ -178,17 +180,6 @@ const RecipeForm = (props) => {
     };
 
     console.log(recipeData);
-    /** Update form^ for the following json format
-
-        recipeId: 2,
-        recipeTitle: "Merman Kabob",
-        recipeDesc: "Not Jinbe",
-        instructions: "Catch and cook",
-        prepTime: 1,
-        cookingTime: 3,
-        userId: 3,
-        categoryId: 1,
-    */
     try {
       const response = await fetch("api/recipe/AddRecipe", {
         method: "POST",
@@ -205,24 +196,17 @@ const RecipeForm = (props) => {
       const responseData = await response.json();
       const recipeId = responseData.recipeId;
 
+
       // Post ingredients to Ingredients table in DB
       for (const ingredient of enteredIngredient) {
+        const newGUID = new uuid();
         const ingredientData = {
-          ingredientId: 24,
+          ingredientId: newGUID,
           recipeId: recipeId,
           itemName: ingredient.name,
           qty: enteredHoursCooktime,
           unit: "tsp",
         };
-
-        /** Update form^ for the following json format
-              Update form to have the following json format
-                ingredientId: GUID.newGUID(); ,        // We might have to update the models to use GUID
-                recipeId: recipeId,
-                itemName: ingredient.name,
-                qty: enteredQty,
-                unit: enteredUnit,        // example tsp, tbs, cup, etc     ie 3 letter abbreviations
-              */
 
         const ingredientResponse = await fetch("api/ingredient/AddIngredient", {
           method: "POST",

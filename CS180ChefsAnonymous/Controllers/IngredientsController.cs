@@ -26,7 +26,7 @@ namespace CS180ChefsAnonymous.Controllers
 
         [HttpGet]
         [Route("GetIngredientsByRecipe/{recipeId}")]
-        public async Task<IEnumerable<Ingredient>> GetIngredientsByRecipe(int recipeId)
+        public async Task<IEnumerable<Ingredient>> GetIngredientsByRecipe(Guid recipeId)
         {
             return await _dbContext.Ingredients.Where(i => i.RecipeId == recipeId).ToListAsync();
         }
@@ -120,7 +120,7 @@ namespace CS180ChefsAnonymous.Controllers
 
         [HttpDelete]
         [Route("DeleteIngredientsByRecipe/{recipeId}")]
-        public bool DeleteIngredientsByRecipe(int recipeId)
+        public bool DeleteIngredientsByRecipe(Guid recipeId)
         {
             bool a = false;
             var ingredients = _dbContext.Ingredients.Where(i => i.RecipeId == recipeId).ToList();

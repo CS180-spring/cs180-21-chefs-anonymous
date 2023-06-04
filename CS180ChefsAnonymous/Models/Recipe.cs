@@ -6,7 +6,7 @@ namespace CS180ChefsAnonymous.Models;
 
 public partial class Recipe
 {
-    public int RecipeId { get; set; }
+    public Guid RecipeId { get; set; }
 
     public string RecipeTitle { get; set; } = null!;
 

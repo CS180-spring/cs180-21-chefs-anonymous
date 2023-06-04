@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import RecipesContext from "./RecipesContext";
 import ExpandedRecipe from "./ExpandedRecipe";
@@ -31,9 +32,9 @@ const Recipes = (props) => {
   const [recipesList, setRecipesList] = useState("");
   const [searchList, setSearchList] = useState("");
   const [refresh, setRefresh] = useState(true);
-
+    const userId = 3;
   useEffect(() => {
-    fetch("api/user/GetUserRecipes/6")
+    fetch(`api/user/GetUserRecipes/${userId}`)
       .then((response) => response.json())
       .then((responseJson) => {
         console.log("response:", responseJson.$values);
@@ -133,6 +134,7 @@ const Recipes = (props) => {
                 <RecipeForm
                   onCancel={cancelFormHandler}
                   onGetRecipeData={getRecipeDataHandler}
+                  userId = {userId}
                 />
               </div>
             )}
