@@ -261,7 +261,7 @@ const RecipeForm = (props) => {
     <div className={styles.backdrop}>
       <Modal>
         <h2 className={styles.new_recipe__controls}>Add Recipe</h2>
-        <form onSubmit={formSubmitHandler}>
+        <form onSubmit={formSubmitHandler} className={styles.add_recipe_wrapper}>
           <div className={styles.new_recipe__controls}>
             <div className={styles.new_recipe__control}>
               <label>Title</label>
