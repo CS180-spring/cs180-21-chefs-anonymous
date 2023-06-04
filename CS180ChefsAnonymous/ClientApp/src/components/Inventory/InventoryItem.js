@@ -63,13 +63,23 @@ const InventoryItem = (props) => {
     };
 
     function removeInventoryItem(key) {
-      console.log(props.inventoryId, key);
-      fetch(`api/inventory/DeleteInventory/${key}`, {
-        method: "DELETE",
-      })
-        .then((response) => response.json())
-        .then((data) => console.log(data))
-        .catch((error) => console.error(error));
+      //console.log(props.inventoryId, key);
+      //fetch(`api/inventory/DeleteInventory/${key}`, {
+      //  method: "DELETE",
+      //})
+      //  .then((response) => response.json())
+      //  .then((data) => console.log(data))
+      //  .catch((error) => console.error(error));
+        console.log(props.inventoryId, key);
+        fetch(`api/inventory/DeleteInventory/${key}`, {
+            method: "DELETE",
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                props.setRefresh((prevRefresh) => !prevRefresh); // Call setRefresh from props
+            })
+            .catch((error) => console.error(error));
     }
 
   return (
@@ -77,12 +87,14 @@ const InventoryItem = (props) => {
       {displayForm === true && (
         <div>
           <InventoryForm
-            enteredTitle={props.enteredTitle}
-            enteredAmount={props.enteredAmount}
-            expiryDate={props.expiryDate}
-            currentDate={props.currentDate}
-            onCancel={cancelFormHandler}
-            onGetInventoryData={getInventoryDataHandler}
+                      expiryDate={props.expiryDate}
+                      currentDate={props.currentDate}
+                      onCancel={cancelFormHandler}
+                      onGetInventoryData={getInventoryDataHandler}
+                      isEditing={true}
+                      inventoryId={props.inventoryId}
+                      enteredTitle={props.ingredient}
+                      enteredAmount={props.quantity}
           />
         </div>
       )}
@@ -120,10 +132,13 @@ const InventoryItem = (props) => {
 
           {displayEditDelete === true && (
             <p
-              className={styles.delete_inventory_item}
-              onClick={displayInventoryFormHandler}
-              onMouseOver={mouseOverHandler}
-              onMouseLeave={mouseLeaveHandler}
+                className={styles.delete_inventory_item}
+                onClick={displayInventoryFormHandler}
+                onMouseOver={mouseOverHandler}
+                onMouseLeave={mouseLeaveHandler}
+
+
+                
             >
               Edit
             </p>
