@@ -15,7 +15,7 @@ const InventoryForm = (props) => {
         if (props.enteredTitle != undefined || props.enteredAmount != undefined) {
             console.log("in useEffect");
             setEnteredTitle(props.enteredTitle);
-            setEnteredAmount(props.enteredTitle);
+            setEnteredAmount(props.enteredAmount);
         }
     },[]);
 

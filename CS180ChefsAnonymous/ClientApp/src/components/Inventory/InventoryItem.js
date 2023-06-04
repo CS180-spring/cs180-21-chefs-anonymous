@@ -87,16 +87,14 @@ const InventoryItem = (props) => {
       {displayForm === true && (
         <div>
           <InventoryForm
-                      enteredTitle={props.enteredTitle}
-                      enteredAmount={props.enteredAmount}
                       expiryDate={props.expiryDate}
                       currentDate={props.currentDate}
                       onCancel={cancelFormHandler}
                       onGetInventoryData={getInventoryDataHandler}
                       isEditing={true}
                       inventoryId={props.inventoryId}
-                      enteredTitle={props.enteredTitle}
-                      enteredAmount={props.enteredAmount}
+                      enteredTitle={props.ingredient}
+                      enteredAmount={props.quantity}
           />
         </div>
       )}
