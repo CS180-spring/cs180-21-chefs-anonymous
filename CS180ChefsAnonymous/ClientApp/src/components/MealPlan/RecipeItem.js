@@ -39,6 +39,12 @@ const RecipeItem = (props) => {
             .then(data => console.log(data))
             .catch(error => console.error(error));
         props.setModal(!props.isModal);
+        props.setRefresh(!props.refresh);
+        props.setSpecificRecipe(prop.title);
+
+        let copy = [...props.nameRecipe];
+        copy[props.mealPlan.mealTime - 1][props.mealPlan.dayOfWeek - 1] = prop.title;
+        props.setNameRecipe(copy);
     }
     
     // Edit recipe

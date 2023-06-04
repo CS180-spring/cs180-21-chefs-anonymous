@@ -117,5 +117,22 @@ namespace CS180ChefsAnonymous.Controllers
             return a;
 
         }
+
+        [HttpDelete]
+        [Route("DeleteIngredientsByRecipe/{recipeId}")]
+        public bool DeleteIngredientsByRecipe(int recipeId)
+        {
+            bool a = false;
+            var ingredients = _dbContext.Ingredients.Where(i => i.RecipeId == recipeId).ToList();
+    
+            if (ingredients != null)
+            {
+                _dbContext.Ingredients.RemoveRange(ingredients);
+                _dbContext.SaveChanges();
+            a = true;
+            }
+
+            return a;
+        }
     }
 }
