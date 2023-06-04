@@ -181,23 +181,25 @@ const RecipeForm = (props) => {
     
   const formSubmitHandler = async (event) => {
       event.preventDefault();
-      const recipeID = uuid();
     // Post recipe to Recipe table in DB
-      const recipeData = {
-        recipeId: recipeID,
-        recipeTitle: enteredTitle,
-        recipeDesc: enteredDescription,
-        preptime:
-        parseInt(enteredMinutesPreptime) + parseInt(enteredHoursPreptime) * 60,
-        cooktime:
-        parseInt(enteredMinutesCooktime) + parseInt(enteredHoursCooktime) * 60,
-        userId: userId,
-        categoryId: 1,
-    };
+      
 
-      console.log(recipeData);
       
       try {
+          const recipeID = uuid();
+          const recipe_temp = recipeID;
+          const recipeData = {
+              recipeId: recipeID,
+              recipeTitle: enteredTitle,
+              recipeDesc: enteredDescription,
+              preptime:
+                  parseInt(enteredMinutesPreptime) + parseInt(enteredHoursPreptime) * 60,
+              cooktime:
+                  parseInt(enteredMinutesCooktime) + parseInt(enteredHoursCooktime) * 60,
+              userId: userId,
+              categoryId: 1,
+          };
+
 
           // Post cuisine,categoryType,favorite,mealtime to Category table in DB
           let CategoryData = {
@@ -242,15 +244,16 @@ const RecipeForm = (props) => {
       }
 
       const responseData = await response.json();
-      //const recipeId = responseData.recipeId;
+      const recipeId = responseData.recipeId;
 
 
       // Post ingredients to Ingredients table in DB
       for (const ingredient of enteredIngredient) {
-        const newGUID = uuid();
+          const newGUID = uuid();
+
         const ingredientData = {
           ingredientId: newGUID,
-          recipeId: recipeID,
+          recipeId: recipeId,
           itemName: ingredient.name,
           qty: enteredHoursCooktime,
           unit: "tsp",
