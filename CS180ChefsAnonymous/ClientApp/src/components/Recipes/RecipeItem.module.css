@@ -4,7 +4,7 @@
   align-items: center;
   padding: 0.5rem;
   margin: 1rem 0;
-  background-color: transparent;
+  background-color: rgba(244, 242, 237, 0.91);
 }
 
 .recipe_item__description {
@@ -26,7 +26,7 @@
 }
 
 .recipe_item:hover {
-    background-color: #dfe6e3;
+    background-color: #ffffffef;
 }
 
 .delete_recipe_item {

@@ -44,3 +44,10 @@
 .ingredients_list{
   list-style-type: disc;
 }
+
+.add_recipe_wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 59vh; 
+  justify-content: space-between;
+}

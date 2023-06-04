@@ -17,10 +17,11 @@
 
 .modal {
   position: fixed;
-  top: 20vh;
-  bottom: 20vh;
+  top: 15vh;
+  bottom: 15vh;
   left: 10%;
   width: 80%;
+  height: 70vh;
   z-index: 100;
   padding: 1rem;
   align-items: center;
