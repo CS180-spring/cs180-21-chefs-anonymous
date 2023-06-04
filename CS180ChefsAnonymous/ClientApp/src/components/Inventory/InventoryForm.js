@@ -1,4 +1,4 @@
-import React, {useState } from "react";
+import React, {useState, useEffect } from "react";
 //import Card from "../UI/Card";
 import Modal from "../UI/Card";
 import Button from "../UI/Button";
@@ -11,6 +11,13 @@ const InventoryForm = (props) => {
   const [expiryDate, setExpiryDate] = useState("");
   const [currentDate, setCurrentDate] = useState("");
 
+    useEffect(() => {
+        if (props.enteredTitle != undefined || props.enteredAmount != undefined) {
+            console.log("in useEffect");
+            setEnteredTitle(props.enteredTitle);
+            setEnteredAmount(props.enteredTitle);
+        }
+    },[]);
 
   const titleChangeHandler = (event) => {
     setEnteredTitle(event.target.value);
@@ -31,11 +38,13 @@ const InventoryForm = (props) => {
   const cancelHandler = () => {
     props.onCancel();
   };
+
     
+
   const formSubmitHandler = async (event) => {   
       
       event.preventDefault();
-      const invId = 34; // Change later for the following comments. (uniqueID for new inventory item && same inventory number for updating)
+      const invId = 36 // Change later for the following comments. (uniqueID for new inventory item && same inventory number for updating)
       const inventoryData = {
           inventoryId: invId, // Should be a new inventory ID
           itemName: enteredTitle,
@@ -47,6 +56,7 @@ const InventoryForm = (props) => {
       };
       console.log(`isEditing: ${props.isEditing}`);
       if (props.isEditing) {
+          console.log(`props: \ninventoryid: ${props.inventoryId}\n enteredTitle: ${props.enteredTitle}`);
           const sameId = props.inventoryId;
           console.log(`props.id === ${props.inventoryId}`);
           const editInventoryData = {
