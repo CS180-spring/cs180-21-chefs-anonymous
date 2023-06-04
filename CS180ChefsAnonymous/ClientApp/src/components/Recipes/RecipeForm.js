@@ -88,7 +88,7 @@ const RecipeForm = (props) => {
   const [enteredTitle, setEnteredTitle] = useState("");
     const [enteredCuisine, setEnteredCuisine] = useState({});
     const [enteredCategory, setEnteredCategory] = useState({});
-  const [enteredMealtime, setEnteredMealtime] = useState("");
+    const [enteredMealtime, setEnteredMealtime] = useState({});
   const [enteredDescription, setEnteredDescription] = useState("");
   const [enteredHoursPreptime, setEnteredHoursPreptime] = useState(0);
   const [enteredMinutesPreptime, setEnteredMinutesPreptime] = useState(0);
@@ -122,8 +122,10 @@ const RecipeForm = (props) => {
   const selectCategoryHandler = (selectedCategory) => {
     setEnteredCategory(selectedCategory);
   };
-  const selectMealtimeHandler = (selectedMealtime) => {
-    setEnteredMealtime(selectedMealtime);
+    const selectMealtimeHandler = (selectedMealtime) => {
+        setEnteredMealtime(selectedMealtime);
+        console.log(enteredMealtime);
+
   };
   const descriptionChangeHandler = (event) => {
     setEnteredDescription(event.target.value);
@@ -205,7 +207,7 @@ const RecipeForm = (props) => {
               difficulty: 3,
               favorite: "Yes",
               amntOfServings: 1.0,
-              mealtime: "breakfast",
+              mealtime: enteredMealtime.title,
           };
 
           const categoryResponse = await fetch("api/category/AddCategory", {
@@ -253,6 +255,10 @@ const RecipeForm = (props) => {
           qty: enteredHoursCooktime,
           unit: "tsp",
         };
+          console.log("ingredientData");
+
+          console.log(ingredientData);
+
         
         const ingredientResponse = await fetch("api/ingredient/AddIngredient", {
           method: "POST",
