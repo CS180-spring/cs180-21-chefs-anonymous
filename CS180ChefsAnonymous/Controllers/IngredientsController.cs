@@ -39,7 +39,7 @@ namespace CS180ChefsAnonymous.Controllers
 
             if (meals == null || meals.Count == 0)
             {
-                return NotFound();
+                return NotFound("No meals found for the specified user.");
             }
 
             var recipes = meals.Select(mp => mp.RecipeId).ToList();
@@ -58,9 +58,10 @@ namespace CS180ChefsAnonymous.Controllers
                     if (inventoryItem.Qty < ingredient.Qty)
                     {
                         var remainder = ingredient.Qty- inventoryItem.Qty;
-                        groceryList.Add(new Ingredient { ItemName = ingredient.ItemName, Qty = remainder });
+                        groceryList.Add(new Ingredient { IngredientId=ingredient.IngredientId,Unit=ingredient.Unit , ItemName = ingredient.ItemName,RecipeId=ingredient.RecipeId ,Qty = remainder });
                     }
-                }
+
+    }
                 else
                 {
                     groceryList.Add(ingredient);

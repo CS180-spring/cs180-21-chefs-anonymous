@@ -44,4 +44,7 @@
     background-color: #5cb85c;
     border-color: #5cb85c;
 }
+.completed {
+    text-decoration: line-through;
+}
 
