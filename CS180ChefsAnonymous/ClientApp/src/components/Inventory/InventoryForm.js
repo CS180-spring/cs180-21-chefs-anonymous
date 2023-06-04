@@ -35,7 +35,7 @@ const InventoryForm = (props) => {
   const formSubmitHandler = async (event) => {   
       
       event.preventDefault();
-      const invId = 35; // Change later for the following comments. (uniqueID for new inventory item && same inventory number for updating)
+      const invId = 39; // Change later for the following comments. (uniqueID for new inventory item && same inventory number for updating)
       const inventoryData = {
           inventoryId: invId, // Should be a new inventory ID
           itemName: enteredTitle,
@@ -47,8 +47,10 @@ const InventoryForm = (props) => {
       };
       console.log(`isEditing: ${props.isEditing}`);
       if (props.isEditing) {
-          const inventoryData = {
-              inventoryId: invId, // Updating an existing inventory so should be the same inventory number
+          const sameId = props.inventoryId;
+          console.log(`props.id === ${props.inventoryId}`);
+          const editInventoryData = {
+              inventoryId: sameId, // Updating an existing inventory so should be the same inventory number
               itemName: enteredTitle,
               qty: enteredAmount,
               unit: "haruki",
@@ -56,20 +58,51 @@ const InventoryForm = (props) => {
               // currentDate: currentDate,
               userId: 3,
           };
-      } 
-    
-  
-      try {
+          try {
 
-          if (props.isEditing) {
-              fetch(`api/inventory/DeleteInventory/${invId}`, {
+              fetch(`api/inventory/DeleteInventory/${sameId}`, {
                   method: "DELETE",
               })
                   .then((response) => response.json())
                   .then((data) => console.log(data))
                   .catch((error) => console.error(error));
+
+              const response = await fetch("api/inventory/AddInventory", {
+                  method: "POST",
+                  headers: {
+                      "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify(editInventoryData)
+              }).then(response => { response.json(); console.log(response.json()) })
+                  .then(data => console.log(data))
+                  .catch(error => console.log(error));
+
+              const responseData = await response.json();
+              console.log("response:", responseData);
+              const inventoryId = responseData.inventoryId;
+
+              // Resetting form inputs
+              setEnteredTitle("");
+              setEnteredAmount("");
+              setExpiryDate([]);
+              setCurrentDate([]);
+
+          } catch (error) {
+              console.error(error);
           }
-            // end delete
+
+
+      } else {
+          try {
+              if (props.isEditing) {
+                  fetch(`api/inventory/DeleteInventory/${invId}`, {
+                      method: "DELETE",
+                  })
+                      .then((response) => response.json())
+                      .then((data) => console.log(data))
+                      .catch((error) => console.error(error));
+              }
+              // end delete
 
               const response = await fetch("api/inventory/AddInventory", {
                   method: "POST",
@@ -81,47 +114,22 @@ const InventoryForm = (props) => {
                   .then(data => console.log(data))
                   .catch(error => console.log(error));
 
-              //if (!response.ok) {
-              //    throw new Error("Failed to add ingredient");
-              //}
-
-
               const responseData = await response.json();
               console.log("response:", responseData);
               const inventoryId = responseData.inventoryId;
-
-              /*for (const ingredient of enteredIngredient) {
-                  const newGUID = uuid();
-                  const ingredientData = {
-                      ingredientId: newGUID,
-                      recipeId: recipeId,
-                      itemName: ingredient.name,
-                      qty: enteredHoursCooktime,
-                      unit: "tsp",
-                  };
-      
-                  const ingredientResponse = await fetch("api/ingredient/AddIngredient", {
-                      method: "POST",
-                      headers: {
-                          "Content-Type": "application/json",
-                      },
-                      body: JSON.stringify(ingredientData),
-                  });
-      
-                  if (!ingredientResponse.ok) {
-                      throw new Error("Failed to add ingredient");
-                  }
-              }*/
 
               // Resetting form inputs
               setEnteredTitle("");
               setEnteredAmount("");
               setExpiryDate([]);
               setCurrentDate([]);
-          
-    } catch (error) {
-        console.error(error);
-    }
+
+          } catch (error) {
+              console.error(error);
+          }
+      }
+  
+      
 };
 
 

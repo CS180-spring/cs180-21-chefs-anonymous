@@ -82,9 +82,9 @@ const InventoryItem = (props) => {
             expiryDate={props.expiryDate}
             currentDate={props.currentDate}
             onCancel={cancelFormHandler}
-                      onGetInventoryData={getInventoryDataHandler}
-                      isEditing={true}
-                      ingredientId={props.ingredient.ingredientId}
+            onGetInventoryData={getInventoryDataHandler}
+            isEditing={true}
+            inventoryId={props.inventoryId}
           />
         </div>
       )}
