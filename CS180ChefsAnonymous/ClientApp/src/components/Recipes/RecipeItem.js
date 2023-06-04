@@ -51,28 +51,31 @@ const RecipeItem = (props) => {
   const cancelDeleteModalHandler = () => {
     setDisplayDeleteModal(false);
   };
-  
-const deleteDeleteModalHandler = async () => {
+
+  const deleteDeleteModalHandler = async () => {
     try {
-        await fetch("api/ingredient/DeleteIngredientsByRecipe/" + props.RecipeId, {
-            method: "DELETE",
-        })
-            .then((response) => response.json())
-            .then((data) => console.log(data))
-            .catch((error) => console.error(error));
-        await fetch("api/recipe/DeleteRecipe/" + props.RecipeId, {
-            method: "DELETE",
-        })
-            .then((response) => response.json())
-            .then((data) => console.log(data))
-            .catch((error) => console.error(error));
-        context.refreshRecipes();
-        context.recipeItemToMinimize();
-        setDisplayDeleteModal(false);
+      await fetch(
+        "api/ingredient/DeleteIngredientsByRecipe/" + props.RecipeId,
+        {
+          method: "DELETE",
+        }
+      )
+        .then((response) => response.json())
+        .then((data) => console.log(data))
+        .catch((error) => console.error(error));
+      await fetch("api/recipe/DeleteRecipe/" + props.RecipeId, {
+        method: "DELETE",
+      })
+        .then((response) => response.json())
+        .then((data) => console.log(data))
+        .catch((error) => console.error(error));
+      context.refreshRecipes();
+      context.recipeItemToMinimize();
+      setDisplayDeleteModal(false);
     } catch (error) {
-        console.error(error);
+      console.error(error);
     }
-};
+  };
 
   // Edit recipe
   const getRecipeDataHandler = (enteredRecipeData) => {
@@ -87,16 +90,14 @@ const deleteDeleteModalHandler = async () => {
       {displayForm === true && (
         <div>
           <RecipeForm
-            title={props.title}
-            cuisine={props.cuisine}
-            description={props.description}
-            prepHr={props.preptime.hours}
-            prepMin={props.preptime.minutes}
-            cookHr={props.cooktime.hours}
-            cookMin={props.cooktime.minutes}
-            ingredients={props.ingredients}
+            title={props.RecipeTitle}
+            recipeId={props.RecipeId}
+            description={props.RecipeDesc}
+            preptime={props.PrepTime}
+            cooktime={props.CookingTime}
             onCancel={cancelFormHandler}
             onGetRecipeData={getRecipeDataHandler}
+            isEditing={true}
           />
         </div>
       )}
