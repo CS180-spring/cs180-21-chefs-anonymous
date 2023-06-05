@@ -35,6 +35,7 @@ export class GroceryList extends Component {
                         this.setState({ groceries: groceriesWithCompletion });
                         console.log("groceries");
                         console.log(this.state.groceries);
+                        localStorage.setItem('groceries', JSON.stringify(groceriesWithCompletion));
                     })
                     .catch(error => {
                         console.error(error);
@@ -127,6 +128,23 @@ export class GroceryList extends Component {
             .catch((error) => console.error(error));
     }
 
+    handleGenerateGroceryList = () => {
+        const { UserId } = this.user;
+        fetch(`api/ingredient/GetGrocery/${UserId}`)
+            .then(response => response.json())
+            .then(data => {
+                const groceriesWithCompletion = data.map(item => ({
+                    ...item,
+                    completed: false
+                }));
+                this.setState({ groceries: groceriesWithCompletion });
+                localStorage.setItem('groceries', JSON.stringify(groceriesWithCompletion));
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }
+
     render() {
         return (
             <div className='grocery-list-container'>
@@ -141,19 +159,16 @@ export class GroceryList extends Component {
                                             checked={item.completed}
                                             onChange={() => this.handleCheckboxChange(item.itemName)}
                                         />
-                                        {item.qty}
-                                        {" "}
-
-                                        {item.itemName}
-
-
+                                        {item.qty} {item.itemName}
                                     </label>
-                                    <button onClick={() => this.handleDelete(item.itemName)} style={{alignSelf:"end"}}>Delete</button>
                                 </div>
                             ))}
                         </div>
+                        <button onClick={this.handleGenerateGroceryList}>
+                            Generate GroceryList
+                        </button>
                     </div>
-                    <div className='grocery-list-img'/>
+                    <div className='grocery-list-img' />
                 </div>
             </div>
         );
@@ -161,4 +176,3 @@ export class GroceryList extends Component {
 }
 
 export default GroceryList;
-
