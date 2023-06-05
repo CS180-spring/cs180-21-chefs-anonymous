@@ -405,88 +405,92 @@ const RecipeForm = (props) => {
         <h2 className={styles.new_recipe__controls}>Add Recipe</h2>
         <form onSubmit={formSubmitHandler}>
           <div className={styles.new_recipe__controls}>
-            <div className={styles.new_recipe__control}>
-              <label>Title</label>
-              <input
-                type="text"
-                value={enteredTitle}
-                onChange={titleChangeHandler}
-              />
+            <div style={{display:"flex"}}>
+              <div className={styles.new_recipe__control}>
+                <label>Title</label>
+                <input
+                  type="text"
+                  value={enteredTitle}
+                  onChange={titleChangeHandler}
+                />
+              </div>
+              <div className={styles.new_recipe__control}>
+                <label>Category</label>
+                <DropdownMenu
+                  placeholder={""}
+                  options={categoryList}
+                  isSearchable={false}
+                  OnSelectedOption={selectCategoryHandler}
+                />
+              </div>
+              <div className={styles.new_recipe__control}>
+                <label>Cuisine</label>
+                <DropdownMenu
+                  placeholder={""}
+                  options={cuisineList}
+                  isSearchable={true}
+                  OnSelectedOption={selectCuisineHandler}
+                />
+              </div>
+              <div className={styles.new_recipe__control}>
+                <label>Mealtime</label>
+                <DropdownMenu
+                  placeholder={""}
+                  options={mealtimeList}
+                  isSearchable={false}
+                  OnSelectedOption={selectMealtimeHandler}
+                />
+              </div>
             </div>
-            <div className={styles.new_recipe__control}>
-              <label>Category</label>
-              <DropdownMenu
-                placeholder={""}
-                options={categoryList}
-                isSearchable={false}
-                OnSelectedOption={selectCategoryHandler}
-              />
-            </div>
-            <div className={styles.new_recipe__control}>
-              <label>Cuisine</label>
-              <DropdownMenu
-                placeholder={""}
-                options={cuisineList}
-                isSearchable={true}
-                OnSelectedOption={selectCuisineHandler}
-              />
-            </div>
-            <div className={styles.new_recipe__control}>
-              <label>Mealtime</label>
-              <DropdownMenu
-                placeholder={""}
-                options={mealtimeList}
-                isSearchable={false}
-                OnSelectedOption={selectMealtimeHandler}
-              />
-            </div>
-            <div className={styles.new_recipe__control}>
-              <label>Description</label>
-              <input
-                type="text"
-                value={enteredDescription}
-                onChange={descriptionChangeHandler}
-              />
-            </div>
-            <div className={styles.new_recipe__control}>
-              <label>Prep Time</label>
-              <input
-                type="number"
-                value={enteredHoursPreptime}
-                min="0"
-                max="24"
-                onChange={hoursPreptimeChangeHandler}
-                style={{ width: "35%" }}
-              />
-              :
-              <input
-                type="number"
-                value={enteredMinutesPreptime}
-                min="0"
-                max="59"
-                onChange={minutesPreptimeChangeHandler}
-                style={{ width: "35%" }}
-              />
-            </div>
-            <div className={styles.new_recipe__control}>
-              <label>Cook Time</label>
-              <input
-                type="number"
-                value={enteredHoursCooktime}
-                min="0"
-                max="24"
-                onChange={hoursCooktimeChangeHandler}
-                style={{ width: "35%" }}
-              />
-              :
-              <input
-                type="number"
-                value={enteredMinutesCooktime}
-                min="0"
-                max="59"
-                onChange={minutesCooktimeChangeHandler}
-                style={{ width: "35%" }}
-              />
+            <div style={{display:"flex"}}>
+              <div className={styles.new_recipe__control}>
+                <label>Description</label>
+                <input
+                  type="text"
+                  value={enteredDescription}
+                  onChange={descriptionChangeHandler}
+                />
+              </div>
+              <div className={styles.new_recipe__control}>
+                <label>Prep Time</label>
+                <input
+                  type="number"
+                  value={enteredHoursPreptime}
+                  min="0"
+                  max="24"
+                  onChange={hoursPreptimeChangeHandler}
+                  style={{ width: "4rem" }}
+                />
+                :
+                <input
+                  type="number"
+                  value={enteredMinutesPreptime}
+                  min="0"
+                  max="59"
+                  onChange={minutesPreptimeChangeHandler}
+                  style={{ width: "4rem" }}
+                />
+              </div>
+              <div className={styles.new_recipe__control}>
+                <label>Cook Time</label>
+                <input
+                  type="number"
+                  value={enteredHoursCooktime}
+                  min="0"
+                  max="24"
+                  onChange={hoursCooktimeChangeHandler}
+                  style={{ width: "4rem" }}
+                />
+                :
+                <input
+                  type="number"
+                  value={enteredMinutesCooktime}
+                  min="0"
+                  max="59"
+                  onChange={minutesCooktimeChangeHandler}
+                  style={{ width: "4rem" }}
+                />
+              </div>
             </div>
           </div>
           <div className={styles.new_recipe__controls}>
@@ -515,7 +519,7 @@ const RecipeForm = (props) => {
                   min="0"
                   max="24"
                   onChange={changeQtyHandler}
-                  style={{ width: "20%" }}
+                  style={{ width: "7rem" }}
                 />
                 <DropdownMenu
                   placeHolder={"Units"}
