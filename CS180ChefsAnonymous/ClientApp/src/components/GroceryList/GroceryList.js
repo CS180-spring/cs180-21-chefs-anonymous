@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './GroceryList.css';
+import { Button } from 'reactstrap';
+import '../Home/Home.css';
 
 export class GroceryList extends Component {
     constructor(props) {
@@ -149,24 +151,26 @@ export class GroceryList extends Component {
         return (
             <div className='grocery-list-container'>
                 <div className="grocery-list">
-                    <div className='grocery-list-out'>
-                        <div className='grocery-list-wrapper'>
-                            {this.state.groceries.map(item => (
-                                <div key={item.itemName} className="grocery-item">
-                                    <label>
-                                        <input
-                                            type="checkbox"
-                                            checked={item.completed}
-                                            onChange={() => this.handleCheckboxChange(item.itemName)}
-                                        />
-                                        {item.qty} {item.itemName}
-                                    </label>
-                                </div>
-                            ))}
+                    <div style={{display:"flex", flexDirection:"column", height:"60vh"}}>
+                        <div className='grocery-list-out'>
+                            <div className='grocery-list-wrapper'>
+                                {this.state.groceries.map(item => (
+                                    <div key={item.itemName} className="grocery-item">
+                                        <label>
+                                            <input
+                                                type="checkbox"
+                                                checked={item.completed}
+                                                onChange={() => this.handleCheckboxChange(item.itemName)}
+                                            />
+                                            {item.qty} {item.itemName}
+                                        </label>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
-                        <button onClick={this.handleGenerateGroceryList}>
+                        <Button onClick={this.handleGenerateGroceryList} style={{margin:"1rem 0", alignSelf:"center", backgroundColor:"#569e56", border:"none"}}>
                             Generate GroceryList
-                        </button>
+                        </Button>
                     </div>
                     <div className='grocery-list-img' />
                 </div>
