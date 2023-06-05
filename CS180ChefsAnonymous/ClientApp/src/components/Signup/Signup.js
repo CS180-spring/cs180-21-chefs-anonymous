@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 
 //import backgroundImage from '../../signupBackground.jpg';
-import './Signup.css';
+import '../Login/Login.css';
 
 export class Signup extends Component {
   static displayName = Signup.name;
@@ -63,30 +63,29 @@ export class Signup extends Component {
 
       return (
         
-        <div className="singupPage" style={{
-            //backgroundImage: `url(${backgroundImage})`,
-            //backgroundSize: 'cover',
-            //height: '100vh'
-          }}>
-              <form className="singupForm">
+        <div className="signupPage">
+              <form className="signupForm">
+                <h3 style={{alignSelf: "center"}}>Create Account</h3>
                   <label>
-                        <input className="Signup_Username" type="text" name="Full Name" onChange={this.handleInputChange} placeholder="Fullname"/>
+                        <input className="Login_Username" type="text" name="Full Name" onChange={this.handleInputChange} placeholder="Fullname"/>
                   </label>
                   
                   <label>
-                        <input className="Signup_Username" type="text" name="Email" onChange={this.handleInputChange} placeholder="Email"/>
+                        <input className="Login_Username" type="text" name="Email" onChange={this.handleInputChange} placeholder="Email"/>
                   </label>
 
                   <label>
-                        <input className="Signup_Username" type="text" name="username" onChange={this.handleInputChange} placeholder="Username"/>
+                        <input className="Login_Username" type="text" name="username" onChange={this.handleInputChange} placeholder="Username"/>
                   </label>
 
                   <label>
-                      <input className="Signup_Password" type="password" name="password" onChange={this.handleInputChange} placeholder="Password" />
+                      <input className="Login_Password" type="password" name="password" onChange={this.handleInputChange} placeholder="Password" />
                   </label>
 
                   <br />
-                  <button className="Signup_Button" type="button" onClick={this.handleSignup}>Sign up</button>
+                  <button className="Login_Button" type="button" onClick={this.handleSignup}>Sign up</button>
+                  <Link to="/logIn" style={{textDecoration:"none", margin:"1rem 3rem", cursor:"pointer", color:"black"}}>Already Have an Account?</Link>
+                  <Link to="/" style={{textDecoration:"none", margin:"0 3rem", cursor:"pointer", color:"black"}}>Back to Home</Link>
               </form>
         </div>
     );

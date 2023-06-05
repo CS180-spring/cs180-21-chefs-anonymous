@@ -276,10 +276,10 @@ const RecipeForm = (props) => {
 
             const ingredientData = {
               ingredientId: newGUID,
-                recipeId: recipeId,
-                itemName: ingredient.ItemName,
-              qty: enteredHoursCooktime,
-              unit: "tsp",
+              recipeId: recipeId,
+              itemName: ingredient.ItemName,
+              qty: ingredient.Qty,
+              unit: ingredient.Unit.title,
             };
             console.log("ingredientData");
 
@@ -315,31 +315,31 @@ const RecipeForm = (props) => {
       }
     } else {
       // Update recipe table in DB
-      //   const updatedRecipeData = {
-      //     recipeId: props.recipeId,
-      //     recipeTitle: enteredTitle,
-      //     recipeDesc: enteredDescription,
-      //     instructions: "Instructions coming soon...",
-      //     prepTime:
-      //       parseInt(enteredMinutesPreptime) +
-      //       parseInt(enteredHoursPreptime) * 60,
-      //     cookingTime:
-      //       parseInt(enteredMinutesCooktime) +
-      //       parseInt(enteredHoursCooktime) * 60,
-      //     userId: 6,
-      //     categoryId: 1,
-      //   };
+      const updatedRecipeData = {
+        recipeId: props.recipeId,
+        recipeTitle: enteredTitle,
+        recipeDesc: enteredDescription,
+        instructions: "Instructions coming soon...",
+        prepTime:
+          parseInt(enteredMinutesPreptime) +
+          parseInt(enteredHoursPreptime) * 60,
+        cookingTime:
+          parseInt(enteredMinutesCooktime) +
+          parseInt(enteredHoursCooktime) * 60,
+        userId: 6,
+        categoryId: 1,
+      };
 
-      //   fetch("api/recipe/UpdateRecipe/" + props.recipeId, {
-      //     method: "PATCH",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //     body: JSON.stringify(updatedRecipeData),
-      //   })
-      //     .then((response) => response.json())
-      //     .then((data) => console.log(data))
-      //     .catch((error) => console.error(error));
+      fetch("api/recipe/UpdateRecipe/" + props.recipeId, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedRecipeData),
+      })
+        .then((response) => response.json())
+        .then((data) => console.log(data))
+        .catch((error) => console.error(error));
 
       // Update ingredient table in DB
       enteredIngredient.forEach((ingredient) => {
@@ -353,32 +353,32 @@ const RecipeForm = (props) => {
         } else {
           console.log(`Posting new ingredient: ${ingredient.ItemName}`);
 
-          //   const newGUID = uuid();
+          const newGUID = uuid();
 
-          //   const ingredientData = {
-          //     ingredientId: newGUID,
-          //     recipeId: recipeId,
-          //     itemName: ,
-          //     qty: enteredQty,
-          //     unit: "tsp",
-          //   };
+          const ingredientData = {
+            ingredientId: newGUID,
+            recipeId: props.recipeId,
+            itemName: newIngredient,
+            qty: enteredQty,
+            unit: "tsp",
+          };
 
-          //   fetch("api/ingredient/AddIngredient", {
-          //     method: "POST",
-          //     headers: {
-          //       "Content-Type": "application/json",
-          //     },
-          //     body: JSON.stringify({
-          //       ingredientId: 80,
-          //       recipeId: 78,
-          //       itemName: "Sauce packet",
-          //       qty: 1,
-          //       unit: "tsp",
-          //     }),
-          //   })
-          //     .then((response) => response.json())
-          //     .then((data) => console.log(data))
-          //     .catch((error) => console.error(error));
+          fetch("api/ingredient/AddIngredient", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              ingredientId: 80,
+              recipeId: 78,
+              itemName: "Sauce packet",
+              qty: 1,
+              unit: "tsp",
+            }),
+          })
+            .then((response) => response.json())
+            .then((data) => console.log(data))
+            .catch((error) => console.error(error));
         }
       });
 

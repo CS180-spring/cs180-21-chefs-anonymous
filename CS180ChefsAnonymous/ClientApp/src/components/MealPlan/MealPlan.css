@@ -15,6 +15,7 @@ th, td {
 }
 td {
     height: 17vh;
+    max-width: 2rem;
 }
 
 th {
