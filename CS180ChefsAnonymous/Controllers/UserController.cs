@@ -117,6 +117,14 @@ namespace CS180ChefsAnonymous.Controllers
         [Route("AddUser")]
         public async Task<User> AddUser(User objUser)
         {
+            //create unique userId
+            int userId = 1;
+            while (await _dbContext.Users.AnyAsync(u => u.UserId == userId))
+            {
+                userId++;
+            }
+            objUser.UserId = userId;
+
             _dbContext.Users.Add(objUser);
             await _dbContext.SaveChangesAsync();
             return objUser;

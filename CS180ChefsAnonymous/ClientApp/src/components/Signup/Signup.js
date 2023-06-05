@@ -12,8 +12,9 @@ export class Signup extends Component {
         this.state = {
             username: '',
             password: '',
-            redirectToRecipes: false,
-
+            email: '',
+            fullName: '',
+            redirectToLogin: false,
         };
     }
 
@@ -25,29 +26,32 @@ export class Signup extends Component {
 
     handleSignup = (event) => {
         event.preventDefault();
+        const { username, password, email, fullName } = this.state;
+        const userData = {
+            userId: 1,
+            name: fullName,
+            username: username,
+            password: password,
+            email: email,
+        };
+        console.log("userData");
 
-        const { username, password } = this.state;
+        console.log(userData);
 
-        fetch('api/user/Signup', {
+
+        fetch('api/user/AddUser', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-                username,
-                password
-            })
+            body: JSON.stringify(userData)
         })
             .then(response => response.json())
             .then(data => {
                 // Handle the response from the API
                 console.log(data);
-                // Save the user object to local storage
-                localStorage.setItem('user', JSON.stringify(data));
-
-
-                // Redirect to the recipe page
-                this.setState({ redirectToRecipes: true });
+                // Redirect to the login page
+                this.setState({ redirectToLogin: true });
             })
             .catch(error => {
                 // Handle any error that occurs during the request
@@ -57,8 +61,8 @@ export class Signup extends Component {
 
     render() {
         // Redirect to the recipe page if the login was successful
-        if (this.state.redirectToRecipes) {
-            return <Navigate to="/recipes" />;
+        if (this.state.redirectToLogin) {
+            return <Navigate to="/login" />;
         }
 
       return (
@@ -67,11 +71,11 @@ export class Signup extends Component {
               <form className="signupForm">
                 <h3 style={{alignSelf: "center"}}>Create Account</h3>
                   <label>
-                        <input className="Login_Username" type="text" name="Full Name" onChange={this.handleInputChange} placeholder="Fullname"/>
+                        <input className="Login_Username" type="text" name="fullName" onChange={this.handleInputChange} placeholder="Fullname"/>
                   </label>
                   
                   <label>
-                        <input className="Login_Username" type="text" name="Email" onChange={this.handleInputChange} placeholder="Email"/>
+                        <input className="Login_Username" type="text" name="email" onChange={this.handleInputChange} placeholder="Email"/>
                   </label>
 
                   <label>
