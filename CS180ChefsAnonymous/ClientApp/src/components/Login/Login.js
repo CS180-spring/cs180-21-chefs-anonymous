@@ -74,6 +74,7 @@ export class Login extends Component {
                   <br />
                   <button className="Login_Button" type="button" onClick={this.handleLogin}>Log in</button>
                   <Link to="/signUp" style={{textDecoration:"none", margin:"1rem 3rem", cursor:"pointer", color:"black"}}>Don't Have an Account?</Link>
+                  <Link to="/" style={{textDecoration:"none", margin:"0 3rem", cursor:"pointer", color:"black"}}>Back to Home</Link>
               </form>
         </div>
     );
