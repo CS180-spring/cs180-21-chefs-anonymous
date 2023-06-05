@@ -3,6 +3,7 @@ import React, {useState, useEffect} from "react";
 import InventoryList from "./InventoryList";
 import InventoryForm from "./InventoryForm";
 import Button from "../UI/Button";
+import style from "./Inventory.module.css"
 
 const DUMMY_INVENTORY = [
   {
@@ -103,8 +104,7 @@ const Inventory = (props) => {
             borderRadius: "30px",marginRight: "3rem",overflowY: "scroll"}}>
               <InventoryList inventory={inventoryList} />
             </div>
-            <div style={{width:"40vw", backgroundImage:"url(https://localhost:44462/static/media/inventory.8b99f88c801dd5532e8a.png)",borderRadius:"40px",
-            backgroundPosition: "center",backgroundRepeat: "no-repeat", objectFit: "cover", backgroundSize: "cover"}} />
+            <div className={style.inv_img} />
           </div>
           <Button type="submit" onClick={displayInventoryFormHandler} isEditing={false}>
             Add Ingredient

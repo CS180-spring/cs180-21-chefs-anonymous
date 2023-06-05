@@ -1,0 +1,9 @@
+.inv_img {
+    width: 40vw;
+    background-image: url(/public/inventory.png);
+    border-radius: 40px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    object-fit: cover;
+    background-size: cover;
+}
