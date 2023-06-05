@@ -129,26 +129,32 @@ export class GroceryList extends Component {
 
     render() {
         return (
-            <div className="grocery-list">
-                <h2>Grocery List</h2>
-                {this.state.groceries.map(item => (
-                    <div key={item.itemName} className="grocery-item">
-                        <label>
-                            <input
-                                type="checkbox"
-                                checked={item.completed}
-                                onChange={() => this.handleCheckboxChange(item.itemName)}
-                            />
-                            {item.qty}
-                            {" "}
+            <div className='grocery-list-container'>
+                <div className="grocery-list">
+                    <div className='grocery-list-out'>
+                        <div className='grocery-list-wrapper'>
+                            {this.state.groceries.map(item => (
+                                <div key={item.itemName} className="grocery-item">
+                                    <label>
+                                        <input
+                                            type="checkbox"
+                                            checked={item.completed}
+                                            onChange={() => this.handleCheckboxChange(item.itemName)}
+                                        />
+                                        {item.qty}
+                                        {" "}
 
-                            {item.itemName}
+                                        {item.itemName}
 
 
-                        </label>
-                        <button onClick={() => this.handleDelete(item.itemName)}>Delete</button>
+                                    </label>
+                                    <button onClick={() => this.handleDelete(item.itemName)} style={{alignSelf:"end"}}>Delete</button>
+                                </div>
+                            ))}
+                        </div>
                     </div>
-                ))}
+                    <div className='grocery-list-img'/>
+                </div>
             </div>
         );
     }
