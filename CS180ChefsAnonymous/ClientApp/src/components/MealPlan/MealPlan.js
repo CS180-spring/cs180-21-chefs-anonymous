@@ -149,7 +149,7 @@ const MealPlan = (props) => {
       else {
         if (j === 0 && i !== 0) {
           tableCells.push(
-            <td id={i+'-'+j} key={i+'-'+j}>
+            <td id={i+'-'+j} key={i+'-'+j} style={{backgroundColor:"rgb(233 233 233)"}}>
               {getMealTime(i)}
             </td>
           );

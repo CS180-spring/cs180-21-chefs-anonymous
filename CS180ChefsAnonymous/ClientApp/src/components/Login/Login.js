@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 
-import backgroundImage from '../../loginBackground.jpg';
 import './Login.css';
 
 export class Login extends Component {
@@ -63,12 +62,9 @@ export class Login extends Component {
 
       return (
         
-        <div className="loginPage" style={{
-            backgroundImage: `url(${backgroundImage})`,
-            backgroundSize: 'cover',
-            height: '100vh'
-          }}>
+        <div className="loginPage">
               <form className="loginForm">
+                <h3 style={{alignSelf: "center"}}>Welcome Back</h3>
                   <label>
                         <input className="Login_Username" type="text" name="username" onChange={this.handleInputChange} placeholder="Username"/>
                   </label>
@@ -77,6 +73,7 @@ export class Login extends Component {
                   </label>
                   <br />
                   <button className="Login_Button" type="button" onClick={this.handleLogin}>Log in</button>
+                  <Link to="/signUp" style={{textDecoration:"none", margin:"1rem 3rem", cursor:"pointer", color:"black"}}>Don't Have an Account?</Link>
               </form>
         </div>
     );
