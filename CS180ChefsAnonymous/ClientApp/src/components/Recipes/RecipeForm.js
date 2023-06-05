@@ -162,6 +162,7 @@ const RecipeForm = (props) => {
     setNewIngredient(event.target.value);
   };
   const selectUnitHandler = (selectedUnit) => {
+    console.log(selectedUnit);
     setEnteredUnit(selectedUnit);
   };
   const changeQtyHandler = (event) => {
@@ -328,7 +329,7 @@ const RecipeForm = (props) => {
         cookingTime:
           parseInt(enteredMinutesCooktime) +
           parseInt(enteredHoursCooktime) * 60,
-        userId: 6,
+        userId: userId,
         categoryId: 1,
       };
 
@@ -353,16 +354,15 @@ const RecipeForm = (props) => {
         if (ingredientExists) {
           console.log(`Ingredient ${ingredient.ItemName} already in DB.`);
         } else {
-          console.log(`Posting new ingredient: ${ingredient.ItemName}`);
-
+          console.log(`Posting new ingredient: ${enteredUnit}`);
           const newGUID = uuid();
 
           const ingredientData = {
             ingredientId: newGUID,
             recipeId: props.recipeId,
-            itemName: newIngredient,
+            itemName: ingredient.ItemName,
             qty: enteredQty,
-            unit: "tsp",
+            unit: enteredUnit.title,
           };
 
           fetch("api/ingredient/AddIngredient", {
@@ -370,13 +370,7 @@ const RecipeForm = (props) => {
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({
-              ingredientId: 80,
-              recipeId: 78,
-              itemName: "Sauce packet",
-              qty: 1,
-              unit: "tsp",
-            }),
+            body: JSON.stringify(ingredientData),
           })
             .then((response) => response.json())
             .then((data) => console.log(data))
