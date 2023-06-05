@@ -58,14 +58,15 @@
 }
 
 .grocery-list input[type="checkbox"] {
-    margin-right: 10px; 
-    appearance: none; 
-    width: 16px; 
-    height: 16px; 
+    margin-right: 10px;
+    appearance: none;
+    width: 16px;
+    height: 16px;
     border: 2px solid #ddd;
-    border-radius: 3px; 
+    border-radius: 3px;
     outline: none;
-    cursor: pointer; 
+    cursor: pointer;
+    border-color: grey;
 }
 
 .grocery-list input[type="checkbox"]:checked {
