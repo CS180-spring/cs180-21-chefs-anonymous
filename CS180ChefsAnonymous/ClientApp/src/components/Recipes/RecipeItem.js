@@ -63,6 +63,14 @@ const RecipeItem = (props) => {
         .then((response) => response.json())
         .then((data) => console.log(data))
         .catch((error) => console.error(error));
+
+      await fetch("api/mealplan/DeleteMealPlanByRecipe/" + props.RecipeId, {
+        method: "DELETE",
+      })
+        .then((response) => response.json())
+        .then((data) => console.log(data))
+        .catch((error) => console.error(error));
+
       await fetch("api/recipe/DeleteRecipe/" + props.RecipeId, {
         method: "DELETE",
       })
