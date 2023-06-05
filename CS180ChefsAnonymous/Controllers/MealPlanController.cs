@@ -77,6 +77,23 @@ namespace CS180ChefsAnonymous.Controllers
             return a;
         }
 
+        [HttpDelete]
+        [Route("DeleteMealPlanByRecipe/{recipeId}")]
+        public bool DeleteMealPlanByRecipe(Guid recipeId)
+        {
+             bool a = false;
+            var mealplans = _dbContext.MealPlans.Where(i => i.RecipeId == recipeId).ToList();
+    
+            if (mealplans != null)
+            {
+                _dbContext.MealPlans.RemoveRange(mealplans);
+                _dbContext.SaveChanges();
+            a = true;
+            }
+
+            return a;
+        }
+
         [HttpGet]
         [Route("GetMealPlan/{user_id}")]
         public async Task<IEnumerable<MealPlan>> GetMealPlan(int user_id)

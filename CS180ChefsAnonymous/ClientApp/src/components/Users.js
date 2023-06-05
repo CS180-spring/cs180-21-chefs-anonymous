@@ -1,7 +1,6 @@
 ﻿import React, { useState, useEffect } from "react";
 
 export function Users() {
-
   const [users, setUsers] = useState([]);
   useEffect(() => {
     fetch("api/user/GetUsers")
@@ -464,7 +463,7 @@ export function Users() {
       });
   }
 
-//finished adding inventory item
+  //finished adding inventory item
   function addInventoryItem() {
     fetch("api/inventory/AddInventory", {
       method: "POST",
@@ -503,7 +502,7 @@ export function Users() {
       .catch((error) => console.error(error));
   }
 
-//finished with remove inventory item
+  //finished with remove inventory item
   function removeInventoryItem() {
     fetch("api/inventory/DeleteInventory/4", {
       method: "DELETE",
@@ -512,10 +511,6 @@ export function Users() {
       .then((data) => console.log(data))
       .catch((error) => console.error(error));
   }
-
-
-
-
 
   // MealPlan Stuff
   const [mealplan, setMeal] = useState([]);
@@ -595,9 +590,21 @@ export function Users() {
   }
 
   function removeMeal() {
-    fetch("api/mealplan/DeleteMealPlan/2", {
+    fetch("api/mealplan/DeleteMealPlan/68", {
       method: "DELETE",
     })
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.error(error));
+  }
+
+  function removeMealByRecipe() {
+    fetch(
+      "api/mealplan/DeleteMealPlanByRecipe/3abe2163-81db-464a-b28f-32a67a33e97c",
+      {
+        method: "DELETE",
+      }
+    )
       .then((response) => response.json())
       .then((data) => console.log(data))
       .catch((error) => console.error(error));
@@ -967,6 +974,9 @@ export function Users() {
       <button className="btn btn-primary" onClick={removeMeal}>
         Delete
       </button>
+      <button className="btn btn-primary" onClick={removeMealByRecipe}>
+        DeleteByRecipe
+      </button>
       <button className="btn btn-primary" onClick={getSpecificMeal}>
         Get1
       </button>
@@ -1019,7 +1029,6 @@ export function Users() {
       </button>
     </div>
   );
-
 }
 
 /*
