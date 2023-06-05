@@ -31,50 +31,46 @@ const Recipes = (props) => {
   const [recipesList, setRecipesList] = useState("");
   const [searchList, setSearchList] = useState("");
   const [refresh, setRefresh] = useState(true);
-    let userId;
-    try {
-        const userJSON = localStorage.getItem('user');
-        if (userJSON) {
-            const user = JSON.parse(userJSON);
-            userId = user.UserId;
-        } else {
-            console.error('User data not found in localStorage.');
-        }
-    } catch (error) {
-        console.error('Error parsing user data from localStorage:', error);
-        userId = 3;
-
+  let userId;
+  try {
+    const userJSON = localStorage.getItem("user");
+    if (userJSON) {
+      const user = JSON.parse(userJSON);
+      userId = user.UserId;
+    } else {
+      console.error("User data not found in localStorage.");
     }
+  } catch (error) {
+    console.error("Error parsing user data from localStorage:", error);
+    userId = 3;
+  }
 
-    useEffect(() => {
-        if (filterOptions.length>=1) {
+  useEffect(() => {
+    if (filterOptions.length >= 1) {
+      fetch(`api/user/GetUserRecipesAscending/${userId}`)
+        .then((response) => response.json())
+        .then((responseJson) => {
+          console.log("response:", responseJson.$values);
+          setRecipesList(responseJson.$values);
+          setSearchList(responseJson.$values);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    } else {
+      fetch(`api/user/GetUserRecipes/${userId}`)
+        .then((response) => response.json())
+        .then((responseJson) => {
+          console.log("response:", responseJson.$values);
+          setRecipesList(responseJson.$values);
+          setSearchList(responseJson.$values);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
 
-                fetch(`api/user/GetUserRecipesAscending/${userId}`)
-                    .then((response) => response.json())
-                    .then((responseJson) => {
-                        console.log("response:", responseJson.$values);
-                        setRecipesList(responseJson.$values);
-                        setSearchList(responseJson.$values);
-                    })
-                    .catch((error) => {
-                        console.error(error);
-                    });
-            
-        } else {
-            fetch(`api/user/GetUserRecipes/${userId}`)
-                .then((response) => response.json())
-                .then((responseJson) => {
-                    console.log("response:", responseJson.$values);
-                    setRecipesList(responseJson.$values);
-                    setSearchList(responseJson.$values);
-                })
-                .catch((error) => {
-                    console.error(error);
-                });
-
-            console.log();
-        }
-    
+      console.log();
+    }
   }, [refresh, filterOptions]);
 
   const refreshRecipesHandler = (props) => {
@@ -179,7 +175,10 @@ const Recipes = (props) => {
                   }}
                 >
                   <div style={{ marginRight: "10px" }}>
-                    <Searchbar recipes={recipesList} fullRecipesList={searchList} />
+                    <Searchbar
+                      recipes={recipesList}
+                      fullRecipesList={searchList}
+                    />
                   </div>
                   <MultiselectDropdown
                     placeHolder="Filter by..."
@@ -190,11 +189,11 @@ const Recipes = (props) => {
                 </div>
                 <div>{displayFilters()}</div>
               </div>
-              <div style={{display:"flex", margin: "2rem 0"}}>
+              <div style={{ display: "flex", margin: "2rem 0" }}>
                 <div className={styles.list_container}>
                   <RecipesList recipes={recipesList} />
                 </div>
-                <div className={styles.pic_container}/>
+                <div className={styles.pic_container} />
               </div>
             </div>
             <Button type="submit" onClick={displayRecipeFormHandler}>
