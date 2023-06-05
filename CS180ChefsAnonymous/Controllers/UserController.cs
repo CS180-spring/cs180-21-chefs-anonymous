@@ -7,6 +7,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Diagnostics.Metrics;
 using System.Threading.Channels;
+using Microsoft.Extensions.Options;
 
 namespace CS180ChefsAnonymous.Controllers
 {
@@ -88,6 +89,29 @@ namespace CS180ChefsAnonymous.Controllers
             var json = JsonSerializer.Serialize(user.Recipes, options);
             return Ok(json);
         }
+
+        [HttpGet]
+        [Route("GetUserRecipesAscending/{userId}")]
+        public async Task<IActionResult> GetRecipesAscending(int userId)
+        {
+            // Find recipes with the given userId
+            var recipes = await _dbContext.Recipes
+                .Where(r => r.UserId == userId)
+                .ToListAsync();
+
+            var options = new JsonSerializerOptions
+            {
+                ReferenceHandler = ReferenceHandler.Preserve
+            };
+
+            // Sort the recipes in ascending order by title
+            var json = JsonSerializer.Serialize(recipes.OrderBy(r => r.RecipeTitle).ToList(), options);
+            
+
+            // Return the sorted recipes
+            return Ok(json);
+        }
+
 
         [HttpPost]
         [Route("AddUser")]

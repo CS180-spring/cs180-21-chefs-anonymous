@@ -47,19 +47,35 @@ const Recipes = (props) => {
     }
 
     useEffect(() => {
-    fetch(`api/user/GetUserRecipes/${userId}`)
-      .then((response) => response.json())
-      .then((responseJson) => {
-        console.log("response:", responseJson.$values);
-        setRecipesList(responseJson.$values);
-        setSearchList(responseJson.$values);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+        if (filterOptions.length>=1) {
 
-    console.log();
-  }, [refresh]);
+                fetch(`api/user/GetUserRecipesAscending/${userId}`)
+                    .then((response) => response.json())
+                    .then((responseJson) => {
+                        console.log("response:", responseJson.$values);
+                        setRecipesList(responseJson.$values);
+                        setSearchList(responseJson.$values);
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                    });
+            
+        } else {
+            fetch(`api/user/GetUserRecipes/${userId}`)
+                .then((response) => response.json())
+                .then((responseJson) => {
+                    console.log("response:", responseJson.$values);
+                    setRecipesList(responseJson.$values);
+                    setSearchList(responseJson.$values);
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+
+            console.log();
+        }
+    
+  }, [refresh, filterOptions]);
 
   const refreshRecipesHandler = (props) => {
     console.log("refreshed!");
