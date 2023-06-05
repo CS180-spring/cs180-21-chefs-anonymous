@@ -39,7 +39,7 @@ namespace CS180ChefsAnonymous.Controllers
         [Route("AddCategory")]
         public async Task<Category> AddCategory(Category objCategory)
         {
-            int catId = 1;
+            int catId = 1100;
             while (await _dbContext.Categories.AnyAsync(inv => inv.CategoryId == catId))
             {
                 catId++;
