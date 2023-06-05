@@ -63,12 +63,15 @@ const RecipeForm = (props) => {
   ];
   // Array containing units
   const unitList = [
-    { id: 1, title: "tsp" },
-    { id: 2, title: "tbsp" },
-    { id: 3, title: "cup" },
-    { id: 4, title: "pint" },
-    { id: 5, title: "quart" },
-    { id: 6, title: "gallon" },
+    { id: 1, title: "N/A" },
+    { id: 2, title: "tsp" },
+    { id: 3, title: "tbsp" },
+    { id: 4, title: "cup" },
+    { id: 5, title: "pint" },
+    { id: 6, title: "quart" },
+    { id: 7, title: "gallon" },
+    { id: 8, title: "lbs" },
+    { id: 9, title: "oz" },
   ];
 
   const context = useContext(RecipesContext);
@@ -205,6 +208,7 @@ const RecipeForm = (props) => {
 
   const formSubmitHandler = async (event) => {
     event.preventDefault();
+    props.onCancel();
     // Post recipe to Recipe table in DB
     if (!props.isEditing) {
       try {
@@ -301,18 +305,16 @@ const RecipeForm = (props) => {
             }
           }
 
-          // Resetting form inputs
-          setEnteredTitle("");
-          setEnteredCuisine("");
-          setEnteredCategory("");
-          setEnteredDescription("");
-          setEnteredIngredient([]);
+          context.refreshRecipes();
         } catch (error) {
           console.error(error);
         }
       } catch (error) {
         console.error(error);
       }
+
+      props.onCancel();
+      context.refreshRecipes();
     } else {
       // Update recipe table in DB
       const updatedRecipeData = {
@@ -393,9 +395,7 @@ const RecipeForm = (props) => {
         }
       });
       // Update category table in DB
-
       context.refreshRecipes();
-      props.onCancel();
     }
   };
 
@@ -405,7 +405,7 @@ const RecipeForm = (props) => {
         <h2 className={styles.new_recipe__controls}>Add Recipe</h2>
         <form onSubmit={formSubmitHandler}>
           <div className={styles.new_recipe__controls}>
-            <div style={{display:"flex"}}>
+            <div style={{ display: "flex" }}>
               <div className={styles.new_recipe__control}>
                 <label>Title</label>
                 <input
@@ -442,7 +442,7 @@ const RecipeForm = (props) => {
                 />
               </div>
             </div>
-            <div style={{display:"flex"}}>
+            <div style={{ display: "flex" }}>
               <div className={styles.new_recipe__control}>
                 <label>Description</label>
                 <input
