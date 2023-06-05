@@ -1,0 +1,41 @@
+﻿a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.navbar-brand {
+  color: #794d24 !important;
+}
+
+.navbar-brand:hover {
+  color: #9d6531 !important;
+}
+
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+  height: 5vh;
+}
+
+header {
+  background-color: rgb(238, 230, 207);
+}
+
+.text-dark {
+  color: #406a40 !important;
+}
+
+.text-dark:hover {
+  color: #61b361 !important;
+}

@@ -1,0 +1,74 @@
+/* Need to Fix this later */
+table, td, th {  
+    border: 1.5px solid #000000;
+    text-align: center;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    padding: 15px;
+    vertical-align:middle;
+}
+td {
+    height: 17vh;
+    max-width: 2rem;
+}
+
+th {
+    background-color: rgb(255, 227, 185);
+    font-weight: 400;
+}
+th:first-child {
+    background-color: rgb(206, 255, 208);
+}
+
+/* ---------------Modal ------------*/
+
+.modal1, .overlay1 {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+}
+
+.overlay1 {
+    background: rgba(44, 44, 44, 0.609);
+}
+
+.modal-content1 {
+    height: 80vh;
+    width: 70vw;
+    position: absolute;
+    overflow-y: scroll;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* line-height: 1.4; */
+    background: #e9e9e9;
+    border-radius: 5px;
+}
+
+.active-modal {
+    overflow-y: hidden;
+}
+
+.mealplan-modal-head {
+    margin: 4rem 3rem;
+    text-align: center;
+    word-break: break-word;
+}
+
+.meal-modal-list {
+    margin: 5rem;
+}
+
+.meal-modal-p {
+    text-align: center;
+}

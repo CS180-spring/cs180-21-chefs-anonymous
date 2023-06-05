@@ -1,0 +1,107 @@
+﻿.loginPage {
+    display: flex;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    left: 0;
+    top: 0;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.45),rgba(0, 0, 0, 0.45)) ,
+    url(/public/login.png);
+    background-size: cover;
+    object-fit: cover;
+}
+
+.signupPage {
+    display: flex;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    left: 0;
+    top: 0;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.45),rgba(0, 0, 0, 0.45)) ,
+    url(/public/login.png);
+    background-position: bottom;
+    background-size: cover;
+    object-fit: cover;
+}
+
+.signupForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 35rem;
+    height: 30rem;
+    background: #FFFEF0;
+    mix-blend-mode: hard-light;
+    margin: auto;
+}
+
+.loginForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 35rem;
+    height: 25rem;
+    background: #FFFEF0;
+    mix-blend-mode: hard-light;
+    margin: auto;
+}
+
+.Login_Username {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px auto;
+    padding: 0 1rem;
+    width: 80%;
+    height: 35px;
+    background: rgb(255, 230, 218);
+    mix-blend-mode: luminosity;
+    border: 1px solid #EFA884;
+    border-radius: 5px;
+}
+
+
+.Login_Password {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px auto;
+    padding: 0 1rem;
+    width: 80%;
+    height: 35px;
+    background: rgba(255, 206, 181, 0.5);
+    mix-blend-mode: luminosity;
+    border: 1px solid #EFA884;
+    border-radius: 5px;
+}
+
+.Login_Button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 80%;
+    height: 35px;
+    background: rgba(255, 206, 181, 0.5);
+    mix-blend-mode: luminosity;
+    border: 1px solid #EFA884;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.Login_Button:hover {
+    background: rgba(255, 224, 208, 0.603);
+}
