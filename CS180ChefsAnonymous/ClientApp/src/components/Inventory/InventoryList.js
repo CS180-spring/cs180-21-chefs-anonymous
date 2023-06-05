@@ -24,7 +24,7 @@ const InventoryList = (props) => {
         <ul className={styles.inventory_list}>
           {props.inventory.map((inventory) => (
             <InventoryItem
-                  key={inventory.id}
+                  key={inventory.inventoryId}
                   inventoryId={inventory.inventoryId}
                   ingredient={inventory.itemName}
                   quantity={inventory.qty}
