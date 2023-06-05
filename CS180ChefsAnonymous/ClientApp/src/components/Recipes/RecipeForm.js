@@ -276,8 +276,8 @@ const RecipeForm = (props) => {
 
             const ingredientData = {
               ingredientId: newGUID,
-              recipeId: recipeId,
-              itemName: ingredient.name,
+                recipeId: recipeId,
+                itemName: ingredient.ItemName,
               qty: enteredHoursCooktime,
               unit: "tsp",
             };

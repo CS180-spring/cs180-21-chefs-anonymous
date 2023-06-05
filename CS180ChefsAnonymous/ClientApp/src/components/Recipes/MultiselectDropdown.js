@@ -33,13 +33,18 @@ const MultiselectDropdown = (props) => {
     setShowOptions(true);
   };
   // When an option in the dropdown menu is clicked, it is added to the selectedOptions array and sent to Recipes.js
-  const selectOption = (option) => {
+    const selectOption = (option) => {
+        console.log("bingbingbing");
     let newOptions;
     if (selectedOptions.findIndex((o) => o.id === option.id) >= 0) {
       newOptions = deleteOption(option);
     } else {
       newOptions = [...selectedOptions, option];
     }
+    // if newoptions size is 1 or greater
+    // then run this api call
+        
+
     setselectedOptions(newOptions);
     props.onGetDisplayOptions(newOptions);
   };
